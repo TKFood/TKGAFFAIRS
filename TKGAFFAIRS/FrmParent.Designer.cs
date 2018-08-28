@@ -1,16 +1,16 @@
 ﻿namespace TKGAFFAIRS
 {
-    partial class Form1
+    partial class FrmParent
     {
         /// <summary>
-        /// 設計工具所需的變數。
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清除任何使用中的資源。
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">如果應該處置 Managed 資源則為 true，否則為 false。</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,25 +20,27 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form 設計工具產生的程式碼
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// 此為設計工具支援所需的方法 - 請勿使用程式碼編輯器修改
-        /// 這個方法的內容。
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // FrmParent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(426, 348);
+            this.ClientSize = new System.Drawing.Size(984, 761);
             this.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "FrmParent";
+            this.Text = "FrmParent";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmParent_FormClosed);
+            this.Load += new System.EventHandler(this.FrmParent_Load);
             this.ResumeLayout(false);
 
         }
@@ -46,4 +48,3 @@
         #endregion
     }
 }
-
