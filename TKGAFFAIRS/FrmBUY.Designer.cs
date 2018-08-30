@@ -59,6 +59,20 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -215,6 +229,20 @@
             this.tableLayoutPanel2.Controls.Add(this.button3, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.button4, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.button5, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBox2, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBox3, 5, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBox4, 7, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBox5, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.textBox6, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.textBox7, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.textBox8, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.textBox9, 3, 5);
+            this.tableLayoutPanel2.Controls.Add(this.textBox10, 5, 5);
+            this.tableLayoutPanel2.Controls.Add(this.textBox11, 7, 5);
+            this.tableLayoutPanel2.Controls.Add(this.textBox13, 3, 6);
+            this.tableLayoutPanel2.Controls.Add(this.textBox14, 5, 6);
+            this.tableLayoutPanel2.Controls.Add(this.dateTimePicker3, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.dateTimePicker4, 1, 6);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -237,7 +265,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 16);
             this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Text = "請購日期";
             // 
             // label2
             // 
@@ -247,7 +275,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(114, 16);
             this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.label2.Text = "請購日期";
             // 
             // label3
             // 
@@ -257,7 +285,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 16);
             this.label3.TabIndex = 2;
-            this.label3.Text = "label3";
+            this.label3.Text = "請購編號";
             // 
             // label4
             // 
@@ -267,7 +295,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(114, 16);
             this.label4.TabIndex = 3;
-            this.label4.Text = "label4";
+            this.label4.Text = "請購人員";
             // 
             // label5
             // 
@@ -277,7 +305,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(114, 16);
             this.label5.TabIndex = 4;
-            this.label5.Text = "label5";
+            this.label5.Text = "請購部門";
             // 
             // label6
             // 
@@ -287,7 +315,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(114, 16);
             this.label6.TabIndex = 5;
-            this.label6.Text = "label6";
+            this.label6.Text = "品名";
             // 
             // label7
             // 
@@ -297,7 +325,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(114, 16);
             this.label7.TabIndex = 6;
-            this.label7.Text = "label7";
+            this.label7.Text = "規格";
             // 
             // label8
             // 
@@ -307,7 +335,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(114, 16);
             this.label8.TabIndex = 7;
-            this.label8.Text = "label8";
+            this.label8.Text = "供應商";
             // 
             // label9
             // 
@@ -317,7 +345,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(114, 16);
             this.label9.TabIndex = 8;
-            this.label9.Text = "label9";
+            this.label9.Text = "數量";
             // 
             // label10
             // 
@@ -327,7 +355,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(114, 16);
             this.label10.TabIndex = 9;
-            this.label10.Text = "label10";
+            this.label10.Text = "單位";
             // 
             // label11
             // 
@@ -337,7 +365,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(114, 16);
             this.label11.TabIndex = 10;
-            this.label11.Text = "label11";
+            this.label11.Text = "單價";
             // 
             // label12
             // 
@@ -347,7 +375,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(114, 16);
             this.label12.TabIndex = 11;
-            this.label12.Text = "label12";
+            this.label12.Text = "總價";
             // 
             // label13
             // 
@@ -357,7 +385,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(114, 16);
             this.label13.TabIndex = 12;
-            this.label13.Text = "label13";
+            this.label13.Text = "到貨日期";
             // 
             // label14
             // 
@@ -367,7 +395,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(114, 16);
             this.label14.TabIndex = 13;
-            this.label14.Text = "label14";
+            this.label14.Text = "驗收數量";
             // 
             // label15
             // 
@@ -377,7 +405,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(114, 16);
             this.label15.TabIndex = 14;
-            this.label15.Text = "label15";
+            this.label15.Text = "備考";
             // 
             // dateTimePicker1
             // 
@@ -407,7 +435,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(114, 16);
             this.label16.TabIndex = 3;
-            this.label16.Text = "label16";
+            this.label16.Text = "~";
             // 
             // button1
             // 
@@ -429,6 +457,7 @@
             this.button2.TabIndex = 15;
             this.button2.Text = "新增";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -439,6 +468,7 @@
             this.button3.TabIndex = 16;
             this.button3.Text = "修改";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -449,6 +479,7 @@
             this.button4.TabIndex = 17;
             this.button4.Text = "刪除";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -459,6 +490,138 @@
             this.button5.TabIndex = 18;
             this.button5.Text = "存檔";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.Location = new System.Drawing.Point(363, 46);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(114, 27);
+            this.textBox2.TabIndex = 20;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.Location = new System.Drawing.Point(603, 46);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(114, 27);
+            this.textBox3.TabIndex = 21;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox4.Location = new System.Drawing.Point(843, 46);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(114, 27);
+            this.textBox4.TabIndex = 22;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.SetColumnSpan(this.textBox5, 4);
+            this.textBox5.Location = new System.Drawing.Point(123, 86);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(474, 27);
+            this.textBox5.TabIndex = 23;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.SetColumnSpan(this.textBox6, 4);
+            this.textBox6.Location = new System.Drawing.Point(123, 126);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(474, 27);
+            this.textBox6.TabIndex = 24;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.SetColumnSpan(this.textBox7, 4);
+            this.textBox7.Location = new System.Drawing.Point(123, 166);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
+            this.textBox7.Size = new System.Drawing.Size(474, 27);
+            this.textBox7.TabIndex = 25;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox8.Location = new System.Drawing.Point(123, 206);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            this.textBox8.Size = new System.Drawing.Size(114, 27);
+            this.textBox8.TabIndex = 26;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox9.Location = new System.Drawing.Point(363, 206);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(114, 27);
+            this.textBox9.TabIndex = 27;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox10.Location = new System.Drawing.Point(603, 206);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
+            this.textBox10.Size = new System.Drawing.Size(114, 27);
+            this.textBox10.TabIndex = 28;
+            // 
+            // textBox11
+            // 
+            this.textBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox11.Location = new System.Drawing.Point(843, 206);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.ReadOnly = true;
+            this.textBox11.Size = new System.Drawing.Size(114, 27);
+            this.textBox11.TabIndex = 29;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox13.Location = new System.Drawing.Point(363, 255);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.ReadOnly = true;
+            this.textBox13.Size = new System.Drawing.Size(114, 27);
+            this.textBox13.TabIndex = 31;
+            // 
+            // textBox14
+            // 
+            this.textBox14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox14.Location = new System.Drawing.Point(603, 255);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.ReadOnly = true;
+            this.textBox14.Size = new System.Drawing.Size(114, 27);
+            this.textBox14.TabIndex = 32;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker3.CustomFormat = "yyyy/MM/dd";
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(123, 46);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(114, 27);
+            this.dateTimePicker3.TabIndex = 33;
+            // 
+            // dateTimePicker4
+            // 
+            this.dateTimePicker4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker4.CustomFormat = "yyyy/MM/dd";
+            this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker4.Location = new System.Drawing.Point(123, 255);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.Size = new System.Drawing.Size(114, 27);
+            this.dateTimePicker4.TabIndex = 34;
             // 
             // FrmBUY
             // 
@@ -522,5 +685,19 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker4;
     }
 }
