@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 11:34:28" ReportInfo.Modified="08/30/2018 11:46:20" ReportInfo.CreatorVersion="2016.4.4.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9Ici0P9l9h05UxhqYOWHnrj">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'&#13;&#10;,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'&#13;&#10;,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'&#13;&#10;,[SIGN] AS '簽名',[REMARK] AS '備考'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[BUYITEM]&#13;&#10;WHERE [BUYDATES]&gt;='20180801' AND [BUYDATES]&lt;='20180831'">
+        <Column Name="請購日期" DataType="System.DateTime"/>
+        <Column Name="請購編號" DataType="System.String"/>
+        <Column Name="請購人員" DataType="System.String"/>
+        <Column Name="請購部門" DataType="System.String"/>
+        <Column Name="品名" DataType="System.String"/>
+        <Column Name="規格" DataType="System.String"/>
+        <Column Name="供應商" DataType="System.String"/>
+        <Column Name="數量" DataType="System.Decimal"/>
+        <Column Name="單位" DataType="System.String"/>
+        <Column Name="單價" DataType="System.Decimal"/>
+        <Column Name="總價" DataType="System.Decimal"/>
+        <Column Name="到貨日期" DataType="System.DateTime"/>
+        <Column Name="驗收數量" DataType="System.Decimal"/>
+        <Column Name="簽名" DataType="System.String"/>
+        <Column Name="備考" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="18.9">
+      <TextObject Name="Text1" Width="1039.5" Height="18.9" Text="總務課每日採購請購項目總表" HorzAlign="Center" VertAlign="Center"/>
+    </ReportTitleBand>
+    <ColumnHeaderBand Name="ColumnHeader1" Top="22.75" Width="1047.06" Height="18.9">
+      <TextObject Name="Text3" Width="66.15" Height="18.9" Border.Lines="All" Text="請購日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text5" Left="66.15" Width="85.05" Height="18.9" Border.Lines="All" Text="請購編號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text7" Left="151.2" Width="66.15" Height="18.9" Border.Lines="All" Text="請購人員" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text9" Left="217.35" Width="66.15" Height="18.9" Border.Lines="All" Text="請購部門" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text11" Left="283.5" Width="94.5" Height="18.9" Border.Lines="All" Text="品名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text13" Left="378" Width="94.5" Height="18.9" Border.Lines="All" Text="規格" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text15" Left="471.54" Width="94.5" Height="18.9" Border.Lines="All" Text="供應商" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text17" Left="566.04" Width="47.25" Height="18.9" Border.Lines="All" Text="數量" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text19" Left="613.29" Width="37.8" Height="18.9" Border.Lines="All" Text="單位" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text21" Left="651.09" Width="56.7" Height="18.9" Border.Lines="All" Text="單價" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text23" Left="707.79" Width="66.15" Height="18.9" Border.Lines="All" Text="總價" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text25" Left="773.94" Width="75.6" Height="18.9" Border.Lines="All" Text="到貨日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text27" Left="849.54" Width="66.15" Height="18.9" Border.Lines="All" Text="驗收數量" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text29" Left="915.69" Width="56.7" Height="18.9" Border.Lines="All" Text="簽名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text31" Left="972.39" Width="66.15" Height="18.9" Border.Lines="All" Text="備考" HorzAlign="Center" VertAlign="Center"/>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" Top="45.49" Width="1047.06" Height="18.9" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text2" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.請購日期]" Format="Date" Format.Format="d"/>
+      <TextObject Name="Text4" Left="66.15" Width="85.05" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.請購編號]"/>
+      <TextObject Name="Text6" Left="151.2" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.請購人員]"/>
+      <TextObject Name="Text8" Left="217.35" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.請購部門]"/>
+      <TextObject Name="Text10" Left="283.5" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.品名]"/>
+      <TextObject Name="Text12" Left="378" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.規格]"/>
+      <TextObject Name="Text14" Left="471.54" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.供應商]"/>
+      <TextObject Name="Text16" Left="566.04" Width="47.25" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.數量]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text18" Left="613.29" Width="37.8" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.單位]"/>
+      <TextObject Name="Text20" Left="651.09" Width="56.7" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.單價]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text22" Left="707.79" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.總價]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text24" Left="773.94" Width="75.6" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.到貨日期]" Format="Date" Format.Format="d"/>
+      <TextObject Name="Text26" Left="849.54" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.驗收數量]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text28" Left="915.69" Width="56.7" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.簽名]"/>
+      <TextObject Name="Text30" Left="972.39" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.備考]"/>
+    </DataBand>
+  </ReportPage>
+</Report>

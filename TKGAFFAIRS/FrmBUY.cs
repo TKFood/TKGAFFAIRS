@@ -15,6 +15,8 @@ using NPOI.XSSF.UserModel;
 using NPOI.SS.Util;
 using System.Reflection;
 using System.Threading;
+using FastReport;
+using FastReport.Data;
 
 namespace TKGAFFAIRS
 {
@@ -419,6 +421,39 @@ namespace TKGAFFAIRS
             }
         }
 
+        public void SETFASTREPORT()
+        {
+
+            string SQL;
+            Report report1 = new Report();
+            report1.Load(@"REPORT\總務課每日採購請購項目總表.frx");
+
+            report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+            TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
+            SQL = SETFASETSQL();
+            Table.SelectCommand = SQL;
+            report1.Preview = previewControl1;
+            report1.Show();
+
+        }
+
+        public string SETFASETSQL()
+        {
+            StringBuilder FASTSQL = new StringBuilder();        
+
+           
+            FASTSQL.AppendFormat(@" SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門' ");
+            FASTSQL.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
+            FASTSQL.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
+            FASTSQL.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
+            FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
+            FASTSQL.AppendFormat(@" WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}' ",dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
+            FASTSQL.AppendFormat(@"  ");
+
+            return FASTSQL.ToString();
+        }
         #endregion
 
         #region BUTTON
@@ -471,9 +506,13 @@ namespace TKGAFFAIRS
 
             Search();
         }
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SETFASTREPORT();
+        }
 
         #endregion
 
-      
+
     }
 }
