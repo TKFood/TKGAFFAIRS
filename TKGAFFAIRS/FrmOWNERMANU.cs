@@ -48,6 +48,8 @@ namespace TKGAFFAIRS
             InitializeComponent();
 
             comboBox1load();
+            comboBox2load();
+            comboBox3load();
         }
 
 
@@ -100,8 +102,107 @@ namespace TKGAFFAIRS
             }
             
         }
+
+        public void comboBox2load()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT ME001,ME002 FROM [TK].dbo.CMSME WHERE ME002 NOT LIKE '%停用%' ORDER BY ME001,ME002    ");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("ME001", typeof(string));
+            dt.Columns.Add("ME002", typeof(string));
+            da.Fill(dt);
+            comboBox2.DataSource = dt.DefaultView;
+            comboBox2.ValueMember = "ME001";
+            comboBox2.DisplayMember = "ME001";
+            sqlConn.Close();
+
+            textBox5.Text = dt.Rows[0]["ME002"].ToString();
+
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT ME001,ME002 FROM [TK].dbo.CMSME  WHERE ME001='{0}'    ", comboBox2.Text.ToString());
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("ME001", typeof(string));
+            dt.Columns.Add("ME002", typeof(string));
+            da.Fill(dt);
+            
+            sqlConn.Close();
+
+            
+            if (dt.Rows.Count > 0)
+            {
+                textBox5.Text = dt.Rows[0]["ME002"].ToString();
+            }
+            else
+            {
+                textBox5.Text = null;
+            }
+
+        }
+        public void comboBox3load()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT [CLASS],[CLASSNAME] FROM [TKGAFFAIRS].[dbo].[CLASSBRAND] ORDER BY CLASS");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("CLASS", typeof(string));
+            dt.Columns.Add("CLASSNAME", typeof(string));
+            da.Fill(dt);
+            comboBox3.DataSource = dt.DefaultView;
+            comboBox3.ValueMember = "CLASS";
+            comboBox3.DisplayMember = "CLASS";
+            sqlConn.Close();
+
+            textBox6.Text = dt.Rows[0]["CLASSNAME"].ToString();
+
+
+        }
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            
+        }
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT [CLASS],[CLASSNAME] FROM [TKGAFFAIRS].[dbo].[CLASSBRAND] WHERE CLASS='{0}' ORDER BY CLASS",comboBox3.Text);
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("CLASS", typeof(string));
+            dt.Columns.Add("CLASSNAME", typeof(string));
+            da.Fill(dt);
+            
+            sqlConn.Close();
+
+            if (dt.Rows.Count > 0)
+            {
+                textBox6.Text = dt.Rows[0]["CLASSNAME"].ToString();
+            }
+            else
+            {
+                textBox6.Text = null;
+            }
             
         }
 
@@ -128,7 +229,7 @@ namespace TKGAFFAIRS
                 }
 
                 sbSql.AppendFormat(@"  SELECT [ID] AS '工號',[NAME] AS '保管人',[DEP] AS '部門',[DEPNAME] AS '單位',[CREATEDATES] AS '建立日期'");
-                sbSql.AppendFormat(@"  ,[CLASS] AS '分類',[NO] AS '流水號',[OWNNAME] AS '保管品名',[BRAND] AS '廠牌',[SPEC] AS '規格'");
+                sbSql.AppendFormat(@"  ,[CLASS] AS '分類',[CLASSNAME] AS '分類名',[NO] AS '流水號',[OWNNAME] AS '保管品名',[BRAND] AS '廠牌',[SPEC] AS '規格'");
                 sbSql.AppendFormat(@"  ,[PRICES] AS '原價',[NUM] AS '數量',[GIVENAME] AS '發放人',[REMARK] AS '備註'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[OWNERMANU]");
                 sbSql.AppendFormat(@"  WHERE DEP='{0}'",comboBox1.Text.ToString());
@@ -182,6 +283,27 @@ namespace TKGAFFAIRS
         {
             Search();
         }
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
 
         #endregion
 
