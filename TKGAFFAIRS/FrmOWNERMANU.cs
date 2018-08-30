@@ -117,12 +117,22 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
+                if(!string.IsNullOrEmpty(textBox1.Text))
+                {
+                    sbSqlQuery.AppendFormat(@" AND [ID]='{0}'  ",textBox1.Text);
+                }
+
+                if (!string.IsNullOrEmpty(textBox2.Text))
+                {
+                    sbSqlQuery.AppendFormat(@" AND [NAME]='{0}'  ", textBox2.Text);
+                }
+
                 sbSql.AppendFormat(@"  SELECT [ID] AS '工號',[NAME] AS '保管人',[DEP] AS '部門',[DEPNAME] AS '單位',[CREATEDATES] AS '建立日期'");
                 sbSql.AppendFormat(@"  ,[CLASS] AS '分類',[NO] AS '流水號',[OWNNAME] AS '保管品名',[BRAND] AS '廠牌',[SPEC] AS '規格'");
                 sbSql.AppendFormat(@"  ,[PRICES] AS '原價',[NUM] AS '數量',[GIVENAME] AS '發放人',[REMARK] AS '備註'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[OWNERMANU]");
                 sbSql.AppendFormat(@"  WHERE DEP='{0}'",comboBox1.Text.ToString());
-                sbSql.AppendFormat(@"  ");
+                sbSql.AppendFormat(sbSqlQuery.ToString());
                 sbSql.AppendFormat(@"  ");
                 sbSql.AppendFormat(@"  ");
 
@@ -160,6 +170,9 @@ namespace TKGAFFAIRS
             {
 
             }
+
+            textBox1.Text = null;
+            textBox2.Text = null;
         }
         #endregion
 
