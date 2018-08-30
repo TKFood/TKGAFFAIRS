@@ -39,6 +39,7 @@ namespace TKGAFFAIRS
         int result;
         Thread TD;
         string BUYNO;
+        string OLDBUYNO;
 
         public FrmBUY()
         {
@@ -106,6 +107,7 @@ namespace TKGAFFAIRS
         {
             try
             {
+                
                 //add ZWAREWHOUSEPURTH
                 connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
                 sqlConn = new SqlConnection(connectionString);
@@ -117,7 +119,8 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSql.AppendFormat(" UPDATE [TKGAFFAIRS].[dbo].[BUYITEM]");
                 sbSql.AppendFormat(" SET [BUYDATES]='{0}',[BUYNO]='{1}',[NAME]='{2}',[DEP]='{3}',[BUYNAME]='{4}',[SPEC]='{5}',[VENDOR]='{6}'",dateTimePicker3.Value.ToString("yyyy/MM/dd"),textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text);
-                sbSql.AppendFormat(" ,[NUM]={0},[UNIT]='{1}',[PRICES]={2},[TMONEY]={3},[INDATES]='{4}',[CHECKNUM]={5},[SIGN]='',[REMARK]='{6}'", textBox8.Text, textBox9.Text, textBox10.Text, dateTimePicker4.Value.ToString("yyyy/MM/dd"), textBox13.Text, textBox14.Text);
+                sbSql.AppendFormat(" ,[NUM]={0},[UNIT]='{1}',[PRICES]={2},[TMONEY]={3},[INDATES]='{4}',[CHECKNUM]={5},[SIGN]='',[REMARK]='{6}'", textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, dateTimePicker4.Value.ToString("yyyy/MM/dd"), textBox13.Text, textBox14.Text);
+                sbSql.AppendFormat(" WHERE [BUYNO]='{0}'", OLDBUYNO);
                 sbSql.AppendFormat(" ");
 
                 cmd.Connection = sqlConn;
@@ -162,7 +165,7 @@ namespace TKGAFFAIRS
 
                 sbSql.Clear();
 
-                sbSql.AppendFormat(@"  SELECT ISNULL(MAX([BUYNO]),'00000000000') AS BUYNO");
+                sbSql.AppendFormat(@"  SELECT ISNULL(MAX([BUYNO]),'000000000000') AS BUYNO");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM] ");                
                 sbSql.AppendFormat(@"  WHERE [BUYNO] LIKE 'B{0}%'",dateTimePicker3.Value.ToString("yyyyMMdd"));
                 sbSql.AppendFormat(@"  ");
@@ -205,9 +208,9 @@ namespace TKGAFFAIRS
 
         public string SETBUYNO(string BUYNO)
         {
-            if (BUYNO.Equals("00000000000"))
+            if (BUYNO.Equals("000000000000"))
             {
-                return dateTimePicker3.Value.ToString("yyyyMMdd") + "001";
+                return "B"+dateTimePicker3.Value.ToString("yyyyMMdd") + "001";
             }
 
             else
@@ -216,7 +219,7 @@ namespace TKGAFFAIRS
                 serno = serno + 1;
                 string temp = serno.ToString();
                 temp = temp.PadLeft(3, '0');
-                return dateTimePicker3.Value.ToString("yyyyMMdd") + temp.ToString();
+                return "B" + dateTimePicker3.Value.ToString("yyyyMMdd") + temp.ToString();
             }
         }
         public void ADD()
@@ -279,8 +282,8 @@ namespace TKGAFFAIRS
 
                 sbSql.Clear();
 
-
-               
+                sbSql.AppendFormat(" DELETE [TKGAFFAIRS].[dbo].[BUYITEM]");
+                sbSql.AppendFormat(" WHERE [BUYNO]='{0}'",textBox2.Text);
                 sbSql.AppendFormat(" ");
 
                 cmd.Connection = sqlConn;
@@ -312,7 +315,7 @@ namespace TKGAFFAIRS
         }
         public void SETSTATUS()
         {
-            //textBox2.Text = null;
+            textBox2.Text = null;
             textBox3.Text = null;
             textBox4.Text = null;
             textBox5.Text = null;
@@ -370,6 +373,52 @@ namespace TKGAFFAIRS
             textBox13.ReadOnly = true;
             textBox14.ReadOnly = true;
         }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int rowindex = dataGridView1.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView1.Rows[rowindex];
+
+                    dateTimePicker3.Value = Convert.ToDateTime(row.Cells["請購日期"].Value.ToString());
+                    dateTimePicker4.Value = Convert.ToDateTime(row.Cells["到貨日期"].Value.ToString());
+                    textBox2.Text = row.Cells["請購編號"].Value.ToString();
+                    textBox3.Text = row.Cells["請購人員"].Value.ToString();
+                    textBox4.Text = row.Cells["請購部門"].Value.ToString();
+                    textBox5.Text = row.Cells["品名"].Value.ToString();
+                    textBox6.Text = row.Cells["規格"].Value.ToString();
+                    textBox7.Text = row.Cells["供應商"].Value.ToString();
+                    textBox8.Text = row.Cells["數量"].Value.ToString();
+                    textBox9.Text = row.Cells["單位"].Value.ToString();
+                    textBox10.Text = row.Cells["單價"].Value.ToString();
+                    textBox11.Text = row.Cells["總價"].Value.ToString();                    
+                    textBox13.Text = row.Cells["驗收數量"].Value.ToString();
+                    textBox14.Text = row.Cells["備考"].Value.ToString();
+
+
+                }
+                else
+                {
+                    textBox2.Text = null;
+                    textBox3.Text = null;
+                    textBox4.Text = null;
+                    textBox5.Text = null;
+                    textBox6.Text = null;
+                    textBox7.Text = null;
+                    textBox8.Text = null;
+                    textBox9.Text = null;
+                    textBox10.Text = null;
+                    textBox11.Text = null;
+                    textBox13.Text = null;
+                    textBox14.Text = null;
+
+                }
+            }
+        }
+
         #endregion
 
         #region BUTTON
@@ -384,13 +433,15 @@ namespace TKGAFFAIRS
 
         private void button3_Click(object sender, EventArgs e)
         {
+            OLDBUYNO = textBox2.Text;
             SETSTATUS2();
         }
 
         private void button5_Click(object sender, EventArgs e)
-        {
+        {          
+
             if (!string.IsNullOrEmpty(textBox2.Text))
-            {
+            {               
                 UPDATE();
             }
             else
@@ -399,11 +450,15 @@ namespace TKGAFFAIRS
             }
 
             SETSTAUSFIANL();
+
+            Search();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("要刪除了?", "要刪除了?", MessageBoxButtons.YesNo);
+            string message = textBox2.Text + " 要刪除了?";
+
+            DialogResult dialogResult = MessageBox.Show(message.ToString(), "要刪除了?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 DEL();
@@ -413,9 +468,12 @@ namespace TKGAFFAIRS
             {
                 //do something else
             }
+
+            Search();
         }
+
         #endregion
 
-
+      
     }
 }
