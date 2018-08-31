@@ -82,6 +82,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmASSETS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmASSETS.Designer.cs">
+      <DependentUpon>FrmASSETS.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmBUY.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmASSETS.resx">
+      <DependentUpon>FrmASSETS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmBUY.resx">
       <DependentUpon>FrmBUY.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,13 +147,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="REPORT\文具、個人手工具保管卡.frx" />
+    <None Include="REPORT\總務課每日採購請購項目總表.frx" />
+    <None Include="REPORT\資產QRCODE.frx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="REPORT\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rd "$(TargetDir)REPORT" /s /q
