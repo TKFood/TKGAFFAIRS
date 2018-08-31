@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 18:01:05" ReportInfo.Modified="08/30/2018 18:02:47" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 18:01:05" ReportInfo.Modified="08/31/2018 09:02:34" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9L21BaaWo+sHLM2ljAwBNF6">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9Lm1zos8vOXAfcSAVpN5e02">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [ID] AS '工號',[NAME] AS '保管人',[DEP] AS '部門',[DEPNAME] AS '單位',[CREATEDATES] AS '建立日期'&#13;&#10;,[CLASS] AS '分類',[CLASSNAME] AS '分類名',[NO] AS '流水號',[OWNNAME] AS '保管品名',[BRAND] AS '廠牌'&#13;&#10;,[SPEC] AS '規格'&#13;&#10;,[PRICES] AS '原價',[NUM] AS '數量',[GIVENAME] AS '發放人',[REMARK] AS '備註'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[OWNERMANU]&#13;&#10;WHERE DEP='114000'&#13;&#10;AND [ID]='160115'&#13;&#10;AND [NAME]='JJ'">
         <Column Name="工號" DataType="System.String"/>
         <Column Name="保管人" DataType="System.String"/>
@@ -21,15 +21,40 @@
       </TableDataSource>
     </MsSqlDataConnection>
   </Dictionary>
-  <ReportPage Name="Page1">
-    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
-      <TextObject Name="Text1" Width="699.3" Height="18.9" Text="文具、個人手工具保管卡" HorzAlign="Center" VertAlign="Center"/>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="37.8">
+      <TextObject Name="Text1" Width="1039.5" Height="18.9" Text="文具、個人手工具保管卡" HorzAlign="Center" VertAlign="Center"/>
     </ReportTitleBand>
-    <ColumnHeaderBand Name="ColumnHeader1" Top="41.65" Width="718.2" Height="18.9">
-      <TextObject Name="Text3" Left="28.35" Width="94.5" Height="18.9" Border.Lines="All" Text="工號" HorzAlign="Center" VertAlign="Center"/>
-    </ColumnHeaderBand>
-    <DataBand Name="Data1" Top="64.39" Width="718.2" Height="75.6" DataSource="Table">
-      <TextObject Name="Text2" Left="28.35" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.工號]"/>
-    </DataBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="41.65" Width="1047.06" Height="37.8" Condition="[Table.工號]">
+      <TextObject Name="Text2" Left="94.5" Width="94.5" Height="18.9" Text="[Table.工號]"/>
+      <TextObject Name="Text7" Left="378" Width="94.5" Height="18.9" Text="單位"/>
+      <TextObject Name="Text5" Left="189" Width="94.5" Height="18.9" Text="保管人" VertAlign="Center"/>
+      <TextObject Name="Text3" Width="94.5" Height="18.9" Text="工號" VertAlign="Center"/>
+      <TextObject Name="Text4" Left="283.5" Width="94.5" Height="18.9" Text="[Table.保管人]"/>
+      <TextObject Name="Text6" Left="472.5" Width="179.55" Height="18.9" Text="[Table.單位]"/>
+      <TextObject Name="Text21" Left="604.8" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="原價" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text9" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="建立日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text11" Left="94.5" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="分類名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text13" Left="189" Top="18.9" Width="75.6" Height="18.9" Border.Lines="All" Text="流水號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text15" Left="264.6" Top="18.9" Width="151.2" Height="18.9" Border.Lines="All" Text="保管品名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text17" Left="415.8" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="廠牌" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text19" Left="510.3" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="規格" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text27" Left="888.3" Top="18.9" Width="151.2" Height="18.9" Border.Lines="All" Text="備註" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text23" Left="699.3" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="數量" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text25" Left="793.8" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="發放人" HorzAlign="Center" VertAlign="Center"/>
+      <DataBand Name="Data1" Top="83.29" Width="1047.06" Height="18.9" DataSource="Table">
+        <TextObject Name="Text8" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.建立日期]" Format="Date" Format.Format="d"/>
+        <TextObject Name="Text10" Left="94.5" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.分類名]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text12" Left="189" Width="75.6" Height="18.9" Border.Lines="All" Text="[Table.流水號]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text14" Left="264.6" Width="151.2" Height="18.9" Border.Lines="All" Text="[Table.保管品名]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text16" Left="415.8" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.廠牌]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text18" Left="510.3" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.規格]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text20" Left="604.8" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.原價]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+        <TextObject Name="Text22" Left="699.3" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.數量]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+        <TextObject Name="Text24" Left="793.8" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.發放人]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text26" Left="888.3" Width="151.2" Height="18.9" Border.Lines="All" Text="[Table.備註]" HorzAlign="Center" VertAlign="Center"/>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="106.04" Width="1047.06"/>
+    </GroupHeaderBand>
   </ReportPage>
 </Report>

@@ -59,6 +59,7 @@ namespace TKGAFFAIRS
             comboBox1load();
             comboBox2load();
             comboBox3load();
+            comboBox4load();
         }
 
 
@@ -214,7 +215,54 @@ namespace TKGAFFAIRS
             }
             
         }
+        public void comboBox4load()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT ME001,ME002 FROM [TK].dbo.CMSME WHERE ME002 NOT LIKE '%停用%' ORDER BY ME001,ME002    ");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
 
+            dt.Columns.Add("ME001", typeof(string));
+            dt.Columns.Add("ME002", typeof(string));
+            da.Fill(dt);
+            comboBox4.DataSource = dt.DefaultView;
+            comboBox4.ValueMember = "ME001";
+            comboBox4.DisplayMember = "ME001";
+            sqlConn.Close();
+
+            label20.Text = dt.Rows[0]["ME002"].ToString();
+
+
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT ME001,ME002 FROM [TK].dbo.CMSME WHERE ME001='{0}'    ", comboBox4.Text.ToString());
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("ME001", typeof(string));
+            dt.Columns.Add("ME002", typeof(string));
+            da.Fill(dt);
+
+            sqlConn.Close();
+
+            if (dt.Rows.Count > 0)
+            {
+                label20.Text = dt.Rows[0]["ME002"].ToString();
+            }
+            else
+            {
+                label20.Text = "DEP";
+            }
+        }
         public void Search()
         {
             ds.Clear();
@@ -599,6 +647,51 @@ namespace TKGAFFAIRS
             }
 
         }
+        public void SETFASTREPORT()
+        {
+
+            string SQL;
+            Report report1 = new Report();
+            report1.Load(@"REPORT\文具、個人手工具保管卡.frx");
+
+            report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+            TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
+            SQL = SETFASETSQL();
+            Table.SelectCommand = SQL;
+            report1.Preview = previewControl1;
+            report1.Show();
+
+        }
+
+        public string SETFASETSQL()
+        {
+            StringBuilder FASTSQL = new StringBuilder();
+
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                sbSqlQuery.AppendFormat(@" AND [ID]='{0}'  ", textBox15.Text);
+            }
+
+            if (!string.IsNullOrEmpty(textBox2.Text))
+            {
+                sbSqlQuery.AppendFormat(@" AND [NAME]='{0}'  ", textBox16.Text);
+            }
+
+            FASTSQL.AppendFormat(@"  SELECT [ID] AS '工號',[NAME] AS '保管人',[DEP] AS '部門',[DEPNAME] AS '單位',[CREATEDATES] AS '建立日期'");
+            FASTSQL.AppendFormat(@"  ,[CLASS] AS '分類',[CLASSNAME] AS '分類名',[NO] AS '流水號',[OWNNAME] AS '保管品名',[BRAND] AS '廠牌',[SPEC] AS '規格'");
+            FASTSQL.AppendFormat(@"  ,[PRICES] AS '原價',[NUM] AS '數量',[GIVENAME] AS '發放人',[REMARK] AS '備註'");
+            FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[OWNERMANU]");
+            FASTSQL.AppendFormat(@"  WHERE DEP='{0}'", comboBox4.Text.ToString());
+            FASTSQL.AppendFormat(sbSqlQuery.ToString());
+            FASTSQL.AppendFormat(@"  ");
+            FASTSQL.AppendFormat(@"  ");
+            FASTSQL.AppendFormat(@"  ");
+
+            return FASTSQL.ToString();
+        }
+
         #endregion
 
         #region BUTTON
@@ -662,11 +755,16 @@ namespace TKGAFFAIRS
             Search();
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SETFASTREPORT();
+        }
+
 
 
 
         #endregion
 
-       
+
     }
 }
