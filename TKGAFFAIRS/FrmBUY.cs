@@ -325,11 +325,11 @@ namespace TKGAFFAIRS
             textBox5.Text = null;
             textBox6.Text = null;
             textBox7.Text = null;
-            textBox8.Text = null;
+            textBox8.Text = "0";
             textBox9.Text = null;
-            textBox10.Text = null;
-            textBox11.Text = null;            
-            textBox13.Text = null;
+            textBox10.Text = "0";
+            textBox11.Text = "0";            
+            textBox13.Text ="0";
             textBox14.Text = null;
 
 
