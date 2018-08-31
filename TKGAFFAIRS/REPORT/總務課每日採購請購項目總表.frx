@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 11:34:28" ReportInfo.Modified="08/31/2018 13:47:09" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 11:34:28" ReportInfo.Modified="08/31/2018 16:13:28" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9JFfYLmpqm3vefpoP97aejD">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9JbaDLvGfME/FUQNKwGCUZI">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'&#13;&#10;,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'&#13;&#10;,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'&#13;&#10;,[SIGN] AS '簽名',[REMARK] AS '備考'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[BUYITEM]&#13;&#10;WHERE [BUYDATES]&gt;='20180801' AND [BUYDATES]&lt;='20180831'">
         <Column Name="請購日期" DataType="System.DateTime"/>
         <Column Name="請購編號" DataType="System.String"/>
@@ -60,7 +60,7 @@
       <TextObject Name="Text30" Left="972.39" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.備考]"/>
     </DataBand>
     <PageFooterBand Name="PageFooter1" Top="68.24" Width="1047.06" Height="18.9">
-      <TextObject Name="Text32" Width="1039.5" Height="18.9" Text="審核:                                                        核準:                                                      申請人:          "/>
+      <TextObject Name="Text32" Width="1039.5" Height="18.9" Text="核准:                                                        審核:                                                      申請人:          "/>
     </PageFooterBand>
   </ReportPage>
 </Report>
