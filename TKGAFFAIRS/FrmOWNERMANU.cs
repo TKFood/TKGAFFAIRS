@@ -40,6 +40,9 @@ namespace TKGAFFAIRS
         string EDITID;
         int result;
         Thread TD;
+
+        string STATUS = null;
+
         string BUYNO;
         string OLDBUYNO;
 
@@ -606,12 +609,14 @@ namespace TKGAFFAIRS
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            STATUS = "ADD";
             SETSTATUS();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            OLDID=textBox3.Text;
+            STATUS = "EDIT";
+            OLDID =textBox3.Text;
             OLDDEP = comboBox2.Text;
             OLDCLASS = comboBox3.Text;
             OLDNO = textBox7.Text;
@@ -621,14 +626,17 @@ namespace TKGAFFAIRS
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox7.Text))
+           
+            if (STATUS.Equals("EDIT"))
             {
                 UPDATE();
             }
-            else
+            else if (STATUS.Equals("ADD"))
             {
                 ADD();
             }
+
+            STATUS = null;
 
             SETSTAUSFIANL();
 
@@ -637,6 +645,7 @@ namespace TKGAFFAIRS
 
         private void button4_Click(object sender, EventArgs e)
         {
+            STATUS = null;
             string message = textBox3.Text+ "的"+textBox7.Text + " 要刪除了?";
 
             DialogResult dialogResult = MessageBox.Show(message.ToString(), "要刪除了?", MessageBoxButtons.YesNo);

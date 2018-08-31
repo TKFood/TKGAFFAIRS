@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 18:01:05" ReportInfo.Modified="08/30/2018 18:02:47" ReportInfo.CreatorVersion="2016.4.4.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9L21BaaWo+sHLM2ljAwBNF6">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [ID] AS '工號',[NAME] AS '保管人',[DEP] AS '部門',[DEPNAME] AS '單位',[CREATEDATES] AS '建立日期'&#13;&#10;,[CLASS] AS '分類',[CLASSNAME] AS '分類名',[NO] AS '流水號',[OWNNAME] AS '保管品名',[BRAND] AS '廠牌'&#13;&#10;,[SPEC] AS '規格'&#13;&#10;,[PRICES] AS '原價',[NUM] AS '數量',[GIVENAME] AS '發放人',[REMARK] AS '備註'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[OWNERMANU]&#13;&#10;WHERE DEP='114000'&#13;&#10;AND [ID]='160115'&#13;&#10;AND [NAME]='JJ'">
+        <Column Name="工號" DataType="System.String"/>
+        <Column Name="保管人" DataType="System.String"/>
+        <Column Name="部門" DataType="System.String"/>
+        <Column Name="單位" DataType="System.String"/>
+        <Column Name="建立日期" DataType="System.DateTime"/>
+        <Column Name="分類" DataType="System.String"/>
+        <Column Name="分類名" DataType="System.String"/>
+        <Column Name="流水號" DataType="System.String"/>
+        <Column Name="保管品名" DataType="System.String"/>
+        <Column Name="廠牌" DataType="System.String"/>
+        <Column Name="規格" DataType="System.String"/>
+        <Column Name="原價" DataType="System.Decimal"/>
+        <Column Name="數量" DataType="System.Decimal"/>
+        <Column Name="發放人" DataType="System.String"/>
+        <Column Name="備註" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Width="699.3" Height="18.9" Text="文具、個人手工具保管卡" HorzAlign="Center" VertAlign="Center"/>
+    </ReportTitleBand>
+    <ColumnHeaderBand Name="ColumnHeader1" Top="41.65" Width="718.2" Height="18.9">
+      <TextObject Name="Text3" Left="28.35" Width="94.5" Height="18.9" Border.Lines="All" Text="工號" HorzAlign="Center" VertAlign="Center"/>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" Top="64.39" Width="718.2" Height="75.6" DataSource="Table">
+      <TextObject Name="Text2" Left="28.35" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.工號]"/>
+    </DataBand>
+  </ReportPage>
+</Report>
