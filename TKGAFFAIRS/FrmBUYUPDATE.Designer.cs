@@ -574,6 +574,7 @@
             this.textBox8.Size = new System.Drawing.Size(114, 27);
             this.textBox8.TabIndex = 26;
             this.textBox8.Text = "0";
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // textBox9
             // 
@@ -593,6 +594,7 @@
             this.textBox10.Size = new System.Drawing.Size(114, 27);
             this.textBox10.TabIndex = 28;
             this.textBox10.Text = "0";
+            this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
             // 
             // textBox11
             // 

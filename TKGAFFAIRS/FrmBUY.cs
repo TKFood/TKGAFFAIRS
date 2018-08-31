@@ -555,6 +555,28 @@ namespace TKGAFFAIRS
             }
             return BUYNOSERIAL= BUYNOSERIAL+"''";
         }
+
+        public void CALSUM()
+        {
+            try
+            {
+                textBox11.Text = (Convert.ToDecimal(textBox8.Text) * Convert.ToDecimal(textBox10.Text)).ToString();
+            }
+            catch
+            {
+
+            }
+        }
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+            CALSUM();
+        }
+
+        private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+            CALSUM();
+        }
+
         #endregion
 
         #region BUTTON
@@ -620,6 +642,7 @@ namespace TKGAFFAIRS
         {
             SETFASTREPORT();
         }
+
 
         #endregion
 
