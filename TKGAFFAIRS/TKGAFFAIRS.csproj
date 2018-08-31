@@ -94,6 +94,12 @@
     <Compile Include="FrmBUY.Designer.cs">
       <DependentUpon>FrmBUY.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBUYUPDATE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBUYUPDATE.Designer.cs">
+      <DependentUpon>FrmBUYUPDATE.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBUY.resx">
       <DependentUpon>FrmBUY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBUYUPDATE.resx">
+      <DependentUpon>FrmBUYUPDATE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
