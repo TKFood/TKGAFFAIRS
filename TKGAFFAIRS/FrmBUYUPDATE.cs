@@ -420,14 +420,14 @@ namespace TKGAFFAIRS
         }
         public void SETSTATUS2()
         {
-            textBox2.ReadOnly = false;
-            textBox3.ReadOnly = false;
-            textBox4.ReadOnly = false;
-            textBox5.ReadOnly = false;
+            //textBox2.ReadOnly = false;
+            //textBox3.ReadOnly = false;
+            //textBox4.ReadOnly = false;
+            //textBox5.ReadOnly = false;
             textBox6.ReadOnly = false;
             textBox7.ReadOnly = false;
-            textBox8.ReadOnly = false;
-            textBox9.ReadOnly = false;
+            //textBox8.ReadOnly = false;
+            //textBox9.ReadOnly = false;
             textBox10.ReadOnly = false;
             textBox11.ReadOnly = false;
             textBox13.ReadOnly = false;
