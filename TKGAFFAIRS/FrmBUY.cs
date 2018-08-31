@@ -47,6 +47,7 @@ namespace TKGAFFAIRS
         string STATUS = null;
         string BUYNO;
         string OLDBUYNO;
+        string CHECKYN = "N";
 
         public FrmBUY()
         {
@@ -138,6 +139,16 @@ namespace TKGAFFAIRS
                 adapter2.Fill(ds2, "TEMPds2");
                 sqlConn.Close();
 
+                if (CHECKYN.Equals("N"))
+                {
+                    //建立一個DataGridView的Column物件及其內容
+                    DataGridViewColumn dgvc = new DataGridViewCheckBoxColumn();
+                    dgvc.Width = 40;
+                    dgvc.Name = "選取";
+
+                    this.dataGridView2.Columns.Insert(0, dgvc);
+                    CHECKYN = "Y";
+                }
 
                 if (ds2.Tables["TEMPds2"].Rows.Count == 0)
                 {
@@ -502,18 +513,47 @@ namespace TKGAFFAIRS
 
         public string SETFASETSQL()
         {
-            StringBuilder FASTSQL = new StringBuilder();        
+            StringBuilder FASTSQL = new StringBuilder();
 
-           
+            string BUYNOSERIAL = GETBUYNOSERIAL();
+
+
             FASTSQL.AppendFormat(@" SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門' ");
             FASTSQL.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
             FASTSQL.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
             FASTSQL.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
             FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
             FASTSQL.AppendFormat(@" WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}' ",dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
+            FASTSQL.AppendFormat(@"  AND [BUYNO] IN ({0})", BUYNOSERIAL.ToString());
             FASTSQL.AppendFormat(@"  ");
 
             return FASTSQL.ToString();
+        }
+
+        public string GETBUYNOSERIAL()
+        {
+            string BUYNOSERIAL = null;
+
+            foreach (DataGridViewRow dr in this.dataGridView2.Rows)
+            {
+                if (dr.Cells[0].Value != null && (bool)dr.Cells[0].Value)
+                {
+                    try
+                    {
+                        BUYNOSERIAL= BUYNOSERIAL+"'"+dr.Cells["請購編號"].Value.ToString()+"',";
+                    }
+                    catch
+                    {
+
+                    }
+
+                    finally
+                    {
+                        
+                    }
+                }
+            }
+            return BUYNOSERIAL= BUYNOSERIAL+"''";
         }
         #endregion
 
