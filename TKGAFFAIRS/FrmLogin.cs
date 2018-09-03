@@ -82,6 +82,16 @@ namespace TKGAFFAIRS
             }
         }
 
+        private void txt_UserName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txt_Password.Focus();
+            }
+        }
+
         #endregion
+
+
     }
 }
