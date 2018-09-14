@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/31/2018 10:44:02" ReportInfo.Modified="09/14/2018 16:18:04" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/31/2018 10:44:02" ReportInfo.Modified="09/14/2018 17:08:16" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9JraaghGWJxNkKNJ8tDyuQ+">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9JBS84YK2eCXoA6iEj0iYSP">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT ASTMB.MB001 AS '資產編號',ASTMA.MA002 AS '類別',ASTMB.MB002 AS '資產名稱',ASTMB.MB003 AS '規格'&#13;&#10;,CONVERT(NVARCHAR,ASTMB.MB012)+ASTMB.MB011 AS '數量',CMSME.ME002 AS '部門名稱',ASTMC.MC006 AS '放置地點'&#13;&#10;,CMSMV.MV002 AS '保管人'&#13;&#10;FROM [TK].dbo.ASTMA ASTMA, [TK].dbo.ASTMB ASTMB, [TK].dbo.ASTMC ASTMC,[TK].dbo.CMSME CMSME,[TK].dbo.CMSMV CMSMV&#13;&#10;WHERE ASTMA.MA001=ASTMB.MB006&#13;&#10;AND ASTMC.MC002=CMSME.ME001&#13;&#10;AND ASTMB.MB001=ASTMC.MC001&#13;&#10;AND CMSMV.MV001=ASTMC.MC003&#13;&#10;AND ASTMC.MC003='160115'&#13;&#10;ORDER BY ASTMB.MB001&#13;&#10;">
         <Column Name="資產編號" DataType="System.String"/>
         <Column Name="類別" DataType="System.String"/>
@@ -15,16 +15,16 @@
     </MsSqlDataConnection>
   </Dictionary>
   <ReportPage Name="Page1" LeftMargin="6.5" TopMargin="0" RightMargin="0" BottomMargin="0" Columns.Count="2" Columns.Width="101.8" Columns.Positions="0,101.8">
-    <DataBand Name="Data1" Width="384.8" Height="135.5" Guides="47.25,47.25,122.85,122.85,132.3,132.3,141.75,132.3,132.3,132.3,18.9" DataSource="Table">
-      <BarcodeObject Name="Barcode1" Left="4.45" Top="19.9" Width="113.4" Height="113.4" AutoSize="false" Text="資產編號:[Table.資產編號] &#13;&#10;資產名稱:[Table.資產名稱]&#13;&#10;資產類別:[Table.類別]&#13;&#10;規格:[Table.規格]&#13;&#10;數量:[Table.數量]&#13;&#10;部門名稱:[Table.部門名稱]&#13;&#10;保管人:[Table.保管人]&#13;&#10;放置地點:[Table.放置地點]" ShowText="false" AllowExpressions="true" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
-      <TextObject Name="Text3" Left="128.85" Top="38.9" Width="236.25" Height="18.9" Border.Lines="All" Text="資產名稱:[Table.資產名稱]" VertAlign="Center"/>
-      <TextObject Name="Text4" Left="128.85" Top="57.8" Width="141.75" Height="18.9" Border.Lines="All" Text="規格:[Table.規格]" VertAlign="Center"/>
-      <TextObject Name="Text5" Left="270.6" Top="57.8" Width="94.5" Height="18.9" Border.Lines="All" Text="數量:[Table.數量]" VertAlign="Center"/>
-      <TextObject Name="Text6" Left="128.85" Top="76.7" Width="141.75" Height="18.9" Border.Lines="All" Text="部門名稱:[Table.部門名稱]" VertAlign="Center"/>
-      <TextObject Name="Text8" Left="270.6" Top="76.7" Width="94.5" Height="18.9" Border.Lines="All" Text="保管人:[Table.保管人]" VertAlign="Center"/>
-      <TextObject Name="Text9" Left="128.85" Top="19.45" Width="236.25" Height="18.9" Border.Lines="Left, Right, Top" Text="資產編號:[Table.資產編號]" VertAlign="Center"/>
-      <TextObject Name="Text2" Left="128.85" Top="114.85" Width="236.25" Height="18.9" Border.Lines="All" Text="放置地點:[Table.放置地點]"/>
-      <TextObject Name="Text7" Left="128.85" Top="96.5" Width="236.25" Height="18.9" Border.Lines="Left, Right, Bottom" Text="資產類別:[Table.類別]"/>
+    <DataBand Name="Data1" Width="384.8" Height="139.86" Guides="47.25,47.25,122.85,122.85,132.3,132.3,141.75,132.3,132.3,132.3,18.9" DataSource="Table">
+      <BarcodeObject Name="Barcode1" Left="0.45" Top="13.9" Width="113.4" Height="113.4" AutoSize="false" Text="資產編號:[Table.資產編號] &#13;&#10;資產名稱:[Table.資產名稱]&#13;&#10;資產類別:[Table.類別]&#13;&#10;規格:[Table.規格]&#13;&#10;數量:[Table.數量]&#13;&#10;部門名稱:[Table.部門名稱]&#13;&#10;保管人:[Table.保管人]&#13;&#10;放置地點:[Table.放置地點]" ShowText="false" AllowExpressions="true" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+      <TextObject Name="Text3" Left="124.85" Top="32.9" Width="236.25" Height="18.9" Border.Lines="All" Text="資產名稱:[Table.資產名稱]" VertAlign="Center"/>
+      <TextObject Name="Text4" Left="124.85" Top="51.8" Width="141.75" Height="18.9" Border.Lines="All" Text="規格:[Table.規格]" VertAlign="Center"/>
+      <TextObject Name="Text5" Left="266.6" Top="51.8" Width="94.5" Height="18.9" Border.Lines="All" Text="數量:[Table.數量]" VertAlign="Center"/>
+      <TextObject Name="Text6" Left="124.85" Top="70.7" Width="141.75" Height="18.9" Border.Lines="All" Text="部門名稱:[Table.部門名稱]" VertAlign="Center"/>
+      <TextObject Name="Text8" Left="266.6" Top="70.7" Width="94.5" Height="18.9" Border.Lines="All" Text="保管人:[Table.保管人]" VertAlign="Center"/>
+      <TextObject Name="Text9" Left="124.85" Top="16.45" Width="236.25" Height="18.9" Border.Lines="Left, Right, Top" Text="資產編號:[Table.資產編號]"/>
+      <TextObject Name="Text2" Left="124.85" Top="107.85" Width="236.25" Height="18.9" Border.Lines="Left, Right, Bottom" Text="放置地點:[Table.放置地點]" VertAlign="Bottom"/>
+      <TextObject Name="Text7" Left="124.85" Top="90.5" Width="236.25" Height="18.9" Border.Lines="Left, Right, Bottom" Text="資產類別:[Table.類別]"/>
     </DataBand>
   </ReportPage>
 </Report>
