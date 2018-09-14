@@ -70,6 +70,7 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
                 sbSql.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
                 sbSql.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
+                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
                 sbSql.AppendFormat(@"  WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}'",dateTimePicker1.Value.ToString("yyyy/MM/dd"), dateTimePicker2.Value.ToString("yyyy/MM/dd"));
                 sbSql.AppendFormat(@"  ");
@@ -126,6 +127,7 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
                 sbSql.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
                 sbSql.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
+                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
                 sbSql.AppendFormat(@"  WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}'", dateTimePicker5.Value.ToString("yyyy/MM/dd"), dateTimePicker6.Value.ToString("yyyy/MM/dd"));
                 sbSql.AppendFormat(@"  ");
@@ -194,6 +196,7 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(" UPDATE [TKGAFFAIRS].[dbo].[BUYITEM]");
                 sbSql.AppendFormat(" SET [BUYDATES]='{0}',[BUYNO]='{1}',[NAME]='{2}',[DEP]='{3}',[BUYNAME]='{4}',[SPEC]='{5}',[VENDOR]='{6}'",dateTimePicker3.Value.ToString("yyyy/MM/dd"),textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text);
                 sbSql.AppendFormat(" ,[NUM]={0},[UNIT]='{1}',[PRICES]={2},[TMONEY]={3},[INDATES]='{4}',[CHECKNUM]={5},[SIGN]='',[REMARK]='{6}'", textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, dateTimePicker4.Value.ToString("yyyy/MM/dd"), textBox13.Text, textBox14.Text);
+                sbSql.AppendFormat(" ,[PAY]='{0}',[PAYDAY] ='{1}'",comboBox1.Text,textBox15.Text);
                 sbSql.AppendFormat(" WHERE [BUYNO]='{0}'", OLDBUYNO);
                 sbSql.AppendFormat(" ");
 
@@ -311,8 +314,8 @@ namespace TKGAFFAIRS
 
                 sbSql.Clear();
                 sbSql.AppendFormat(" INSERT INTO [TKGAFFAIRS].[dbo].[BUYITEM]");
-                sbSql.AppendFormat(" ([BUYDATES],[BUYNO],[NAME],[DEP],[BUYNAME],[SPEC],[VENDOR],[NUM],[UNIT],[PRICES],[TMONEY],[INDATES],[CHECKNUM],[SIGN],[REMARK])");
-                sbSql.AppendFormat(" VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7},'{8}',{9},{10},'{11}',{12},'{13}','{14}')",dateTimePicker3.Value.ToString("yyyy/MM/dd"),textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, dateTimePicker4.Value.ToString("yyyy/MM/dd"),textBox13.Text,null,textBox14.Text);
+                sbSql.AppendFormat(" ([BUYDATES],[BUYNO],[NAME],[DEP],[BUYNAME],[SPEC],[VENDOR],[NUM],[UNIT],[PRICES],[TMONEY],[INDATES],[CHECKNUM],[SIGN],[REMARK],[PAY],[PAYDAY])");
+                sbSql.AppendFormat(" VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7},'{8}',{9},{10},'{11}',{12},'{13}','{14}','{15}','{16}')", dateTimePicker3.Value.ToString("yyyy/MM/dd"),textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, dateTimePicker4.Value.ToString("yyyy/MM/dd"),textBox13.Text,null,textBox14.Text,comboBox1.Text,textBox15.Text);
                 sbSql.AppendFormat(" ");
 
                 cmd.Connection = sqlConn;
@@ -401,6 +404,7 @@ namespace TKGAFFAIRS
             textBox11.Text = "0";            
             textBox13.Text ="0";
             textBox14.Text = null;
+            textBox15.Text = null;
 
 
             //textBox2.ReadOnly = false;
@@ -415,6 +419,7 @@ namespace TKGAFFAIRS
             textBox11.ReadOnly = false;            
             textBox13.ReadOnly = false;
             textBox14.ReadOnly = false;
+            textBox15.ReadOnly = false;
 
         }
         public void SETSTATUS2()
@@ -431,6 +436,7 @@ namespace TKGAFFAIRS
             textBox11.ReadOnly = false;
             textBox13.ReadOnly = false;
             textBox14.ReadOnly = false;
+            textBox15.ReadOnly = false;
         }
 
         public void SETSTAUSFIANL()
@@ -446,6 +452,7 @@ namespace TKGAFFAIRS
             textBox11.ReadOnly = true;
             textBox13.ReadOnly = true;
             textBox14.ReadOnly = true;
+            textBox15.ReadOnly = true;
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -459,6 +466,7 @@ namespace TKGAFFAIRS
 
                     dateTimePicker3.Value = Convert.ToDateTime(row.Cells["請購日期"].Value.ToString());
                     dateTimePicker4.Value = Convert.ToDateTime(row.Cells["到貨日期"].Value.ToString());
+                    comboBox1.Text = row.Cells["付款方式"].Value.ToString();
                     textBox2.Text = row.Cells["請購編號"].Value.ToString();
                     textBox3.Text = row.Cells["請購人員"].Value.ToString();
                     textBox4.Text = row.Cells["請購部門"].Value.ToString();
@@ -471,6 +479,7 @@ namespace TKGAFFAIRS
                     textBox11.Text = row.Cells["總價"].Value.ToString();                    
                     textBox13.Text = row.Cells["驗收數量"].Value.ToString();
                     textBox14.Text = row.Cells["備考"].Value.ToString();
+                    textBox15.Text = row.Cells["付款天數"].Value.ToString();
 
 
                 }
@@ -488,6 +497,7 @@ namespace TKGAFFAIRS
                     textBox11.Text = null;
                     textBox13.Text = null;
                     textBox14.Text = null;
+                    textBox15.Text = null;
 
                 }
             }
@@ -522,6 +532,7 @@ namespace TKGAFFAIRS
             FASTSQL.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
             FASTSQL.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
             FASTSQL.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
+            FASTSQL.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'");
             FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
             FASTSQL.AppendFormat(@" WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}' ",dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
             FASTSQL.AppendFormat(@"  AND [BUYNO] IN ({0})", BUYNOSERIAL.ToString());

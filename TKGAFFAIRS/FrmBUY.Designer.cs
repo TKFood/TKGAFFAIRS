@@ -84,6 +84,9 @@
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.previewControl1 = new FastReport.Preview.PreviewControl();
+            this.label19 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -307,6 +310,9 @@
             this.tableLayoutPanel2.Controls.Add(this.textBox14, 5, 6);
             this.tableLayoutPanel2.Controls.Add(this.dateTimePicker3, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.dateTimePicker4, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label19, 5, 4);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox1, 6, 4);
+            this.tableLayoutPanel2.Controls.Add(this.textBox15, 7, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -806,6 +812,38 @@
             this.previewControl1.Size = new System.Drawing.Size(966, 291);
             this.previewControl1.TabIndex = 2;
             // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(603, 172);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(114, 16);
+            this.label19.TabIndex = 35;
+            this.label19.Text = "支付方式";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "付現",
+            "月結"});
+            this.comboBox1.Location = new System.Drawing.Point(723, 170);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(114, 24);
+            this.comboBox1.TabIndex = 36;
+            this.comboBox1.Text = "付現";
+            // 
+            // textBox15
+            // 
+            this.textBox15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox15.Location = new System.Drawing.Point(843, 166);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.ReadOnly = true;
+            this.textBox15.Size = new System.Drawing.Size(114, 27);
+            this.textBox15.TabIndex = 37;
+            // 
             // FrmBUY
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -905,5 +943,8 @@
         private FastReport.Preview.PreviewControl previewControl1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox15;
     }
 }
