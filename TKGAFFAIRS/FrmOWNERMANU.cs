@@ -669,12 +669,14 @@ namespace TKGAFFAIRS
         {
             StringBuilder FASTSQL = new StringBuilder();
 
-            if (!string.IsNullOrEmpty(textBox1.Text))
+            sbSqlQuery.Clear();
+
+            if (!string.IsNullOrEmpty(textBox15.Text))
             {
                 sbSqlQuery.AppendFormat(@" AND [ID]='{0}'  ", textBox15.Text);
             }
 
-            if (!string.IsNullOrEmpty(textBox2.Text))
+            if (!string.IsNullOrEmpty(textBox16.Text))
             {
                 sbSqlQuery.AppendFormat(@" AND [NAME]='{0}'  ", textBox16.Text);
             }
