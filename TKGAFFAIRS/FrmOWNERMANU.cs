@@ -695,7 +695,175 @@ namespace TKGAFFAIRS
 
             return FASTSQL.ToString();
         }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            SEARCHNAME1();
+        }
 
+        private void textBox15_TextChanged(object sender, EventArgs e)
+        {
+            SEARCHNAME2();
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            SEARCHNAME3();
+        }
+
+        public void SEARCHNAME1()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                StringBuilder sbSql = new StringBuilder();
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+                ds4.Clear();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(@" SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}' ",textBox1.Text);
+                sbSql.AppendFormat(@"  ");
+
+                adapter4 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder4 = new SqlCommandBuilder(adapter4);
+                sqlConn.Open();
+                ds4.Clear();
+                adapter4.Fill(ds4, "TEMPds4");
+                sqlConn.Close();
+
+
+                if (ds4.Tables["TEMPds4"].Rows.Count == 0)
+                {
+                    
+                }
+                else
+                {
+                    if (ds4.Tables["TEMPds4"].Rows.Count >= 1)
+                    {
+                        textBox2.Text = ds4.Tables["TEMPds4"].Rows[0]["MV002"].ToString();
+                        
+
+                    }
+                    
+                }
+
+            }
+            catch
+            {
+                
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+
+        }
+        public void SEARCHNAME2()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                StringBuilder sbSql = new StringBuilder();
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+                ds4.Clear();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(@" SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}' ", textBox15.Text);
+                sbSql.AppendFormat(@"  ");
+
+                adapter4 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder4 = new SqlCommandBuilder(adapter4);
+                sqlConn.Open();
+                ds4.Clear();
+                adapter4.Fill(ds4, "TEMPds4");
+                sqlConn.Close();
+
+
+                if (ds4.Tables["TEMPds4"].Rows.Count == 0)
+                {
+
+                }
+                else
+                {
+                    if (ds4.Tables["TEMPds4"].Rows.Count >= 1)
+                    {
+                        textBox16.Text = ds4.Tables["TEMPds4"].Rows[0]["MV002"].ToString();
+
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+        public void SEARCHNAME3()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                StringBuilder sbSql = new StringBuilder();
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+                ds4.Clear();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(@" SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}' ", textBox3.Text);
+                sbSql.AppendFormat(@"  ");
+
+                adapter4 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder4 = new SqlCommandBuilder(adapter4);
+                sqlConn.Open();
+                ds4.Clear();
+                adapter4.Fill(ds4, "TEMPds4");
+                sqlConn.Close();
+
+
+                if (ds4.Tables["TEMPds4"].Rows.Count == 0)
+                {
+
+                }
+                else
+                {
+                    if (ds4.Tables["TEMPds4"].Rows.Count >= 1)
+                    {
+                        textBox4.Text = ds4.Tables["TEMPds4"].Rows[0]["MV002"].ToString();
+
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
         #endregion
 
         #region BUTTON
@@ -767,8 +935,9 @@ namespace TKGAFFAIRS
 
 
 
+
         #endregion
 
-
+       
     }
 }
