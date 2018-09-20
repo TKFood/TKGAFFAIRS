@@ -337,12 +337,13 @@ namespace TKGAFFAIRS
         {
            
             textBox3.Text = null;
-            textBox4.Text = null;            
+            textBox4.Text = null;
+            textBox7.Text = null;
             textBox8.Text = null;
             textBox9.Text = null;
             textBox10.Text = null;
-            textBox11.Text = null;
-            textBox12.Text = null;
+            textBox11.Text = "0";
+            textBox12.Text = "0";
             textBox13.Text = null;
             textBox14.Text = null;
 
@@ -377,7 +378,7 @@ namespace TKGAFFAIRS
         {
             try
             {
-                textBox7.Text = GETNO();
+                textBox7.Text =comboBox3.Text+'-'+ GETNO();
                 //add ZWAREWHOUSEPURTH
                 connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
                 sqlConn = new SqlConnection(connectionString);
@@ -435,9 +436,9 @@ namespace TKGAFFAIRS
 
                 sbSql.Clear();
 
-                sbSql.AppendFormat(@"  SELECT ISNULL(MAX([NO]),'000') AS NO");
+                sbSql.AppendFormat(@"  SELECT ISNULL(MAX([NO]),'00000000') AS NO");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[OWNERMANU]");               
-                sbSql.AppendFormat(@"  WHERE [ID]='{0}' AND [DEP]='{1}' AND [CLASS]='{2}'",textBox3.Text,comboBox2.Text,comboBox3.Text);
+                sbSql.AppendFormat(@"  WHERE [CLASS]='{0}'",comboBox3.Text);
                 sbSql.AppendFormat(@"  ");
 
                 adapter4 = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -477,17 +478,18 @@ namespace TKGAFFAIRS
 
         public string SETNO(string NO)
         {
-            if (NO.Equals("000"))
+            if (NO.Equals("00000000"))
             {
-                return  "001";
+                return  "00001";
             }
 
             else
             {
+                NO = NO.Substring(3, 5);
                 int serno = Convert.ToInt16(NO);
                 serno = serno + 1;
                 string temp = serno.ToString();
-                temp = temp.PadLeft(3, '0');
+                temp = temp.PadLeft(5, '0');
                 return temp.ToString();
             }
         }
