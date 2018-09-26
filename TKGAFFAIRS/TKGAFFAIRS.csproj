@@ -94,6 +94,12 @@
     <Compile Include="FrmBOXMEAL.Designer.cs">
       <DependentUpon>FrmBOXMEAL.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBOXMEALSTAS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBOXMEALSTAS.Designer.cs">
+      <DependentUpon>FrmBOXMEALSTAS.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmBUY.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
     <EmbeddedResource Include="FrmBOXMEAL.resx">
       <DependentUpon>FrmBOXMEAL.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmBOXMEALSTAS.resx">
+      <DependentUpon>FrmBOXMEALSTAS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmBUY.resx">
       <DependentUpon>FrmBUY.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +176,7 @@
     </Compile>
     <None Include="REPORT\伙食月統計.frx" />
     <None Include="REPORT\文具、個人手工具保管卡.frx" />
+    <None Include="REPORT\每月個人伙食費統計表.frx" />
     <None Include="REPORT\總務課每日採購請購項目總表.frx" />
     <None Include="REPORT\資產QRCODE.frx" />
   </ItemGroup>
