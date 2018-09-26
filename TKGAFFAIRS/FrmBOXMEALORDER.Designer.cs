@@ -241,6 +241,10 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FrmBOXMEALORDER
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -251,6 +255,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmBOXMEALORDER";
             this.Text = "FrmBOXMEALORDER";
+            this.Load += new System.EventHandler(this.FrmBOXMEALORDER_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);

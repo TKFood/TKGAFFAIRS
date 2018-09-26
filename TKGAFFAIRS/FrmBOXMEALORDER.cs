@@ -68,6 +68,17 @@ namespace TKGAFFAIRS
 
 
         #region FUNCTION
+        private void FrmBOXMEALORDER_Load(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Start();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label1.Text = DateTime.Now.ToString();
+
+        }
         public void Search()
         {
             ds.Clear();
@@ -136,6 +147,9 @@ namespace TKGAFFAIRS
         {
             Search();
         }
+
         #endregion
+
+        
     }
 }
