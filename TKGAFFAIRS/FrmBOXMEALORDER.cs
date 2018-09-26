@@ -94,8 +94,8 @@ namespace TKGAFFAIRS
                 sbSqlQuery.Clear();
 
                 
-                sbSql.AppendFormat(@" SELECT [LOCALEMPORDER].[ID] AS '工號',[LOCALEMPORDER].[NAME] AS '姓名',[MEAL].[MEALNAME] AS '餐別',[MEALDISH].[DISHNAME] AS '葷素' ");
-                sbSql.AppendFormat(@" ,[LOCALEMPORDER].[SERNO],[LOCALEMPORDER].[CARDNO],[LOCALEMPORDER].[DATE],[LOCALEMPORDER].[MEAL],[LOCALEMPORDER].[DISH],[LOCALEMPORDER].[NUM] ");
+                sbSql.AppendFormat(@" SELECT [LOCALEMPORDER].[ID] AS '工號',[LOCALEMPORDER].[NAME] AS '姓名',[MEAL].[MEALNAME] AS '餐別',[MEALDISH].[DISHNAME] AS '葷素' ,[LOCALEMPORDER].[NUM] AS '訂餐量'");
+                sbSql.AppendFormat(@" ,[LOCALEMPORDER].[SERNO],[LOCALEMPORDER].[CARDNO],[LOCALEMPORDER].[DATE],[LOCALEMPORDER].[MEAL],[LOCALEMPORDER].[DISH] ");
                 sbSql.AppendFormat(@" FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] ");
                 sbSql.AppendFormat(@" LEFT JOIN [TKBOXEDMEAL].[dbo].[MEAL] ON [MEAL].[MEAL]=[LOCALEMPORDER].[MEAL] ");
                 sbSql.AppendFormat(@" LEFT JOIN [TKBOXEDMEAL].[dbo].[MEALDISH] ON [MEALDISH].[DISH]=[LOCALEMPORDER].[DISH] ");
@@ -174,7 +174,7 @@ namespace TKGAFFAIRS
                         //InsertsbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[EMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),GETDATE(), 112) AND [ID]='{0}' AND  ([MEAL]='10' OR [MEAL]='20') AND [EATNUM]=0", EmployeeID, Meal);
                         Meal = "10";
                         InsertsbSql.Append(" ");
-                        InsertsbSql.AppendFormat(" INSERT INTO  [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] ([SERNO],[ID],[NAME],[CARDNO],[DATE],[MEAL],[DISH],[NUM]) VALUES ('{0}','{1}','{2}','{3}',GETDATE(),'{4}','{5}',1) ", DateTime.Now.ToString("yyyyMMddHHmmss"), EmployeeID, Name, CardNo, Meal, Dish);
+                        InsertsbSql.AppendFormat(" INSERT INTO  [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] ([SERNO],[ID],[NAME],[CARDNO],[DATE],[MEAL],[DISH],[NUM]) VALUES ('{0}','{1}','{2}','{3}',GETDATE(),'{4}','{5}',1) ",dateTimePicker1.Value.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss"), EmployeeID, Name, CardNo, Meal, Dish);
                     }
 
                     sqlConn = new SqlConnection(connectionString);
@@ -195,7 +195,7 @@ namespace TKGAFFAIRS
                     {
                         Meal = "20";
                         InsertsbSql.Append(" ");
-                        InsertsbSql.AppendFormat(" INSERT INTO  [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] ([SERNO],[ID],[NAME],[CARDNO],[DATE],[MEAL],[DISH],[NUM]) VALUES ('{0}','{1}','{2}','{3}',GETDATE(),'{4}','{5}',1) ", DateTime.Now.ToString("yyyyMMddHHmmss"), EmployeeID, Name, CardNo, Meal, Dish);
+                        InsertsbSql.AppendFormat(" INSERT INTO  [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] ([SERNO],[ID],[NAME],[CARDNO],[DATE],[MEAL],[DISH],[NUM]) VALUES ('{0}','{1}','{2}','{3}',GETDATE(),'{4}','{5}',1) ", dateTimePicker1.Value.ToString("yyyyMMdd") + DateTime.Now.ToString("HHmmss"), EmployeeID, Name, CardNo, Meal, Dish);
                     }
 
                 }
@@ -208,7 +208,7 @@ namespace TKGAFFAIRS
                     sbSql.Clear();
                     sbSqlQuery.Clear();
 
-                    sbSql.AppendFormat(@"SELECT [SERNO],[ID],[NAME],[CARDNO],[DATE],[MEAL],[DISH],[NUM],[EATNUM] FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),GETDATE(), 112) AND [ID]='{0}' AND  [MEAL]='{1}' ", EmployeeID, Meal);
+                    sbSql.AppendFormat(@"SELECT [SERNO],[ID],[NAME],[CARDNO],[DATE],[MEAL],[DISH],[NUM],[EATNUM] FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{2}', 112) AND [ID]='{0}' AND  [MEAL]='{1}' ", EmployeeID, Meal,dateTimePicker1.Value.ToString("yyyyMMdd"));
 
                     adapter = new SqlDataAdapter(@"" + sbSql, sqlConn);
                     sqlCmdBuilder = new SqlCommandBuilder(adapter);
@@ -226,7 +226,7 @@ namespace TKGAFFAIRS
                     {
                         InsertsbSql.Append(" ");
                         //InsertsbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[EMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),GETDATE(), 112) AND [ID]='{0}' AND  [MEAL]='{1}' AND [EATNUM]=0 ", EmployeeID, Meal);
-                        InsertsbSql.AppendFormat(" INSERT INTO  [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] ([SERNO],[ID],[NAME],[CARDNO],[DATE],[MEAL],[DISH],[NUM]) VALUES ('{0}','{1}','{2}','{3}',GETDATE(),'{4}','{5}',1) ", DateTime.Now.ToString("yyyyMMddHHmmss"), EmployeeID, Name, CardNo, Meal, Dish);
+                        InsertsbSql.AppendFormat(" INSERT INTO  [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] ([SERNO],[ID],[NAME],[CARDNO],[DATE],[MEAL],[DISH],[NUM]) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7}) ", dateTimePicker1.Value.ToString("yyyyMMdd")+ DateTime.Now.ToString("HHmmss"), EmployeeID, Name, CardNo, dateTimePicker1.Value.ToString("yyyyMMdd"), Meal, Dish,textBox3.Text);
                     }
                     else
                     {
@@ -300,12 +300,12 @@ namespace TKGAFFAIRS
 
                 if (Meal.Equals("10+20"))
                 {
-                    sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),GETDATE(), 112) AND [ID]='{0}' AND  ([MEAL]='10' OR [MEAL]='20') AND [DISH]='{1}' ", EmployeeID, Dish);
+                    sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{2}', 112) AND [ID]='{0}' AND  ([MEAL]='10' OR [MEAL]='20') AND [DISH]='{1}' ", EmployeeID, Dish,dateTimePicker1.Value.ToString("yyyyMMdd"));
                 }
                 else
                 {
                     sbSql.Append(" ");
-                    sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),GETDATE(), 112) AND [ID]='{0}' AND  [MEAL]='{1}' AND [DISH]='{2}' ", EmployeeID, Meal, Dish);
+                    sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{3}', 112) AND [ID]='{0}' AND  [MEAL]='{1}' AND [DISH]='{2}' ", EmployeeID, Meal, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
                 }
 
                 cmd.Connection = sqlConn;
@@ -343,6 +343,7 @@ namespace TKGAFFAIRS
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+          
             SearchEmplyee();
         }
 
@@ -357,7 +358,12 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
-                sbSql.AppendFormat(@"SELECT TOP 1  [EmployeeID],[CardNo],[Name] FROM [TKBOXEDMEAL].[dbo].[VEMPLOYEE] WHERE [EmployeeID]='{0}' OR [CardNo]='{0}'", textBox1.Text.ToString());
+                sbSql.AppendFormat(@" SELECT TOP 1  [EmployeeID],[CardNo],[Name] FROM [TKBOXEDMEAL].[dbo].[VEMPLOYEE] WHERE [EmployeeID]='{0}' OR [CardNo]='{0}'", textBox1.Text.ToString());
+                sbSql.AppendFormat(@" UNION ALL");
+                sbSql.AppendFormat(@" SELECT TOP 1  ME001 collate Chinese_Taiwan_Stroke_CI_AI,ME001 collate Chinese_Taiwan_Stroke_CI_AI,ME002 collate Chinese_Taiwan_Stroke_CI_AI FROM [TK].dbo.[CMSME]  WHERE ME001='{0}'", textBox1.Text.ToString());
+                sbSql.AppendFormat(@" ");
+                sbSql.AppendFormat(@" ");
+
 
                 adapter = new SqlDataAdapter(@"" + sbSql, sqlConn);
                 sqlCmdBuilder = new SqlCommandBuilder(adapter);
@@ -373,7 +379,8 @@ namespace TKGAFFAIRS
                     //SHOWMESSAGE("沒有此員工!!");
 
                     //textBox1.Text = null;
-                    //textBox2.Text = null;
+                    textBox2.Text = textBox1.Text;
+                    
 
 
                 }
@@ -398,6 +405,9 @@ namespace TKGAFFAIRS
             }
 
         }
+
+       
+
         #endregion
 
 
@@ -492,8 +502,9 @@ namespace TKGAFFAIRS
             Search();
         }
 
+
         #endregion
 
-        
+
     }
 }
