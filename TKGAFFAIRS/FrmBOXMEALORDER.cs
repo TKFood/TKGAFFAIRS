@@ -418,87 +418,111 @@ namespace TKGAFFAIRS
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {            
-            Meal = "10";
-            Dish = "1";
-            EmployeeID = textBox1.Text;
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "10";
+                Dish = "1";
+                EmployeeID = textBox1.Text;
 
-            ORDERAdd(Meal, Dish, OrderBoxed);
+                ORDERAdd(Meal, Dish, OrderBoxed);
+            }   
+           
 
             Search();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Meal = "10";
-            Dish = "2";
-            EmployeeID = textBox1.Text;
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "10";
+                Dish = "2";
+                EmployeeID = textBox1.Text;
 
-            ORDERAdd(Meal, Dish, OrderBoxed);
+                ORDERAdd(Meal, Dish, OrderBoxed);
+            }
 
             Search();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Meal = "20";
-            Dish = "1";
-            EmployeeID = textBox1.Text;
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "20";
+                Dish = "1";
+                EmployeeID = textBox1.Text;
 
-            ORDERAdd(Meal, Dish, OrderBoxed);
-
+                ORDERAdd(Meal, Dish, OrderBoxed);
+            }
             Search();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Meal = "20";
-            Dish = "2";
-            EmployeeID = textBox1.Text;
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "20";
+                Dish = "2";
+                EmployeeID = textBox1.Text;
 
-            ORDERAdd(Meal, Dish, OrderBoxed);
+                ORDERAdd(Meal, Dish, OrderBoxed);
+            }
             Search();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Meal = "10";
-            Dish = "1";
-            EmployeeID = textBox1.Text;
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "10";
+                Dish = "1";
+                EmployeeID = textBox1.Text;
 
-            OrderCanel(Meal, Dish, OrderBoxed);
+                OrderCanel(Meal, Dish, OrderBoxed);
+            }
 
             Search();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Meal = "10";
-            Dish = "2";
-            EmployeeID = textBox1.Text;
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "10";
+                Dish = "2";
+                EmployeeID = textBox1.Text;
 
-            OrderCanel(Meal, Dish, OrderBoxed);
+                OrderCanel(Meal, Dish, OrderBoxed);
+            }
 
             Search();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Meal = "20";
-            Dish = "1";
-            EmployeeID = textBox1.Text;
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "20";
+                Dish = "1";
+                EmployeeID = textBox1.Text;
 
-            OrderCanel(Meal, Dish, OrderBoxed);
+                OrderCanel(Meal, Dish, OrderBoxed);
+            }
             Search();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            Meal = "20";
-            Dish = "2";
-            EmployeeID = textBox1.Text;
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "20";
+                Dish = "2";
+                EmployeeID = textBox1.Text;
 
-            OrderCanel(Meal, Dish, OrderBoxed);
+                OrderCanel(Meal, Dish, OrderBoxed);
+            }
             Search();
         }
 
