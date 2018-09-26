@@ -424,7 +424,7 @@ namespace TKGAFFAIRS
                 Meal = "10";
                 Dish = "1";
                 EmployeeID = textBox1.Text;
-
+                Name = textBox2.Text;
                 ORDERAdd(Meal, Dish, OrderBoxed);
             }   
            
@@ -439,7 +439,7 @@ namespace TKGAFFAIRS
                 Meal = "10";
                 Dish = "2";
                 EmployeeID = textBox1.Text;
-
+                Name = textBox2.Text;
                 ORDERAdd(Meal, Dish, OrderBoxed);
             }
 
@@ -453,7 +453,7 @@ namespace TKGAFFAIRS
                 Meal = "20";
                 Dish = "1";
                 EmployeeID = textBox1.Text;
-
+                Name = textBox2.Text;
                 ORDERAdd(Meal, Dish, OrderBoxed);
             }
             Search();
@@ -466,7 +466,7 @@ namespace TKGAFFAIRS
                 Meal = "20";
                 Dish = "2";
                 EmployeeID = textBox1.Text;
-
+                Name = textBox2.Text;
                 ORDERAdd(Meal, Dish, OrderBoxed);
             }
             Search();
