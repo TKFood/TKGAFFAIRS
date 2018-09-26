@@ -76,7 +76,7 @@ namespace TKGAFFAIRS
                                
             FASTSQL.AppendFormat(@" SELECT [ID]+[NAME] AS '姓名',CONVERT(NVARCHAR,[DATE],112) AS '日期',SUM([NUM]) AS '數量' ");
             FASTSQL.AppendFormat(@" FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] ");
-            FASTSQL.AppendFormat(@" WHERE [DATE]>='{0}' AND [DATE]<='{1}'",dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
+            FASTSQL.AppendFormat(@" WHERE CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'", dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
             FASTSQL.AppendFormat(@" GROUP BY [ID]+[NAME],CONVERT(NVARCHAR,[DATE],112)");
             FASTSQL.AppendFormat(@"  ");
 

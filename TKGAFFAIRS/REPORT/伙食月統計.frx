@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="09/25/2018 09:06:06" ReportInfo.Modified="09/25/2018 09:24:21" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/25/2018 09:06:06" ReportInfo.Modified="09/26/2018 13:26:39" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9L9NEnsJe3x3qHqhy13Cl8r">
-      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [ID]+[NAME] AS '姓名',CONVERT(NVARCHAR,[DATE],112) AS '日期',SUM([NUM]) AS '數量'&#13;&#10;FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]&#13;&#10;WHERE [DATE]&gt;='20180826' AND [DATE]&lt;='20180925'&#13;&#10;GROUP BY [ID]+[NAME],CONVERT(NVARCHAR,[DATE],112)&#13;&#10;">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9IqDkFr39RkuFfyIPJDRYWG">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [ID]+[NAME] AS '姓名',CONVERT(NVARCHAR,[DATE],112) AS '日期',SUM([NUM]) AS '數量'&#13;&#10;FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]&#13;&#10;WHERE CONVERT(NVARCHAR,[DATE],112)&gt;='20180826' AND CONVERT(NVARCHAR,[DATE],112)&lt;='20180925'&#13;&#10;GROUP BY [ID]+[NAME],CONVERT(NVARCHAR,[DATE],112)&#13;&#10;">
         <Column Name="姓名" DataType="System.String"/>
         <Column Name="日期" DataType="System.String"/>
         <Column Name="數量" DataType="System.Int32"/>
