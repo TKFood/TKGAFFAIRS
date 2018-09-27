@@ -73,11 +73,12 @@ namespace TKGAFFAIRS
         {
             StringBuilder FASTSQL = new StringBuilder();
 
-            FASTSQL.AppendFormat(@"  SELECT [ID] AS '工號',[NAME] AS '姓名',SUM([NUM]) AS '訂餐量',{0}*SUM([NUM]) AS '訂餐金額'",textBox1.Text.ToString());
+            FASTSQL.AppendFormat(@"  SELECT [ID] AS '工號',[NAME] AS '姓名',SUM([NUM]) AS '訂餐量',[MEALDISH].[DISHNAME] AS '葷/素',{0}*SUM([NUM]) AS '訂餐金額'", textBox1.Text.ToString());
             FASTSQL.AppendFormat(@"  FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]");
+            FASTSQL.AppendFormat(@"  LEFT JOIN [TKBOXEDMEAL].[dbo].[MEALDISH] ON  [MEALDISH].[DISH]=[LOCALEMPORDER].[DISH]");
             FASTSQL.AppendFormat(@"  WHERE CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
-            FASTSQL.AppendFormat(@"  GROUP BY [ID],[NAME]");
-            FASTSQL.AppendFormat(@"  ORDER BY [ID],[NAME]");
+            FASTSQL.AppendFormat(@"  GROUP BY [ID],[NAME],[MEALDISH].[DISHNAME]");
+            FASTSQL.AppendFormat(@"  ORDER BY [ID],[NAME],[MEALDISH].[DISHNAME]");
             FASTSQL.AppendFormat(@"  ");
 
             return FASTSQL.ToString();
