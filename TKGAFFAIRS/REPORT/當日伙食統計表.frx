@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="09/26/2018 09:01:05" ReportInfo.Modified="09/28/2018 09:49:22" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/26/2018 09:01:05" ReportInfo.Modified="09/28/2018 17:53:34" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9K2AdyOPfvOjSgWbh0YS2jv">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9LMQb+mWF5WQwaNwFufCAxb">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [ID] AS '工號',[NAME] AS '姓名',SUM([NUM]) AS '訂餐量',[MEAL].[MEALNAME] AS '午/晚餐',[MEALDISH].[DISHNAME] AS '葷/素','' AS '用餐'&#13;&#10;FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]&#13;&#10;LEFT JOIN [TKBOXEDMEAL].[dbo].[MEALDISH] ON  [MEALDISH].[DISH]=[LOCALEMPORDER].[DISH]&#13;&#10;LEFT JOIN [TKBOXEDMEAL].[dbo].[MEAL] ON [MEAL].[MEAL]=[LOCALEMPORDER].[MEAL]&#13;&#10;WHERE CONVERT(NVARCHAR,[DATE],112)&gt;='20180901' AND CONVERT(NVARCHAR,[DATE],112)&lt;='20180925'&#13;&#10;GROUP BY [ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]&#13;&#10;ORDER BY [ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]">
         <Column Name="工號" DataType="System.String"/>
         <Column Name="姓名" DataType="System.String"/>
@@ -11,13 +11,16 @@
         <Column Name="用餐" DataType="System.String"/>
       </TableDataSource>
     </MsSqlDataConnection>
+    <MsSqlDataConnection Name="Connection1" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9LCThNuFl9ZQtnK7EoAPw89"/>
+    <Parameter Name="P1" DataType="System.String"/>
     <Total Name="TotalNUM" Expression="[Table.訂餐量]" Evaluator="Data1"/>
   </Dictionary>
   <ReportPage Name="Page1">
-    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="18.9">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
       <TextObject Name="Text1" Width="708.75" Height="18.9" Text="每日個人伙食統計表 " HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text12" Top="18.9" Width="236.25" Height="18.9" Text="日期:[P1]" VertAlign="Center"/>
     </ReportTitleBand>
-    <ColumnHeaderBand Name="ColumnHeader1" Top="22.75" Width="718.2" Height="18.9">
+    <ColumnHeaderBand Name="ColumnHeader1" Top="41.65" Width="718.2" Height="18.9">
       <TextObject Name="Text3" Width="94.5" Height="18.9" Border.Lines="All" Text="工號" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text5" Left="94.5" Width="94.5" Height="18.9" Border.Lines="All" Text="姓名" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text7" Left="189" Width="75.6" Height="18.9" Border.Lines="All" Text="訂餐量" HorzAlign="Center" VertAlign="Center"/>
@@ -25,7 +28,7 @@
       <TextObject Name="Text18" Left="264.6" Width="75.6" Height="18.9" Border.Lines="All" Text="午/晚餐" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text9" Left="406.35" Width="94.5" Height="18.9" Border.Lines="All" Text="用餐" HorzAlign="Center" VertAlign="Center"/>
     </ColumnHeaderBand>
-    <DataBand Name="Data1" Top="45.49" Width="718.2" Height="18.9" DataSource="Table">
+    <DataBand Name="Data1" Top="64.39" Width="718.2" Height="18.9" DataSource="Table">
       <TextObject Name="Text2" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.工號]" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text4" Left="94.5" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.姓名]" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text6" Left="189" Width="75.6" Height="18.9" Border.Lines="All" Text="[Table.訂餐量]" HorzAlign="Center" VertAlign="Center"/>
@@ -33,7 +36,7 @@
       <TextObject Name="Text17" Left="264.6" Width="75.6" Height="18.9" Border.Lines="All" Text="[Table.午/晚餐]" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text8" Left="406.35" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.用餐]" HorzAlign="Center" VertAlign="Center"/>
     </DataBand>
-    <ReportSummaryBand Name="ReportSummary1" Top="68.24" Width="718.2" Height="56.7">
+    <ReportSummaryBand Name="ReportSummary1" Top="87.14" Width="718.2" Height="56.7">
       <TextObject Name="Text10" Width="189" Height="18.9" Border.Lines="All" Text="合計" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text11" Left="189" Width="75.6" Height="18.9" Border.Lines="All" Text="[TotalNUM]" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text13" Top="28.35" Width="708.75" Height="18.9" Text="核准:                                 審核:                                   申請人:            " VertAlign="Center"/>

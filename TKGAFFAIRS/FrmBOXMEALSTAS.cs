@@ -63,7 +63,11 @@ namespace TKGAFFAIRS
 
             TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
             SQL = SETFASETSQL();
-            Table.SelectCommand = SQL;
+
+            report1.SetParameterValue("P1", dateTimePicker1.Value.ToString("yyyy/MM/dd"));
+
+            Table.SelectCommand = SQL;         
+            
             report1.Preview = previewControl1;
             report1.Show();
 
