@@ -94,6 +94,12 @@
     <Compile Include="FrmBOXMEAL.Designer.cs">
       <DependentUpon>FrmBOXMEAL.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBOXMEALDAY.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBOXMEALDAY.Designer.cs">
+      <DependentUpon>FrmBOXMEALDAY.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmBOXMEALORDER.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBOXMEAL.resx">
       <DependentUpon>FrmBOXMEAL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBOXMEALDAY.resx">
+      <DependentUpon>FrmBOXMEALDAY.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBOXMEALORDER.resx">
       <DependentUpon>FrmBOXMEALORDER.cs</DependentUpon>
