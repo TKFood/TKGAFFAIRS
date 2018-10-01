@@ -31,12 +31,15 @@ namespace TKGAFFAIRS
         SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder();
         SqlDataAdapter adapter2 = new SqlDataAdapter();
         SqlCommandBuilder sqlCmdBuilder2 = new SqlCommandBuilder();
+        SqlDataAdapter adapter3 = new SqlDataAdapter();
+        SqlCommandBuilder sqlCmdBuilder3 = new SqlCommandBuilder();
         SqlDataAdapter adapter4 = new SqlDataAdapter();
         SqlCommandBuilder sqlCmdBuilder4 = new SqlCommandBuilder();
         SqlTransaction tran;
         SqlCommand cmd = new SqlCommand();
         DataSet ds = new DataSet();
         DataSet ds2 = new DataSet();
+        DataSet ds3 = new DataSet();
         DataSet ds4 = new DataSet();
         DataTable dt = new DataTable();
         string tablename = null;
@@ -162,6 +165,74 @@ namespace TKGAFFAIRS
                     {
                         dataGridView2.DataSource = ds2.Tables["TEMPds2"];
                         dataGridView2.AutoResizeColumns();
+
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+        }
+
+        public void Search3()
+        {
+            ds.Clear();
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+                sbSql.AppendFormat(@"  SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'");
+                sbSql.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
+                sbSql.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
+                sbSql.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
+                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'");
+                sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
+                sbSql.AppendFormat(@"  WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}'", dateTimePicker7.Value.ToString("yyyy/MM/dd"), dateTimePicker8.Value.ToString("yyyy/MM/dd"));
+                sbSql.AppendFormat(@"  ");
+                sbSql.AppendFormat(@"  ");
+
+                adapter3 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder3 = new SqlCommandBuilder(adapter3);
+                sqlConn.Open();
+                ds3.Clear();
+                adapter3.Fill(ds3, "TEMPds3");
+                sqlConn.Close();
+
+                if (CHECKYN.Equals("N"))
+                {
+                    //建立一個DataGridView的Column物件及其內容
+                    DataGridViewColumn dgvc = new DataGridViewCheckBoxColumn();
+                    dgvc.Width = 40;
+                    dgvc.Name = "選取";
+
+                    this.dataGridView3.Columns.Insert(0, dgvc);
+                    CHECKYN = "Y";
+                }
+
+                if (ds3.Tables["TEMPds3"].Rows.Count == 0)
+                {
+                    dataGridView3.DataSource = null;
+                }
+                else
+                {
+                    if (ds3.Tables["TEMPds3"].Rows.Count >= 1)
+                    {
+                        dataGridView3.DataSource = ds3.Tables["TEMPds3"];
+                        dataGridView3.AutoResizeColumns();
 
 
                     }
@@ -567,6 +638,69 @@ namespace TKGAFFAIRS
             return BUYNOSERIAL= BUYNOSERIAL+"''";
         }
 
+        public void SETFASTREPORT2()
+        {
+
+            string SQL;
+            Report report2= new Report();
+            report2.Load(@"REPORT\請款單.frx");
+
+            report2.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+            TableDataSource Table = report2.GetDataSource("Table") as TableDataSource;
+            SQL = SETFASETSQL2();
+            Table.SelectCommand = SQL;
+            report2.Preview = previewControl2;
+            report2.Show();
+
+        }
+
+        public string SETFASETSQL2()
+        {
+            StringBuilder FASTSQL = new StringBuilder();
+
+            string BUYNOSERIAL = GETBUYNOSERIAL2();
+
+
+            FASTSQL.AppendFormat(@" SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門' ");
+            FASTSQL.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
+            FASTSQL.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
+            FASTSQL.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
+            FASTSQL.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'");
+            FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
+            FASTSQL.AppendFormat(@" WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}' ", dateTimePicker7.Value.ToString("yyyyMMdd"), dateTimePicker8.Value.ToString("yyyyMMdd"));
+            FASTSQL.AppendFormat(@"  AND [BUYNO] IN ({0})", BUYNOSERIAL.ToString());
+            FASTSQL.AppendFormat(@"  ");
+
+            return FASTSQL.ToString();
+        }
+
+        public string GETBUYNOSERIAL2()
+        {
+            string BUYNOSERIAL = null;
+
+            foreach (DataGridViewRow dr in this.dataGridView3.Rows)
+            {
+                if (dr.Cells[0].Value != null && (bool)dr.Cells[0].Value)
+                {
+                    try
+                    {
+                        BUYNOSERIAL = BUYNOSERIAL + "'" + dr.Cells["請購編號"].Value.ToString() + "',";
+                    }
+                    catch
+                    {
+
+                    }
+
+                    finally
+                    {
+
+                    }
+                }
+            }
+            return BUYNOSERIAL = BUYNOSERIAL + "''";
+        }
         public void CALSUM()
         {
             try
@@ -653,10 +787,18 @@ namespace TKGAFFAIRS
         {
             SETFASTREPORT();
         }
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Search3();
+        }
+        private void button9_Click(object sender, EventArgs e)
+        {
+            SETFASTREPORT2();
+        }
 
 
         #endregion
 
-
+      
     }
 }
