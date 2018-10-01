@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/01/2018 09:24:48" ReportInfo.Modified="10/01/2018 10:54:01" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/01/2018 09:24:48" ReportInfo.Modified="10/01/2018 10:56:42" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9IPTn+4YDmYAqj+tuVqa5DG">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9Jen52Lt3zPKje8nh0GkQAw">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'&#13;&#10;,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'&#13;&#10;,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM]  AS '驗收數量'&#13;&#10;,[SIGN] AS '簽名',[REMARK] AS '備考'&#13;&#10;,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[BUYITEM]&#13;&#10;WHERE [BUYDATES]&gt;='20180801' AND [BUYDATES]&lt;='20180831'">
         <Column Name="請購日期" DataType="System.DateTime"/>
         <Column Name="請購編號" DataType="System.String"/>
@@ -22,6 +22,7 @@
         <Column Name="付款天數" DataType="System.String"/>
       </TableDataSource>
     </MsSqlDataConnection>
+    <Total Name="Total" Expression="[Table.總價]" Evaluator="Data1"/>
   </Dictionary>
   <ReportPage Name="Page1">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="103.95">
@@ -54,7 +55,7 @@
     <ColumnFooterBand Name="ColumnFooter1" Top="174.64" Width="718.2" Height="151.2">
       <TextObject Name="Text15" Width="47.25" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
       <TextObject Name="Text16" Left="47.25" Width="349.65" Height="37.8" Border.Lines="All" Text="合計&#13;&#10;TOTAL" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
-      <TextObject Name="Text17" Left="396.9" Width="113.4" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text17" Left="396.9" Width="113.4" Height="37.8" Border.Lines="All" Text="[Total]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
       <TextObject Name="Text18" Left="510.3" Width="198.45" Height="37.8" Border.Lines="All" Text="簽收人：&#13;&#10;" VertAlign="Center" Font="新細明體, 10pt"/>
       <TextObject Name="Text19" Top="50.7" Width="141.75" Height="18.9" Text="出納：" VertAlign="Center" Font="新細明體, 10pt"/>
       <TextObject Name="Text20" Left="141.75" Top="50.7" Width="141.75" Height="18.9" Text="會計：" VertAlign="Center" Font="新細明體, 10pt"/>
