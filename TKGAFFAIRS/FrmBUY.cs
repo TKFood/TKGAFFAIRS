@@ -60,7 +60,20 @@ namespace TKGAFFAIRS
         public void Search()
         {
             ds.Clear();
-          
+
+            StringBuilder NAME = new StringBuilder();
+            StringBuilder BUYNAME = new StringBuilder();
+
+            if(!string.IsNullOrEmpty(textBox1.Text))
+            {
+                NAME.AppendFormat(@" AND [NAME] LIKE '%{0}%'",textBox1.Text);
+            }
+
+            if (!string.IsNullOrEmpty(textBox12.Text))
+            {
+                BUYNAME.AppendFormat(@" AND [BUYNAME] LIKE '%{0}%'",textBox12.Text);
+            }
+
             try
             {
                 connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
@@ -76,7 +89,8 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
                 sbSql.AppendFormat(@"  WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}'",dateTimePicker1.Value.ToString("yyyy/MM/dd"), dateTimePicker2.Value.ToString("yyyy/MM/dd"));
-                sbSql.AppendFormat(@"  ");
+                sbSql.AppendFormat(@"  {0}", NAME.ToString());
+                sbSql.AppendFormat(@"  {0}",BUYNAME.ToString());
                 sbSql.AppendFormat(@"  ");
 
                 adapter = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -728,6 +742,9 @@ namespace TKGAFFAIRS
         private void button1_Click(object sender, EventArgs e)
         {
             Search();
+
+            textBox1.Text = null;
+            textBox12.Text = null;
         }
         private void button2_Click(object sender, EventArgs e)
         {
