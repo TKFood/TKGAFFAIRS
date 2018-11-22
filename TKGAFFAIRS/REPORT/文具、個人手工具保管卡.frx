@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 18:01:05" ReportInfo.Modified="09/18/2018 14:55:40" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 18:01:05" ReportInfo.Modified="11/22/2018 09:37:26" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9K8irhGsDwaKqC7cHisCMWE">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9LMk6RlJq+yabL4FJ89iPRM">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [ID] AS '工號',[NAME] AS '保管人',[DEP] AS '部門',[DEPNAME] AS '單位',[CREATEDATES] AS '建立日期'&#13;&#10;,[CLASS] AS '分類',[CLASSNAME] AS '分類名',[NO] AS '流水號',[OWNNAME] AS '保管品名',[BRAND] AS '廠牌'&#13;&#10;,[SPEC] AS '規格'&#13;&#10;,[PRICES] AS '原價',[NUM] AS '數量',[GIVENAME] AS '發放人',[REMARK] AS '備註'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[OWNERMANU]&#13;&#10;WHERE DEP='114000'&#13;&#10;AND [ID]='160115'&#13;&#10;AND [NAME]='JJ'">
         <Column Name="工號" DataType="System.String"/>
         <Column Name="保管人" DataType="System.String"/>
@@ -56,5 +56,8 @@
       </DataBand>
       <GroupFooterBand Name="GroupFooter1" Top="106.04" Width="1047.06"/>
     </GroupHeaderBand>
+    <ColumnFooterBand Name="ColumnFooter1" Top="109.88" Width="1047.06" Height="37.8">
+      <TextObject Name="Text28" Top="9.45" Width="1039.5" Height="18.9" Text="核準:                                                  審核:                                              申請人:                                                    " HorzAlign="Center" VertAlign="Center"/>
+    </ColumnFooterBand>
   </ReportPage>
 </Report>
