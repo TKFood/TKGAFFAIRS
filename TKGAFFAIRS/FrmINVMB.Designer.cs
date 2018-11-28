@@ -48,7 +48,7 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -62,7 +62,6 @@
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -195,22 +194,26 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(625, 585);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.LightGreen;
-            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 280F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel1.Controls.Add(this.textBox3, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.textBox2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.textBox4, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.button5, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.button4, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.button3, 0, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -231,9 +234,11 @@
             // textBox2
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox2, 2);
             this.textBox2.Location = new System.Drawing.Point(123, 46);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(274, 27);
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(234, 27);
             this.textBox2.TabIndex = 1;
             // 
             // label1
@@ -248,9 +253,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(3, 3);
+            this.button2.Location = new System.Drawing.Point(3, 163);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(92, 28);
+            this.button2.Size = new System.Drawing.Size(92, 34);
             this.button2.TabIndex = 2;
             this.button2.Text = "新增";
             this.button2.UseVisualStyleBackColor = true;
@@ -269,9 +274,10 @@
             // textBox3
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox3, 2);
             this.textBox3.Location = new System.Drawing.Point(123, 86);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(274, 27);
+            this.textBox3.Size = new System.Drawing.Size(234, 27);
             this.textBox3.TabIndex = 4;
             // 
             // label3
@@ -287,14 +293,15 @@
             // textBox4
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox4, 2);
             this.textBox4.Location = new System.Drawing.Point(123, 126);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(274, 27);
+            this.textBox4.Size = new System.Drawing.Size(234, 27);
             this.textBox4.TabIndex = 6;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(123, 203);
+            this.button3.Location = new System.Drawing.Point(3, 243);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(92, 34);
             this.button3.TabIndex = 7;
@@ -304,29 +311,23 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(140, 3);
+            this.button4.Location = new System.Drawing.Point(243, 163);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(92, 28);
+            this.button4.Size = new System.Drawing.Size(92, 34);
             this.button4.TabIndex = 8;
             this.button4.Text = "存檔";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // tableLayoutPanel2
+            // button5
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.button2, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.button4, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(123, 163);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(274, 34);
-            this.tableLayoutPanel2.TabIndex = 9;
+            this.button5.Location = new System.Drawing.Point(123, 163);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(92, 34);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "更新";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // FrmINVMB
             // 
@@ -353,7 +354,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -380,6 +380,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button button5;
     }
 }

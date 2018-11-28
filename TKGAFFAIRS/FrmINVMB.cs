@@ -115,8 +115,182 @@ namespace TKGAFFAIRS
 
             }
         }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int rowindex = dataGridView1.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView1.Rows[rowindex];
+
+                    textBox2.Text = row.Cells["品號"].Value.ToString();
+                    textBox3.Text = row.Cells["品名"].Value.ToString();
+                    textBox4.Text = row.Cells["規格"].Value.ToString();
+
+                }
+                else
+                {
+                    textBox2.Text = null;
+                    textBox3.Text = null;
+                    textBox4.Text = null;
+
+                }
+            }
+        }
+
+        public void SETTEXT()
+        {
+            textBox2.Text = null;
+            textBox3.Text = null;
+            textBox4.Text = null;
+
+            textBox2.ReadOnly = false;
+        }
+
+        public void SETTEXT2()
+        {
+            textBox2.ReadOnly = true;
+        }
+        public void ADDINVMB()
+        {
+            try
+            {
+                
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
 
 
+                sbSql.AppendFormat(" INSERT INTO [TKGAFFAIRS].[dbo].[INVMB]");
+                sbSql.AppendFormat(" ([MB001],[MB002],[MB003] )");
+                sbSql.AppendFormat(" VALUES ('{0}','{1}','{2}')",textBox2.Text,textBox3.Text,textBox4.Text);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        public void UPDATEINVMB()
+        {
+            try
+            {
+
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+               
+                sbSql.AppendFormat(" UPDATE [TKGAFFAIRS].[dbo].[INVMB]");
+                sbSql.AppendFormat(" SET [MB002]='{0}',[MB003]='{1}'", textBox3.Text, textBox4.Text);
+                sbSql.AppendFormat("WHERE [MB001] ='{0}' ", textBox2.Text);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        public void DEL()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" DELETE [TKGAFFAIRS].[dbo].[INVMB]");
+                sbSql.AppendFormat(" WHERE [MB001]='{0}'", textBox2.Text);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+
+        }
         #endregion
 
         #region BUTTON
@@ -126,18 +300,51 @@ namespace TKGAFFAIRS
         }
         private void button2_Click(object sender, EventArgs e)
         {
-
+            SETTEXT();
+            STATUS = "ADD";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if(STATUS.Equals("ADD"))
+            {
+                ADDINVMB();
+            }
+            else if(STATUS.Equals("UPDATE"))
+            {
+                UPDATEINVMB();
+            }
 
+            STATUS = null; ;
+
+            SETTEXT2();
+            SEARCHINVMB();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            STATUS = null;
+            string message = textBox2.Text + " 要刪除了?";
 
+            DialogResult dialogResult = MessageBox.Show(message.ToString(), "要刪除了?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DEL();
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+            SEARCHINVMB();
         }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            STATUS = "UPDATE";
+        }
+
+
         #endregion
 
 
