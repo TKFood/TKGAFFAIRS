@@ -342,6 +342,94 @@ namespace TKGAFFAIRS
 
         }
 
+        public void SEARCHINVGAFFAIRS2()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+                sbSql.AppendFormat(@"  SELECT [DATES] AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '金額',[ID]");
+                sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+                sbSql.AppendFormat(@"  WHERE [NUM]>0");
+                sbSql.AppendFormat(@"  AND [DATES]='{0}'",dateTimePicker1.Value.ToString("yyyy/MM/dd"));
+                sbSql.AppendFormat(@"  ");
+
+                adapter2 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder2 = new SqlCommandBuilder(adapter2);
+                sqlConn.Open();
+                ds2.Clear();
+                adapter2.Fill(ds2, "ds2");
+                sqlConn.Close();
+
+
+                if (ds2.Tables["ds2"].Rows.Count == 0)
+                {
+                    dataGridView2.DataSource = null;
+                }
+                else
+                {
+                    if (ds2.Tables["ds2"].Rows.Count >= 1)
+                    {
+                        dataGridView2.DataSource = ds2.Tables["ds2"];
+                        dataGridView2.AutoResizeColumns();
+
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+        }
+
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView2.CurrentRow != null)
+            {
+                int rowindex = dataGridView2.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView2.Rows[rowindex];
+
+                    dateTimePicker1.Value = Convert.ToDateTime(row.Cells["日期"].Value.ToString());
+                    comboBox1.Text= row.Cells["部門"].Value.ToString();
+                    comboBox2.Text = row.Cells["品號"].Value.ToString();
+                    textBox2.Text = row.Cells["部門名"].Value.ToString();
+                    textBox3.Text = row.Cells["工號"].Value.ToString();
+                    textBox4.Text = row.Cells["姓名"].Value.ToString();
+                    textBox5.Text = row.Cells["品名"].Value.ToString();
+                    textBox6.Text = row.Cells["規格"].Value.ToString();
+                    textBox7.Text = row.Cells["數量"].Value.ToString();
+                    textBox8.Text = row.Cells["金額"].Value.ToString();
+                    textBoxID1.Text = row.Cells["ID"].Value.ToString();
+
+                }
+                else
+                {
+                    textBox2.Text = null;
+                    textBox3.Text = null;
+                    textBox4.Text = null;
+                    textBox5.Text = null;
+                    textBox6.Text = null;
+                    textBox7.Text = null;
+                    textBox8.Text = null;
+                    textBoxID1.Text = null;
+
+                }
+            }
+        }
 
         #endregion
 
@@ -350,10 +438,34 @@ namespace TKGAFFAIRS
         {
             SEARCHINVGAFFAIRS();
         }
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SEARCHINVGAFFAIRS2();
+        }
+
 
 
         #endregion
 
-      
+        
     }
 }
