@@ -59,6 +59,8 @@ namespace TKGAFFAIRS
             InitializeComponent();
 
             comboBox1load();
+            comboBox2load();
+            
         }
 
         #region FUNCTION
@@ -82,6 +84,27 @@ namespace TKGAFFAIRS
             sqlConn.Close();
 
 
+        }
+
+        public void comboBox2load()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@" SELECT [MB001] ,[MB002] ,[MB003] FROM [TKGAFFAIRS].[dbo].INVMB ORDER BY [MB001]");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("MB001", typeof(string));
+            dt.Columns.Add("MB002", typeof(string));
+            da.Fill(dt);
+            comboBox2.DataSource = dt.DefaultView;
+            comboBox2.ValueMember = "MB001";
+            comboBox2.DisplayMember = "MB001";
+            sqlConn.Close();
+
+           
         }
 
 
@@ -263,6 +286,63 @@ namespace TKGAFFAIRS
             return null;
         }
 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FINDINVMB();
+        }
+
+        public void FINDINVMB()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@"   SELECT [MB001],[MB002] ,[MB003] FROM [TKGAFFAIRS].[dbo].INVMB  WHERE MB001='{0}'", comboBox2.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP.Clear();
+                adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                sqlConn.Close();
+
+
+                if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                {
+                    textBox5.Text = null;
+                    textBox6.Text = null;
+                }
+                else
+                {
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                    {
+                        textBox5.Text = dsTEMP.Tables["dsTEMP"].Rows[0]["MB002"].ToString();
+                        textBox6.Text = dsTEMP.Tables["dsTEMP"].Rows[0]["MB003"].ToString();                       
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+        }
+
+
         #endregion
 
         #region BUTTON
@@ -270,6 +350,7 @@ namespace TKGAFFAIRS
         {
             SEARCHINVGAFFAIRS();
         }
+
 
         #endregion
 
