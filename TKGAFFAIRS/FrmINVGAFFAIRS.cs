@@ -206,6 +206,63 @@ namespace TKGAFFAIRS
 
             return null;
         }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            textBox4.Text = FINDCMSMV();
+        }
+
+        public string FINDCMSMV()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@"  SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}'", textBox3.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP.Clear();
+                adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                sqlConn.Close();
+
+
+                if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                    {
+
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["MV002"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region BUTTON
@@ -213,8 +270,9 @@ namespace TKGAFFAIRS
         {
             SEARCHINVGAFFAIRS();
         }
+
         #endregion
 
-       
+      
     }
 }
