@@ -430,7 +430,156 @@ namespace TKGAFFAIRS
                 }
             }
         }
+        public void SETTEXT1()
+        {
+            textBox2.Text = null;
+            textBox3.Text = null;
+            textBox4.Text = null;
+            textBox5.Text = null;
+            textBox6.Text = null;
+            textBox7.Text = "0";
+            textBox8.Text = "0";
+            textBoxID1.Text = null;
 
+        }
+
+        public void ADDINVGAFFAIRS1()
+        {
+            try
+            {
+
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" INSERT INTO [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+                sbSql.AppendFormat(" ([ID],[DATES],[DEP],[DEPNAME],[WID],[NAME],[MB001],[MB002],[MB003],[NUM],[MONEY])");
+                sbSql.AppendFormat(" VALUES (NEWID(),'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')",dateTimePicker1.Value.ToString("yyyy/MM/dd"),comboBox1.Text,textBox2.Text,textBox3.Text,textBox4.Text,comboBox2.Text,textBox5.Text,textBox6.Text,textBox7.Text,textBox8.Text);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        public void UPDATEGAFFAIRS1()
+        {
+            try
+            {
+
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" UPDATE  [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+                sbSql.AppendFormat(" SET [DATES]='{0}',[DEP]='{1}',[DEPNAME]='{2}',[WID]='{3}',[NAME]='{4}',[MB001]='{5}',[MB002]='{6}',[MB003]='{7}',[NUM]='{8}',[MONEY]='{9}'",dateTimePicker1.Value.ToString("yyyy/MM/dd"), comboBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, comboBox2.Text, textBox5.Text, textBox6.Text, textBox7.Text, textBox8.Text);
+                sbSql.AppendFormat(" WHERE [ID]='{0}'",textBoxID1.Text);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        public void DELGAFFAIRS1()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" DELETE [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+                sbSql.AppendFormat(" WHERE [ID]='{0}'", textBoxID1.Text);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
         #endregion
 
         #region BUTTON
@@ -440,7 +589,7 @@ namespace TKGAFFAIRS
         }
         private void button2_Click(object sender, EventArgs e)
         {
-
+            SETTEXT1();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -450,12 +599,35 @@ namespace TKGAFFAIRS
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(textBoxID1.Text))
+            {
+                ADDINVGAFFAIRS1();
+            }
+            else if(!string.IsNullOrEmpty(textBoxID1.Text))
+            {
+                UPDATEGAFFAIRS1();
+            }
 
+            SEARCHINVGAFFAIRS2();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+           
+            string message = textBox5.Text + " 要刪除了?";
 
+            DialogResult dialogResult = MessageBox.Show(message.ToString(), "要刪除了?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DELGAFFAIRS1();
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+            SEARCHINVGAFFAIRS2();
         }
         private void button6_Click(object sender, EventArgs e)
         {
