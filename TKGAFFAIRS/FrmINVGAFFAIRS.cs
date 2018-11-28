@@ -25,10 +25,15 @@ namespace TKGAFFAIRS
         SqlConnection sqlConn = new SqlConnection();
         SqlCommand sqlComm = new SqlCommand();
         string connectionString;
-        StringBuilder sbSql = new StringBuilder();
-        StringBuilder sbSqlQuery = new StringBuilder();
         SqlDataAdapter adapter = new SqlDataAdapter();
         SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder();
+        SqlDataAdapter adapterTEMP = new SqlDataAdapter();
+        SqlCommandBuilder sqlCmdBuilderTEMP = new SqlCommandBuilder();
+
+        StringBuilder sbSql = new StringBuilder();
+        StringBuilder sbSqlQuery = new StringBuilder();
+
+
         SqlDataAdapter adapter2 = new SqlDataAdapter();
         SqlCommandBuilder sqlCmdBuilder2 = new SqlCommandBuilder();
         SqlDataAdapter adapter3 = new SqlDataAdapter();
@@ -38,9 +43,10 @@ namespace TKGAFFAIRS
         SqlTransaction tran;
         SqlCommand cmd = new SqlCommand();
         DataSet ds = new DataSet();
+        DataSet dsTEMP = new DataSet();
         DataSet ds2 = new DataSet();
         DataSet ds3 = new DataSet();
-        DataSet ds43 = new DataSet();
+        DataSet ds4 = new DataSet();
         DataTable dt = new DataTable();
         string tablename = null;
         string EDITID;
@@ -51,9 +57,34 @@ namespace TKGAFFAIRS
         public FrmINVGAFFAIRS()
         {
             InitializeComponent();
+
+            comboBox1load();
         }
 
         #region FUNCTION
+
+        public void comboBox1load()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT ME001,ME002 FROM [TK].dbo.CMSME WHERE ME002 NOT LIKE '%停用%' ORDER BY ME001");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("ME001", typeof(string));
+            dt.Columns.Add("ME002", typeof(string));
+            da.Fill(dt);
+            comboBox1.DataSource = dt.DefaultView;
+            comboBox1.ValueMember = "ME001";
+            comboBox1.DisplayMember = "ME001";
+            sqlConn.Close();
+
+
+        }
+
+
         public void SEARCHINVGAFFAIRS()
         {
             ds.Clear();
@@ -120,6 +151,61 @@ namespace TKGAFFAIRS
             }
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBox2.Text = FINDCMSME();
+        }
+
+        public string FINDCMSME()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+             
+                sbSql.AppendFormat(@"  SELECT ME001,ME002 FROM [TK].dbo.CMSME WHERE ME001 LIKE '%{0}%' ORDER BY ME001",comboBox1.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP.Clear();
+                adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                sqlConn.Close();
+
+
+                if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                    {
+
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["ME002"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+            return null;
+        }
         #endregion
 
         #region BUTTON
@@ -128,5 +214,7 @@ namespace TKGAFFAIRS
             SEARCHINVGAFFAIRS();
         }
         #endregion
+
+       
     }
 }
