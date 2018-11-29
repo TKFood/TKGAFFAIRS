@@ -1076,6 +1076,42 @@ namespace TKGAFFAIRS
         {
             textBox11.Text = FINDCMSMV2();
         }
+
+        public void SETFASTREPORT()
+        {
+
+            string SQL;
+            Report report1 = new Report();
+            report1.Load(@"REPORT\品號入庫及領用.frx");
+
+            report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+            TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
+            SQL = SETFASETSQL();
+            Table.SelectCommand = SQL;
+
+            report1.SetParameterValue("P1", dateTimePicker1.Value.ToString("yyyy/MM/dd"));
+            report1.Preview = previewControl1;
+            report1.Show();
+
+        }
+
+        public string SETFASETSQL()
+        {
+            StringBuilder FASTSQL = new StringBuilder();
+
+            FASTSQL.AppendFormat(@"  SELECT CONVERT(nvarchar,[DATES],112) AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '金額',[ID]");
+            FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+            FASTSQL.AppendFormat(@"  WHERE [DATES]>='{0}' AND [DATES]<='{1}'",dateTimePicker3.Value.ToString("yyyy/MM/dd"), dateTimePicker4.Value.ToString("yyyy/MM/dd"));
+            FASTSQL.AppendFormat(@" ORDER BY [DATES],[DEP] ");
+            FASTSQL.AppendFormat(@"  ");
+
+            return FASTSQL.ToString();
+        }
+
+
+
         #endregion
 
         #region BUTTON
@@ -1193,11 +1229,15 @@ namespace TKGAFFAIRS
         }
 
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            SETFASTREPORT();
+        }
 
 
 
         #endregion
 
-       
+
     }
 }
