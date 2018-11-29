@@ -60,7 +60,9 @@ namespace TKGAFFAIRS
 
             comboBox1load();
             comboBox2load();
-            
+            comboBox3load();
+            comboBox4load();
+
         }
 
         #region FUNCTION
@@ -107,6 +109,47 @@ namespace TKGAFFAIRS
            
         }
 
+        public void comboBox3load()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT ME001,ME002 FROM [TK].dbo.CMSME WHERE ME002 NOT LIKE '%停用%' ORDER BY ME001");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("ME001", typeof(string));
+            dt.Columns.Add("ME002", typeof(string));
+            da.Fill(dt);
+            comboBox3.DataSource = dt.DefaultView;
+            comboBox3.ValueMember = "ME001";
+            comboBox3.DisplayMember = "ME001";
+            sqlConn.Close();
+
+
+        }
+
+        public void comboBox4load()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@" SELECT [MB001] ,[MB002] ,[MB003] FROM [TKGAFFAIRS].[dbo].INVMB ORDER BY [MB001]");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("MB001", typeof(string));
+            dt.Columns.Add("MB002", typeof(string));
+            da.Fill(dt);
+            comboBox4.DataSource = dt.DefaultView;
+            comboBox4.ValueMember = "MB001";
+            comboBox4.DisplayMember = "MB001";
+            sqlConn.Close();
+
+
+        }
 
         public void SEARCHINVGAFFAIRS()
         {
@@ -230,6 +273,58 @@ namespace TKGAFFAIRS
             return null;
         }
 
+        public string FINDCMSME2()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@"  SELECT ME001,ME002 FROM [TK].dbo.CMSME WHERE ME001 LIKE '%{0}%' ORDER BY ME001", comboBox3.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP.Clear();
+                adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                sqlConn.Close();
+
+
+                if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                    {
+
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["ME002"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+            return null;
+        }
+
+
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             textBox4.Text = FINDCMSMV();
@@ -247,6 +342,107 @@ namespace TKGAFFAIRS
 
 
                 sbSql.AppendFormat(@"  SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}'", textBox3.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP.Clear();
+                adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                sqlConn.Close();
+
+
+                if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                    {
+
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["MV002"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+            return null;
+        }
+        
+        public string FINDCMSMV1()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@"  SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}'", textBox3.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP.Clear();
+                adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                sqlConn.Close();
+
+
+                if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                    {
+
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["MV002"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+            return null;
+        }
+        public string FINDCMSMV2()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@"  SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}'", textBox10.Text.ToString());
 
 
                 adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -341,6 +537,56 @@ namespace TKGAFFAIRS
             }
 
         }
+        public void FINDINVMB2()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@"   SELECT [MB001],[MB002] ,[MB003] FROM [TKGAFFAIRS].[dbo].INVMB  WHERE MB001='{0}'", comboBox4.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP.Clear();
+                adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                sqlConn.Close();
+
+
+                if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                {
+                    textBox12.Text = null;
+                    textBox13.Text = null;
+                }
+                else
+                {
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                    {
+                        textBox12.Text = dsTEMP.Tables["dsTEMP"].Rows[0]["MB002"].ToString();
+                        textBox13.Text = dsTEMP.Tables["dsTEMP"].Rows[0]["MB003"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+        }
 
         public void SEARCHINVGAFFAIRS2()
         {
@@ -394,6 +640,57 @@ namespace TKGAFFAIRS
             }
         }
 
+        public void SEARCHINVGAFFAIRS3()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+                sbSql.AppendFormat(@"  SELECT [DATES] AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '金額',[ID]");
+                sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+                sbSql.AppendFormat(@"  WHERE [NUM]<0");
+                sbSql.AppendFormat(@"  AND [DATES]='{0}'", dateTimePicker2.Value.ToString("yyyy/MM/dd"));
+                sbSql.AppendFormat(@"  ");
+
+                adapter3 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder3 = new SqlCommandBuilder(adapter3);
+                sqlConn.Open();
+                ds3.Clear();
+                adapter3.Fill(ds3, "ds3");
+                sqlConn.Close();
+
+
+                if (ds3.Tables["ds3"].Rows.Count == 0)
+                {
+                    dataGridView3.DataSource = null;
+                }
+                else
+                {
+                    if (ds3.Tables["ds3"].Rows.Count >= 1)
+                    {
+                        dataGridView3.DataSource = ds3.Tables["ds3"];
+                        dataGridView3.AutoResizeColumns();
+
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+        }
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView2.CurrentRow != null)
@@ -440,6 +737,19 @@ namespace TKGAFFAIRS
             textBox7.Text = "0";
             textBox8.Text = "0";
             textBoxID1.Text = null;
+
+        }
+
+        public void SETTEXT2()
+        {
+            textBox9.Text = null;
+            textBox10.Text = null;
+            textBox11.Text = null;
+            textBox12.Text = null;
+            textBox13.Text = null;
+            textBox14.Text = "0";
+            textBox15.Text = "0";
+            textBoxID2.Text = null;
 
         }
 
@@ -490,6 +800,52 @@ namespace TKGAFFAIRS
             }
         }
 
+        public void ADDINVGAFFAIRS2()
+        {
+            try
+            {
+
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" INSERT INTO [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+                sbSql.AppendFormat(" ([ID],[DATES],[DEP],[DEPNAME],[WID],[NAME],[MB001],[MB002],[MB003],[NUM],[MONEY])");
+                sbSql.AppendFormat(" VALUES (NEWID(),'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')", dateTimePicker2.Value.ToString("yyyy/MM/dd"), comboBox3.Text, textBox9.Text, textBox10.Text, textBox11.Text, comboBox4.Text, textBox12.Text, textBox13.Text, textBox14.Text, textBox15.Text);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
         public void UPDATEGAFFAIRS1()
         {
             try
@@ -537,6 +893,52 @@ namespace TKGAFFAIRS
             }
         }
 
+        public void UPDATEGAFFAIRS2()
+        {
+            try
+            {
+
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" UPDATE  [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+                sbSql.AppendFormat(" SET [DATES]='{0}',[DEP]='{1}',[DEPNAME]='{2}',[WID]='{3}',[NAME]='{4}',[MB001]='{5}',[MB002]='{6}',[MB003]='{7}',[NUM]='{8}',[MONEY]='{9}'", dateTimePicker2.Value.ToString("yyyy/MM/dd"), comboBox3.Text, textBox9.Text, textBox10.Text, textBox11.Text, comboBox4.Text, textBox12.Text, textBox13.Text, textBox14.Text, textBox15.Text);
+                sbSql.AppendFormat(" WHERE [ID]='{0}'", textBoxID2.Text);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
         public void DELGAFFAIRS1()
         {
             try
@@ -579,6 +981,100 @@ namespace TKGAFFAIRS
             {
                 sqlConn.Close();
             }
+        }
+        public void DELGAFFAIRS2()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" DELETE [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+                sbSql.AppendFormat(" WHERE [ID]='{0}'", textBoxID2.Text);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+        private void dataGridView3_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView3.CurrentRow != null)
+            {
+                int rowindex = dataGridView3.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView3.Rows[rowindex];
+
+                    dateTimePicker2.Value = Convert.ToDateTime(row.Cells["日期"].Value.ToString());
+                    comboBox3.Text = row.Cells["部門"].Value.ToString();
+                    comboBox4.Text = row.Cells["品號"].Value.ToString();
+                    textBox9.Text = row.Cells["部門名"].Value.ToString();
+                    textBox10.Text = row.Cells["工號"].Value.ToString();
+                    textBox11.Text = row.Cells["姓名"].Value.ToString();
+                    textBox12.Text = row.Cells["品名"].Value.ToString();
+                    textBox13.Text = row.Cells["規格"].Value.ToString();
+                    textBox14.Text = row.Cells["數量"].Value.ToString();
+                    textBox15.Text = row.Cells["金額"].Value.ToString();
+                    textBoxID2.Text = row.Cells["ID"].Value.ToString();
+
+                }
+                else
+                {
+                    textBox9.Text = null;
+                    textBox10.Text = null;
+                    textBox11.Text = null;
+                    textBox12.Text = null;
+                    textBox13.Text = null;
+                    textBox14.Text = null;
+                    textBox15.Text = null;
+                    textBoxID2.Text = null;
+
+
+                }
+            }
+        }
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBox9.Text = FINDCMSME2();
+        }
+
+        private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            FINDINVMB2();
+        }
+
+        private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+            textBox11.Text = FINDCMSMV2();
         }
         #endregion
 
@@ -642,10 +1138,66 @@ namespace TKGAFFAIRS
             SEARCHINVGAFFAIRS2();
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            SETTEXT2();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(textBox14.Text) < 0 && Convert.ToDecimal(textBox15.Text) < 0)
+            {
+                if (string.IsNullOrEmpty(textBoxID2.Text))
+                {
+                    ADDINVGAFFAIRS2();
+                }
+                else if (!string.IsNullOrEmpty(textBoxID2.Text))
+                {
+                    UPDATEGAFFAIRS2();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("數量或金額不得大於0");
+            }
+
+            SEARCHINVGAFFAIRS3();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string message = textBox12.Text + " 要刪除了?";
+
+            DialogResult dialogResult = MessageBox.Show(message.ToString(), "要刪除了?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DELGAFFAIRS2();
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+
+            SEARCHINVGAFFAIRS3();
+        }
+        private void button11_Click(object sender, EventArgs e)
+        {
+            SEARCHINVGAFFAIRS3();
+        }
+
+
+
 
 
         #endregion
 
-        
+       
     }
 }
