@@ -1110,8 +1110,62 @@ namespace TKGAFFAIRS
             return FASTSQL.ToString();
         }
 
+        private void textBox14_TextChanged(object sender, EventArgs e)
+        {
+            textBox15.Text = CALNUMCOST();
+        }
+        public string CALNUMCOST()
+        {
+            if(!string.IsNullOrEmpty(comboBox4.Text))
+            {
+                try
+                {
+                    connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                    sqlConn = new SqlConnection(connectionString);
+
+                    sbSql.Clear();
+                    sbSqlQuery.Clear();
 
 
+                    sbSql.AppendFormat(@"   SELECT CONVERT(DECIMAL(16,4),SUM([MONEY])/SUM(NUM))  AS COST FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [MB001]='{0}'", comboBox4.Text.ToString());
+
+
+                    adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                    sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                    sqlConn.Open();
+                    dsTEMP.Clear();
+                    adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                    sqlConn.Close();
+
+
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                        {
+                            return (Convert.ToInt32(textBox14.Text)*Convert.ToDecimal(dsTEMP.Tables["dsTEMP"].Rows[0]["COST"].ToString())).ToString();                           
+
+                        }
+
+                    }
+
+                }
+                catch
+                {
+
+                }
+                finally
+                {
+
+                }
+
+            }
+            return null;
+        }
         #endregion
 
         #region BUTTON
@@ -1236,8 +1290,9 @@ namespace TKGAFFAIRS
 
 
 
+
         #endregion
 
-
+       
     }
 }

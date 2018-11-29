@@ -918,12 +918,14 @@
             this.textBox14.Size = new System.Drawing.Size(114, 27);
             this.textBox14.TabIndex = 23;
             this.textBox14.Text = "0";
+            this.textBox14.TextChanged += new System.EventHandler(this.textBox14_TextChanged);
             // 
             // textBox15
             // 
             this.textBox15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox15.Location = new System.Drawing.Point(363, 166);
             this.textBox15.Name = "textBox15";
+            this.textBox15.ReadOnly = true;
             this.textBox15.Size = new System.Drawing.Size(139, 27);
             this.textBox15.TabIndex = 24;
             this.textBox15.Text = "0";
