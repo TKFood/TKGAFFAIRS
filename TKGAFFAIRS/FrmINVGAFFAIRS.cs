@@ -599,13 +599,21 @@ namespace TKGAFFAIRS
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(textBoxID1.Text))
+            if (Convert.ToInt32(textBox7.Text) > 0 && Convert.ToDecimal(textBox8.Text) > 0)
             {
-                ADDINVGAFFAIRS1();
+                if (string.IsNullOrEmpty(textBoxID1.Text))
+                {
+                    ADDINVGAFFAIRS1();
+                }
+                else if (!string.IsNullOrEmpty(textBoxID1.Text))
+                {
+                    UPDATEGAFFAIRS1();
+                }
+
             }
-            else if(!string.IsNullOrEmpty(textBoxID1.Text))
+            else
             {
-                UPDATEGAFFAIRS1();
+                MessageBox.Show("數量或金額不得小於0");
             }
 
             SEARCHINVGAFFAIRS2();
