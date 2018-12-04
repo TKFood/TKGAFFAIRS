@@ -48,9 +48,33 @@ namespace TKGAFFAIRS
         public FrmINVMB()
         {
             InitializeComponent();
+
+            comboBox1load();
         }
 
         #region FUNCTION
+
+        public void comboBox1load()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT [KIND],[NAME] FROM [TKGAFFAIRS].[dbo].[INVKIND]");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("KIND", typeof(string));
+            dt.Columns.Add("NAME", typeof(string));
+            da.Fill(dt);
+            comboBox1.DataSource = dt.DefaultView;
+            comboBox1.ValueMember = "KIND";
+            comboBox1.DisplayMember = "NAME";
+            sqlConn.Close();
+
+
+        }
+
         public void SEARCHINVMB()
         {
             ds.Clear();
@@ -76,7 +100,7 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(@"  SELECT [KIND] AS '類別',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVMB]");
                 sbSql.AppendFormat(@"  {0}", NAME.ToString());
-                sbSql.AppendFormat(@"  ORDER BY [MB001] ");
+                sbSql.AppendFormat(@"  ORDER BY [KIND], [MB001] ");
                 sbSql.AppendFormat(@"  ");
 
 
@@ -127,7 +151,7 @@ namespace TKGAFFAIRS
                     textBox2.Text = row.Cells["品號"].Value.ToString();
                     textBox3.Text = row.Cells["品名"].Value.ToString();
                     textBox4.Text = row.Cells["規格"].Value.ToString();
-                    textBox5.Text = row.Cells["類別"].Value.ToString();
+                    comboBox1.Text = row.Cells["類別"].Value.ToString();
 
                 }
                 else
@@ -135,7 +159,7 @@ namespace TKGAFFAIRS
                     textBox2.Text = null;
                     textBox3.Text = null;
                     textBox4.Text = null;
-                    textBox5.Text = null;
+                    comboBox1.Text = null;
 
                 }
             }
@@ -146,7 +170,7 @@ namespace TKGAFFAIRS
             textBox2.Text = null;
             textBox3.Text = null;
             textBox4.Text = null;
-            textBox5.Text = null;
+            comboBox1.Text = null;
 
             textBox2.ReadOnly = false;
         }
@@ -172,7 +196,7 @@ namespace TKGAFFAIRS
 
                 sbSql.AppendFormat(" INSERT INTO [TKGAFFAIRS].[dbo].[INVMB]");
                 sbSql.AppendFormat(" ([MB001],[MB002],[MB003],[KIND] )");
-                sbSql.AppendFormat(" VALUES ('{0}','{1}','{2}','{3}')",textBox2.Text,textBox3.Text,textBox4.Text, textBox5.Text);
+                sbSql.AppendFormat(" VALUES ('{0}','{1}','{2}','{3}')",textBox2.Text,textBox3.Text,textBox4.Text, comboBox1.Text);
                 sbSql.AppendFormat(" ");
 
                 cmd.Connection = sqlConn;
@@ -218,7 +242,7 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                
                 sbSql.AppendFormat(" UPDATE [TKGAFFAIRS].[dbo].[INVMB]");
-                sbSql.AppendFormat(" SET [MB002]='{0}',[MB003]='{1}',[KIND]='{2}'", textBox3.Text, textBox4.Text, textBox5.Text);
+                sbSql.AppendFormat(" SET [MB002]='{0}',[MB003]='{1}',[KIND]='{2}'", textBox3.Text, textBox4.Text, comboBox1.Text);
                 sbSql.AppendFormat("WHERE [MB001] ='{0}' ", textBox2.Text);
                 sbSql.AppendFormat(" ");
 

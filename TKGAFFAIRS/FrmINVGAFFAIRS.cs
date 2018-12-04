@@ -93,7 +93,7 @@ namespace TKGAFFAIRS
             connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
             sqlConn = new SqlConnection(connectionString);
             StringBuilder Sequel = new StringBuilder();
-            Sequel.AppendFormat(@" SELECT [MB001] ,[MB002] ,[MB003] FROM [TKGAFFAIRS].[dbo].INVMB ORDER BY [MB001]");
+            Sequel.AppendFormat(@" SELECT [MB001] ,[MB002] ,[MB003] FROM [TKGAFFAIRS].[dbo].INVMB ORDER BY [KIND],[MB001]");
             SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
             DataTable dt = new DataTable();
             sqlConn.Open();
@@ -135,7 +135,7 @@ namespace TKGAFFAIRS
             connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
             sqlConn = new SqlConnection(connectionString);
             StringBuilder Sequel = new StringBuilder();
-            Sequel.AppendFormat(@" SELECT [MB001] ,[MB002] ,[MB003] FROM [TKGAFFAIRS].[dbo].INVMB ORDER BY [MB001]");
+            Sequel.AppendFormat(@" SELECT [MB001] ,[MB002] ,[MB003] FROM [TKGAFFAIRS].[dbo].INVMB ORDER BY [KIND],[MB001]");
             SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
             DataTable dt = new DataTable();
             sqlConn.Open();

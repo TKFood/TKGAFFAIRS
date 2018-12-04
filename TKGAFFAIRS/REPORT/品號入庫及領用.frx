@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/29/2018 09:35:36" ReportInfo.Modified="12/04/2018 11:02:30" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/29/2018 09:35:36" ReportInfo.Modified="12/04/2018 11:40:01" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9LzLFYbeGdWQRm/ZjTzbvrL">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9I1wjfAVJmAou5ZcsCUeDkn">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT CONVERT(nvarchar,[DATES],112) AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[KINID] AS '類別',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '單價',[TOTALMONEY] AS '金額',[ID]&#13;&#10;FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]&#13;&#10;WHERE [DATES]&gt;='2018/11/1' AND [DATES]&lt;='2018/12/30'&#13;&#10;ORDER BY [DATES],[DEP]">
         <Column Name="日期" DataType="System.String"/>
         <Column Name="部門" DataType="System.String"/>
@@ -51,5 +51,6 @@
       <TextObject Name="Text22" Left="340.2" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.類別]" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text24" Left="859.95" Width="85.05" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.單價]" Format="Number" Format.UseLocale="true" HorzAlign="Center" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
     </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="68.24" Width="1047.06" Height="18.9"/>
   </ReportPage>
 </Report>
