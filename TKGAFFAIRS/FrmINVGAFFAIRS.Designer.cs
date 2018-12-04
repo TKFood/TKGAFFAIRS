@@ -108,6 +108,10 @@
             this.button12 = new System.Windows.Forms.Button();
             this.previewControl1 = new FastReport.Preview.PreviewControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label26 = new System.Windows.Forms.Label();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.textBox17 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -310,6 +314,8 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.comboBox1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label26, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.textBox16, 5, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -487,7 +493,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(114, 16);
             this.label10.TabIndex = 22;
-            this.label10.Text = "金額";
+            this.label10.Text = "單價";
             // 
             // textBox7
             // 
@@ -635,7 +641,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
             this.tableLayoutPanel2.Controls.Add(this.label12, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label15, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label16, 2, 2);
@@ -655,7 +661,6 @@
             this.tableLayoutPanel2.Controls.Add(this.label21, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.label22, 2, 4);
             this.tableLayoutPanel2.Controls.Add(this.textBox14, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.textBox15, 3, 4);
             this.tableLayoutPanel2.Controls.Add(this.label23, 4, 5);
             this.tableLayoutPanel2.Controls.Add(this.textBoxID2, 5, 5);
             this.tableLayoutPanel2.Controls.Add(this.button11, 2, 0);
@@ -663,6 +668,9 @@
             this.tableLayoutPanel2.Controls.Add(this.label19, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.label13, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.label14, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label27, 4, 4);
+            this.tableLayoutPanel2.Controls.Add(this.textBox15, 5, 4);
+            this.tableLayoutPanel2.Controls.Add(this.textBox17, 3, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -849,7 +857,7 @@
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(114, 16);
             this.label22.TabIndex = 22;
-            this.label22.Text = "金額";
+            this.label22.Text = "單價";
             // 
             // textBox14
             // 
@@ -864,10 +872,10 @@
             // textBox15
             // 
             this.textBox15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox15.Location = new System.Drawing.Point(543, 166);
+            this.textBox15.Location = new System.Drawing.Point(783, 166);
             this.textBox15.Name = "textBox15";
             this.textBox15.ReadOnly = true;
-            this.textBox15.Size = new System.Drawing.Size(114, 27);
+            this.textBox15.Size = new System.Drawing.Size(186, 27);
             this.textBox15.TabIndex = 24;
             this.textBox15.Text = "0";
             // 
@@ -1081,6 +1089,45 @@
             this.tabPage5.Text = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // label26
+            // 
+            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(663, 172);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(114, 16);
+            this.label26.TabIndex = 28;
+            this.label26.Text = "金額";
+            // 
+            // textBox16
+            // 
+            this.textBox16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox16.Location = new System.Drawing.Point(783, 166);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(360, 27);
+            this.textBox16.TabIndex = 29;
+            this.textBox16.Text = "0";
+            // 
+            // label27
+            // 
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(663, 172);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(114, 16);
+            this.label27.TabIndex = 28;
+            this.label27.Text = "金額";
+            // 
+            // textBox17
+            // 
+            this.textBox17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox17.Location = new System.Drawing.Point(543, 166);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.ReadOnly = true;
+            this.textBox17.Size = new System.Drawing.Size(114, 27);
+            this.textBox17.TabIndex = 29;
+            this.textBox17.Text = "0";
+            // 
             // FrmINVGAFFAIRS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -1209,5 +1256,9 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker4;
         private System.Windows.Forms.Button button12;
         private FastReport.Preview.PreviewControl previewControl1;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox textBox17;
     }
 }

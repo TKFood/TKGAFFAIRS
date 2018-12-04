@@ -173,7 +173,7 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
-                sbSql.AppendFormat(@"  SELECT [MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',SUM([NUM]) AS '庫存數量',SUM([MONEY]) AS '庫存金額'");
+                sbSql.AppendFormat(@"  SELECT [MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',SUM([NUM]) AS '庫存數量',AVG([MONEY]) AS '平均單價',SUM([TOTALMONEY])  AS '庫存金額'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
                 sbSql.AppendFormat(@"  {0}", NAME.ToString());
                 sbSql.AppendFormat(@"  GROUP BY [MB001],[MB002],[MB003]");
@@ -549,7 +549,7 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
-                sbSql.AppendFormat(@"  SELECT [DATES] AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[KINID] AS '類別',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '金額',[ID]");
+                sbSql.AppendFormat(@"  SELECT [DATES] AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[KINID] AS '類別',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '單價',[TOTALMONEY]  AS '金額',[ID]");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
                 sbSql.AppendFormat(@"  WHERE [NUM]>0");
                 sbSql.AppendFormat(@"  AND [DATES]='{0}'",dateTimePicker1.Value.ToString("yyyy/MM/dd"));
@@ -601,7 +601,7 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
-                sbSql.AppendFormat(@"  SELECT [DATES] AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[KINID] AS '類別',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '金額',[ID]");
+                sbSql.AppendFormat(@"  SELECT [DATES] AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[KINID] AS '類別',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '單價',[TOTALMONEY]  AS '金額',[ID]");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
                 sbSql.AppendFormat(@"  WHERE [NUM]<0");
                 sbSql.AppendFormat(@"  AND [DATES]='{0}'", dateTimePicker2.Value.ToString("yyyy/MM/dd"));
@@ -660,7 +660,8 @@ namespace TKGAFFAIRS
                     textBox5.Text = row.Cells["品號"].Value.ToString();
                     textBox6.Text = row.Cells["規格"].Value.ToString();
                     textBox7.Text = row.Cells["數量"].Value.ToString();
-                    textBox8.Text = row.Cells["金額"].Value.ToString();
+                    textBox8.Text = row.Cells["單價"].Value.ToString();
+                    textBox16.Text = row.Cells["金額"].Value.ToString();
                     textBoxID1.Text = row.Cells["ID"].Value.ToString();
 
                 }
@@ -719,8 +720,8 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
 
                 sbSql.AppendFormat(" INSERT INTO [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
-                sbSql.AppendFormat(" ([ID],[DATES],[DEP],[DEPNAME],[WID],[NAME],[MB001],[MB002],[MB003],[NUM],[MONEY],[KINID])");
-                sbSql.AppendFormat(" VALUES (NEWID(),'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','採購')",dateTimePicker1.Value.ToString("yyyy/MM/dd"), textBox2.Text, comboBox1.Text,textBox3.Text,textBox4.Text, textBox5.Text, comboBox2.Text,textBox6.Text,textBox7.Text,textBox8.Text);
+                sbSql.AppendFormat(" ([ID],[DATES],[DEP],[DEPNAME],[WID],[NAME],[MB001],[MB002],[MB003],[NUM],[MONEY],[KINID],[TOTALMONEY])");
+                sbSql.AppendFormat(" VALUES (NEWID(),'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','採購','{10}')",dateTimePicker1.Value.ToString("yyyy/MM/dd"), textBox2.Text, comboBox1.Text,textBox3.Text,textBox4.Text, textBox5.Text, comboBox2.Text,textBox6.Text,textBox7.Text,textBox8.Text, textBox16.Text);
                 sbSql.AppendFormat(" ");
 
                 cmd.Connection = sqlConn;
@@ -766,8 +767,8 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
 
                 sbSql.AppendFormat(" INSERT INTO [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
-                sbSql.AppendFormat(" ([ID],[DATES],[DEP],[DEPNAME],[WID],[NAME],[MB001],[MB002],[MB003],[NUM],[MONEY],[KINID])");
-                sbSql.AppendFormat(" VALUES (NEWID(),'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','領用')", dateTimePicker2.Value.ToString("yyyy/MM/dd"), textBox9.Text, comboBox3.Text, textBox10.Text, textBox11.Text, textBox12.Text, comboBox4.Text, textBox13.Text, textBox14.Text, textBox15.Text);
+                sbSql.AppendFormat(" ([ID],[DATES],[DEP],[DEPNAME],[WID],[NAME],[MB001],[MB002],[MB003],[NUM],[MONEY],[KINID],[TOTALMONEY])");
+                sbSql.AppendFormat(" VALUES (NEWID(),'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','領用','{10}')", dateTimePicker2.Value.ToString("yyyy/MM/dd"), textBox9.Text, comboBox3.Text, textBox10.Text, textBox11.Text, textBox12.Text, comboBox4.Text, textBox13.Text, textBox14.Text, textBox17.Text, textBox15.Text);
                 sbSql.AppendFormat(" ");
 
                 cmd.Connection = sqlConn;
@@ -812,7 +813,7 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
 
                 sbSql.AppendFormat(" UPDATE  [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
-                sbSql.AppendFormat(" SET [DATES]='{0}',[DEP]='{1}',[DEPNAME]='{2}',[WID]='{3}',[NAME]='{4}',[MB001]='{5}',[MB002]='{6}',[MB003]='{7}',[NUM]='{8}',[MONEY]='{9}'",dateTimePicker1.Value.ToString("yyyy/MM/dd"), textBox2.Text, comboBox1.Text, textBox3.Text, textBox4.Text, textBox5.Text, comboBox2.Text, textBox6.Text, textBox7.Text, textBox8.Text);
+                sbSql.AppendFormat(" SET [DATES]='{0}',[DEP]='{1}',[DEPNAME]='{2}',[WID]='{3}',[NAME]='{4}',[MB001]='{5}',[MB002]='{6}',[MB003]='{7}',[NUM]='{8}',[MONEY]='{9}',[TOTALMONEY]='{10}'", dateTimePicker1.Value.ToString("yyyy/MM/dd"), textBox2.Text, comboBox1.Text, textBox3.Text, textBox4.Text, textBox5.Text, comboBox2.Text, textBox6.Text, textBox7.Text, textBox8.Text, textBox16.Text);
                 sbSql.AppendFormat(" WHERE [ID]='{0}'",textBoxID1.Text);
                 sbSql.AppendFormat(" ");
 
@@ -859,7 +860,7 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
 
                 sbSql.AppendFormat(" UPDATE  [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
-                sbSql.AppendFormat(" SET [DATES]='{0}',[DEP]='{1}',[DEPNAME]='{2}',[WID]='{3}',[NAME]='{4}',[MB001]='{5}',[MB002]='{6}',[MB003]='{7}',[NUM]='{8}',[MONEY]='{9}'", dateTimePicker2.Value.ToString("yyyy/MM/dd"), textBox9.Text, comboBox3.Text, textBox10.Text, textBox11.Text, textBox12.Text, comboBox4.Text, textBox13.Text, textBox14.Text, textBox15.Text);
+                sbSql.AppendFormat(" SET [DATES]='{0}',[DEP]='{1}',[DEPNAME]='{2}',[WID]='{3}',[NAME]='{4}',[MB001]='{5}',[MB002]='{6}',[MB003]='{7}',[NUM]='{8}',[MONEY]='{9}',[TOTALMONEY]='{10}'", dateTimePicker2.Value.ToString("yyyy/MM/dd"), textBox9.Text, comboBox3.Text, textBox10.Text, textBox11.Text, textBox12.Text, comboBox4.Text, textBox13.Text, textBox14.Text, textBox17.Text, textBox15.Text);
                 sbSql.AppendFormat(" WHERE [ID]='{0}'", textBoxID2.Text);
                 sbSql.AppendFormat(" ");
 
@@ -1103,7 +1104,7 @@ namespace TKGAFFAIRS
         {
             StringBuilder FASTSQL = new StringBuilder();
 
-            FASTSQL.AppendFormat(@"  SELECT CONVERT(nvarchar,[DATES],112) AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[KINID] AS '類別',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '金額',[ID]");
+            FASTSQL.AppendFormat(@"  SELECT CONVERT(nvarchar,[DATES],112) AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[KINID] AS '類別',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '單價',[TOTALMONEY] AS '金額',[ID]");
             FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
             FASTSQL.AppendFormat(@"  WHERE [DATES]>='{0}' AND [DATES]<='{1}'",dateTimePicker3.Value.ToString("yyyy/MM/dd"), dateTimePicker4.Value.ToString("yyyy/MM/dd"));
             FASTSQL.AppendFormat(@" ORDER BY [DATES],[DEP] ");
@@ -1115,6 +1116,7 @@ namespace TKGAFFAIRS
         private void textBox14_TextChanged(object sender, EventArgs e)
         {
             textBox15.Text = CALNUMCOST();
+            textBox17.Text = CALNUMCOST2();
         }
         public string CALNUMCOST()
         {
@@ -1129,7 +1131,7 @@ namespace TKGAFFAIRS
                     sbSqlQuery.Clear();
 
 
-                    sbSql.AppendFormat(@"   SELECT CONVERT(DECIMAL(16,4),SUM([MONEY])/SUM(NUM))  AS COST FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [MB001]='{0}'", textBox12.Text.ToString());
+                    sbSql.AppendFormat(@"   SELECT CONVERT(DECIMAL(16,4),SUM([TOTALMONEY])/SUM(NUM))  AS COST FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [MB001]='{0}'", textBox12.Text.ToString());
 
 
                     adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -1150,6 +1152,59 @@ namespace TKGAFFAIRS
                         if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
                         {
                             return ( Convert.ToInt32(textBox14.Text)*Convert.ToDecimal(dsTEMP.Tables["dsTEMP"].Rows[0]["COST"].ToString())).ToString();                           
+
+                        }
+
+                    }
+
+                }
+                catch
+                {
+
+                }
+                finally
+                {
+
+                }
+
+            }
+            return null;
+        }
+
+        public string CALNUMCOST2()
+        {
+            if (!string.IsNullOrEmpty(comboBox4.Text))
+            {
+                try
+                {
+                    connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                    sqlConn = new SqlConnection(connectionString);
+
+                    sbSql.Clear();
+                    sbSqlQuery.Clear();
+
+
+                    sbSql.AppendFormat(@"   SELECT CONVERT(DECIMAL(16,4),SUM([TOTALMONEY])/SUM(NUM))  AS COST FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [MB001]='{0}'", textBox12.Text.ToString());
+
+
+                    adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                    sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                    sqlConn.Open();
+                    dsTEMP.Clear();
+                    adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                    sqlConn.Close();
+
+
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                        {
+                            return ( Convert.ToDecimal(dsTEMP.Tables["dsTEMP"].Rows[0]["COST"].ToString())).ToString();
 
                         }
 
