@@ -1138,16 +1138,24 @@ namespace TKGAFFAIRS
 
         public string SETFASETSQL2()
         {
+            DateTime dt = new DateTime();
+            dt = Convert.ToDateTime(dateTimePicker7.Value.ToString("yyyy/MM")+"/1");
+
+            DateTime LASTdt = dt.AddDays(1 - dt.Day).AddDays(-1);
+            DateTime FirstDay = dt.AddDays(-dt.Day + 1);
+            DateTime LastDay = dt.AddMonths(1).AddDays(-dt.AddMonths(1).Day);
+
+
             StringBuilder FASTSQL = new StringBuilder();
             FASTSQL.AppendFormat(@"  SELECT 品號,品名,規格,單位,期初數量,期初金額,本期進貨數量,本期進貨金額,本期領料數量,本期領料金額,(期初數量+本期進貨數量-本期領料數量) AS 期末數量,(期初金額+本期進貨金額-本期領料金額) AS 期末金額");
             FASTSQL.AppendFormat(@"  FROM (");
             FASTSQL.AppendFormat(@"  SELECT [MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[UNIT] AS '單位'");
-            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(NUM),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND DATES<='2018/11/30') AS '期初數量'");
-            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(TOTALMONEY),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND DATES<='2018/11/30') AS '期初金額'");
-            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(NUM),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND KINID='採購' AND DATES>='2018/12/1' AND DATES<='2018/12/31') AS '本期進貨數量'");
-            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(TOTALMONEY),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001]  AND KINID='採購'  AND DATES>='2018/12/1' AND DATES<='2018/12/31') AS '本期進貨金額'");
-            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(NUM),0)*-1 FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND KINID='領用' AND DATES>='2018/12/1' AND DATES<='2018/12/31') AS '本期領料數量'");
-            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(TOTALMONEY),0)*-1 FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001]  AND KINID='領用'  AND DATES>='2018/12/1' AND DATES<='2018/12/31') AS '本期領料金額'");
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(NUM),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND DATES<='{0}') AS '期初數量'", LASTdt.ToString("yyyy/MM/dd"));
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(TOTALMONEY),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND DATES<='{0}') AS '期初金額'", LASTdt.ToString("yyyy/MM/dd"));
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(NUM),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND KINID='採購' AND DATES>='{0}' AND DATES<='{1}') AS '本期進貨數量'", FirstDay.ToString("yyyy/MM/dd"), LastDay.ToString("yyyy/MM/dd"));
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(TOTALMONEY),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001]  AND KINID='採購'  AND DATES>='{0}' AND DATES<='{1}') AS '本期進貨金額'", FirstDay.ToString("yyyy/MM/dd"), LastDay.ToString("yyyy/MM/dd"));
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(NUM),0)*-1 FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND KINID='領用' AND DATES>='{0}' AND DATES<='{1}') AS '本期領料數量'", FirstDay.ToString("yyyy/MM/dd"), LastDay.ToString("yyyy/MM/dd"));
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(TOTALMONEY),0)*-1 FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001]  AND KINID='領用'  AND DATES>='{0}' AND DATES<='{1}') AS '本期領料金額'", FirstDay.ToString("yyyy/MM/dd"), LastDay.ToString("yyyy/MM/dd"));
             FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVMB]");
             FASTSQL.AppendFormat(@"  ) AS TEMP");
             FASTSQL.AppendFormat(@"  ORDER BY 品號");
