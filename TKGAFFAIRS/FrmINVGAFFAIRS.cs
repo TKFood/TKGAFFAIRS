@@ -1113,6 +1113,51 @@ namespace TKGAFFAIRS
             return FASTSQL.ToString();
         }
 
+        public void SETFASTREPORT2()
+        {
+            if(comboBox5.Text.Equals("用品盤存月表"))
+            {
+                string SQL;
+                Report report1 = new Report();
+                report1.Load(@"REPORT\用品盤存月表.frx");
+
+                report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+                TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
+                SQL = SETFASETSQL2();
+                Table.SelectCommand = SQL;
+                
+                report1.Preview = previewControl2;
+                report1.Show();
+            }
+
+            
+
+        }
+
+        public string SETFASETSQL2()
+        {
+            StringBuilder FASTSQL = new StringBuilder();
+            FASTSQL.AppendFormat(@"  SELECT 品號,品名,規格,單位,期初數量,期初金額,本期進貨數量,本期進貨金額,本期領料數量,本期領料金額,(期初數量+本期進貨數量-本期領料數量) AS 期末數量,(期初金額+本期進貨金額-本期領料金額) AS 期末金額");
+            FASTSQL.AppendFormat(@"  FROM (");
+            FASTSQL.AppendFormat(@"  SELECT [MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[UNIT] AS '單位'");
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(NUM),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND DATES<='2018/11/30') AS '期初數量'");
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(TOTALMONEY),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND DATES<='2018/11/30') AS '期初金額'");
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(NUM),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND KINID='採購' AND DATES>='2018/12/1' AND DATES<='2018/12/31') AS '本期進貨數量'");
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(TOTALMONEY),0) FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001]  AND KINID='採購'  AND DATES>='2018/12/1' AND DATES<='2018/12/31') AS '本期進貨金額'");
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(NUM),0)*-1 FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001] AND KINID='領用' AND DATES>='2018/12/1' AND DATES<='2018/12/31') AS '本期領料數量'");
+            FASTSQL.AppendFormat(@"  ,(SELECT ISNULL(SUM(TOTALMONEY),0)*-1 FROM  [TKGAFFAIRS].[dbo].[INVGAFFAIRS] WHERE [INVGAFFAIRS].MB001=[INVMB].[MB001]  AND KINID='領用'  AND DATES>='2018/12/1' AND DATES<='2018/12/31') AS '本期領料金額'");
+            FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVMB]");
+            FASTSQL.AppendFormat(@"  ) AS TEMP");
+            FASTSQL.AppendFormat(@"  ORDER BY 品號");
+            FASTSQL.AppendFormat(@"  ");
+            FASTSQL.AppendFormat(@"  ");
+            FASTSQL.AppendFormat(@"  ");
+
+            return FASTSQL.ToString();
+        }
+
         private void textBox14_TextChanged(object sender, EventArgs e)
         {
             textBox15.Text = CALNUMCOST();
@@ -1345,12 +1390,16 @@ namespace TKGAFFAIRS
             SETFASTREPORT();
         }
 
+        private void button13_Click(object sender, EventArgs e)
+        {
+            SETFASTREPORT2();
+        }
 
 
 
 
         #endregion
 
-       
+
     }
 }
