@@ -1,31 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/29/2018 09:35:36" ReportInfo.Modified="12/05/2018 17:19:38" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/29/2018 09:35:36" ReportInfo.Modified="12/05/2018 17:40:10" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9KSCokJghx4pwO33Km/sODf">
-      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [DEP] AS '部門',[DEPNAME] AS '部門名',[INVMB].[KIND] AS '類別',SUM([TOTALMONEY])*-1 AS '金額'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS],[TKGAFFAIRS].[dbo].[INVMB]&#13;&#10;WHERE [INVGAFFAIRS].[MB001]= [INVMB].[MB001]&#13;&#10;AND [DATES]&gt;='2018/11/1' AND [DATES]&lt;='2018/12/30'&#13;&#10;AND KINID='領用'&#13;&#10;GROUP BY [DEP],[DEPNAME],[INVMB].[KIND]&#13;&#10;ORDER BY [DEP],[DEPNAME],[INVMB].[KIND]">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9IqcAQzP2yQwb6QpopyYwQO">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [INVMB].[KIND] AS '類別',[DEP] AS '部門',[DEPNAME] AS '部門名',SUM([TOTALMONEY])*-1 AS '金額'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS],[TKGAFFAIRS].[dbo].[INVMB]&#13;&#10;WHERE [INVGAFFAIRS].[MB001]= [INVMB].[MB001]&#13;&#10;AND [DATES]&gt;='2018/11/1' AND [DATES]&lt;='2018/12/30'&#13;&#10;AND KINID='領用'&#13;&#10;GROUP BY [INVMB].[KIND],[DEP],[DEPNAME]&#13;&#10;ORDER BY [INVMB].[KIND],[DEP],[DEPNAME]">
         <Column Name="部門" DataType="System.String"/>
         <Column Name="部門名" DataType="System.String"/>
         <Column Name="金額" DataType="System.Decimal"/>
         <Column Name="類別" DataType="System.String"/>
       </TableDataSource>
     </MsSqlDataConnection>
+    <Total Name="Total" Expression="[Table.金額]" Evaluator="Data1" PrintOn="GroupFooter1"/>
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210">
     <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="28.35">
       <TextObject Name="Text1" Width="1039.5" Height="18.9" Text="財務每月用品統計表" HorzAlign="Center" VertAlign="Center"/>
     </ReportTitleBand>
     <ColumnHeaderBand Name="ColumnHeader1" Top="32.2" Width="1047.06" Height="18.9">
-      <TextObject Name="Text3" Width="94.5" Height="18.9" Border.Lines="All" Text="部門" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text5" Left="94.5" Width="151.2" Height="18.9" Border.Lines="All" Text="部門名" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text7" Left="245.7" Width="151.2" Height="18.9" Border.Lines="All" Text="類別" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text3" Left="151.2" Width="94.5" Height="18.9" Border.Lines="All" Text="部門" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text5" Left="245.7" Width="151.2" Height="18.9" Border.Lines="All" Text="部門名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text7" Width="151.2" Height="18.9" Border.Lines="All" Text="類別" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text9" Left="396.9" Width="94.5" Height="18.9" Border.Lines="All" Text="金額" HorzAlign="Center" VertAlign="Center"/>
     </ColumnHeaderBand>
-    <DataBand Name="Data1" Top="54.94" Width="1047.06" Height="18.9" DataSource="Table">
-      <TextObject Name="Text2" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.部門]" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text4" Left="94.5" Width="151.2" Height="18.9" Border.Lines="All" Text="[Table.部門名]" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text6" Left="245.7" Width="151.2" Height="18.9" Border.Lines="All" Text="[Table.類別]" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text8" Left="396.9" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.金額]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
-    </DataBand>
-    <ReportSummaryBand Name="ReportSummary1" Top="77.69" Width="1047.06" Height="18.9"/>
+    <GroupHeaderBand Name="GroupHeader1" Top="54.94" Width="1047.06" Condition="[Table.類別]">
+      <DataBand Name="Data1" Top="58.79" Width="1047.06" Height="18.9" DataSource="Table">
+        <TextObject Name="Text2" Left="151.2" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.部門]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text4" Left="245.7" Width="151.2" Height="18.9" Border.Lines="All" Text="[Table.部門名]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text6" Width="151.2" Height="18.9" Border.Lines="All" Text="[Table.類別]" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text8" Left="396.9" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.金額]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="81.53" Width="1047.06" Height="18.9">
+        <TextObject Name="Text10" Width="396.9" Height="18.9" Border.Lines="All" Text="小計" HorzAlign="Center" VertAlign="Center"/>
+        <TextObject Name="Text11" Left="396.9" Width="94.5" Height="18.9" Border.Lines="All" Text="[Total]" Format="Number" Format.UseLocale="true" HorzAlign="Center" VertAlign="Bottom"/>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="104.28" Width="1047.06" Height="18.9"/>
   </ReportPage>
 </Report>

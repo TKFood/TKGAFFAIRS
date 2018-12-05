@@ -1215,13 +1215,13 @@ namespace TKGAFFAIRS
         {
             StringBuilder FASTSQL = new StringBuilder();
 
-            FASTSQL.AppendFormat(@"  SELECT [DEP] AS '部門',[DEPNAME] AS '部門名',[INVMB].[KIND] AS '類別',SUM([TOTALMONEY])*-1 AS '金額'");
+            FASTSQL.AppendFormat(@"  SELECT [INVMB].[KIND] AS '類別',[DEP] AS '部門',[DEPNAME] AS '部門名',SUM([TOTALMONEY])*-1 AS '金額'");
             FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS],[TKGAFFAIRS].[dbo].[INVMB]");
             FASTSQL.AppendFormat(@"  WHERE [INVGAFFAIRS].[MB001]= [INVMB].[MB001]");
             FASTSQL.AppendFormat(@"  AND [DATES]>='{0}' AND [DATES]<='{1}'", dateTimePicker5.Value.ToString("yyyy/MM/dd"), dateTimePicker6.Value.ToString("yyyy/MM/dd"));
             FASTSQL.AppendFormat(@"  AND KINID='領用'");
-            FASTSQL.AppendFormat(@"  GROUP BY [DEP],[DEPNAME],[INVMB].[KIND]");
-            FASTSQL.AppendFormat(@"  ORDER BY [DEP],[DEPNAME],[INVMB].[KIND]");
+            FASTSQL.AppendFormat(@"  GROUP BY  [INVMB].[KIND],[DEP],[DEPNAME]");
+            FASTSQL.AppendFormat(@"  ORDER BY  [INVMB].[KIND],[DEP],[DEPNAME]");
             FASTSQL.AppendFormat(@"  ");
 
             return FASTSQL.ToString();
