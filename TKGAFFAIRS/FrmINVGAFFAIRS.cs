@@ -1132,6 +1132,23 @@ namespace TKGAFFAIRS
                 report1.Show();
             }
 
+            else if(comboBox5.Text.Equals("用品盤存明細表"))
+            {
+                string SQL;
+                Report report1 = new Report();
+                report1.Load(@"REPORT\用品盤存明細表.frx");
+
+                report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+                TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
+                SQL = SETFASETSQL3();
+                Table.SelectCommand = SQL;
+
+                report1.Preview = previewControl2;
+                report1.Show();
+            }
+
             
 
         }
@@ -1161,6 +1178,19 @@ namespace TKGAFFAIRS
             FASTSQL.AppendFormat(@"  ORDER BY 品號");
             FASTSQL.AppendFormat(@"  ");
             FASTSQL.AppendFormat(@"  ");
+            FASTSQL.AppendFormat(@"  ");
+
+            return FASTSQL.ToString();
+        }
+
+        public string SETFASETSQL3()
+        {
+            StringBuilder FASTSQL = new StringBuilder();
+
+            FASTSQL.AppendFormat(@"  SELECT CONVERT(nvarchar,[DATES],112) AS '日期',[DEP] AS '部門',[DEPNAME] AS '部門名',[WID] AS '工號',[NAME] AS '姓名',[KINID] AS '類別',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[NUM] AS '數量',[MONEY] AS '單價',[TOTALMONEY] AS '金額',[ID]");
+            FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
+            FASTSQL.AppendFormat(@"  WHERE [DATES]>='{0}' AND [DATES]<='{1}'", dateTimePicker5.Value.ToString("yyyy/MM/dd"), dateTimePicker6.Value.ToString("yyyy/MM/dd"));
+            FASTSQL.AppendFormat(@" ORDER BY [DATES],[DEP] ");
             FASTSQL.AppendFormat(@"  ");
 
             return FASTSQL.ToString();
