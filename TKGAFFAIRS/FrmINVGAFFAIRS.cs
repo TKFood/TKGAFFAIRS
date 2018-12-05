@@ -1149,7 +1149,22 @@ namespace TKGAFFAIRS
                 report1.Show();
             }
 
-            
+            else if(comboBox5.Text.Equals("財務每月用品統計表"))
+            {
+                string SQL;
+                Report report1 = new Report();
+                report1.Load(@"REPORT\財務每月用品統計表.frx");
+
+                report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+                TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
+                SQL = SETFASETSQL4();
+                Table.SelectCommand = SQL;
+
+                report1.Preview = previewControl2;
+                report1.Show();
+            }
 
         }
 
@@ -1191,6 +1206,22 @@ namespace TKGAFFAIRS
             FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS]");
             FASTSQL.AppendFormat(@"  WHERE [DATES]>='{0}' AND [DATES]<='{1}'", dateTimePicker5.Value.ToString("yyyy/MM/dd"), dateTimePicker6.Value.ToString("yyyy/MM/dd"));
             FASTSQL.AppendFormat(@" ORDER BY [DATES],[DEP] ");
+            FASTSQL.AppendFormat(@"  ");
+
+            return FASTSQL.ToString();
+        }
+
+        public string SETFASETSQL4()
+        {
+            StringBuilder FASTSQL = new StringBuilder();
+
+            FASTSQL.AppendFormat(@"  SELECT [DEP] AS '部門',[DEPNAME] AS '部門名',[INVMB].[KIND] AS '類別',SUM([TOTALMONEY])*-1 AS '金額'");
+            FASTSQL.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[INVGAFFAIRS],[TKGAFFAIRS].[dbo].[INVMB]");
+            FASTSQL.AppendFormat(@"  WHERE [INVGAFFAIRS].[MB001]= [INVMB].[MB001]");
+            FASTSQL.AppendFormat(@"  AND [DATES]>='{0}' AND [DATES]<='{1}'", dateTimePicker5.Value.ToString("yyyy/MM/dd"), dateTimePicker6.Value.ToString("yyyy/MM/dd"));
+            FASTSQL.AppendFormat(@"  AND KINID='領用'");
+            FASTSQL.AppendFormat(@"  GROUP BY [DEP],[DEPNAME],[INVMB].[KIND]");
+            FASTSQL.AppendFormat(@"  ORDER BY [DEP],[DEPNAME],[INVMB].[KIND]");
             FASTSQL.AppendFormat(@"  ");
 
             return FASTSQL.ToString();

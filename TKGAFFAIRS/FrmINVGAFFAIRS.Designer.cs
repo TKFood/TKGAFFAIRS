@@ -1279,7 +1279,8 @@
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Items.AddRange(new object[] {
             "用品盤存月表",
-            "用品盤存明細表"});
+            "用品盤存明細表",
+            "財務每月用品統計表"});
             this.comboBox5.Location = new System.Drawing.Point(82, 10);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(155, 24);
