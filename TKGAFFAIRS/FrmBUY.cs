@@ -166,11 +166,11 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
-                sbSql.AppendFormat(@"  SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'");
+                sbSql.AppendFormat(@"  SELECT [STATUS] AS '狀態',[BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'");
                 sbSql.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
                 sbSql.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
                 sbSql.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
-                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數',[STATUS] AS '狀態' ");
+                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數' ");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
                 sbSql.AppendFormat(@"  WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}'",dateTimePicker1.Value.ToString("yyyy/MM/dd"), dateTimePicker2.Value.ToString("yyyy/MM/dd"));
                 sbSql.AppendFormat(@"  AND [STATUS]='{0}'",comboBox2.Text.ToString());
@@ -225,11 +225,11 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
-                sbSql.AppendFormat(@"  SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'");
+                sbSql.AppendFormat(@"  SELECT [STATUS] AS '狀態',[BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'");
                 sbSql.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
                 sbSql.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
                 sbSql.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
-                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數',[STATUS] AS '狀態'");
+                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
                 sbSql.AppendFormat(@"  WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}'", dateTimePicker5.Value.ToString("yyyy/MM/dd"), dateTimePicker6.Value.ToString("yyyy/MM/dd"));
                 sbSql.AppendFormat(@"  AND [STATUS]='{0}'", comboBox4.Text.ToString());
@@ -294,11 +294,11 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
-                sbSql.AppendFormat(@"  SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'");
+                sbSql.AppendFormat(@"  SELECT [STATUS] AS '狀態',[BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'");
                 sbSql.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
                 sbSql.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
                 sbSql.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
-                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數',[STATUS] AS '狀態'");
+                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
                 sbSql.AppendFormat(@"  WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}'", dateTimePicker7.Value.ToString("yyyy/MM/dd"), dateTimePicker8.Value.ToString("yyyy/MM/dd"));
                 sbSql.AppendFormat(@"  AND [STATUS]='{0}'", comboBox5.Text.ToString());
