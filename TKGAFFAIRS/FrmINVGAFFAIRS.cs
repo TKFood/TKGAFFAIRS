@@ -1077,7 +1077,7 @@ namespace TKGAFFAIRS
         }
         private void textBox10_TextChanged(object sender, EventArgs e)
         {
-            textBox11.Text = FINDCMSMV2();
+            //textBox11.Text = FINDCMSMV2();
         }
 
         public void SETFASTREPORT()
@@ -1393,6 +1393,62 @@ namespace TKGAFFAIRS
             return null;
         }
 
+        private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+            textBox10.Text = FINDCMSMV4();
+        }
+
+        public string FINDCMSMV4()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@"  SELECT TOP 1 MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV002='{0}' ", textBox11.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP.Clear();
+                adapterTEMP.Fill(dsTEMP, "dsTEMP");
+                sqlConn.Close();
+
+
+                if (dsTEMP.Tables["dsTEMP"].Rows.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
+                    {
+
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["MV001"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region BUTTON
@@ -1524,8 +1580,9 @@ namespace TKGAFFAIRS
 
 
 
+
         #endregion
 
-       
+      
     }
 }

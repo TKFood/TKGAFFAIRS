@@ -796,9 +796,9 @@
             this.textBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox11.Location = new System.Drawing.Point(543, 86);
             this.textBox11.Name = "textBox11";
-            this.textBox11.ReadOnly = true;
             this.textBox11.Size = new System.Drawing.Size(114, 27);
             this.textBox11.TabIndex = 16;
+            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
             // 
             // textBox12
             // 
@@ -1218,7 +1218,7 @@
             "用品盤存月表",
             "用品盤存明細表",
             "財務每月用品統計表"});
-            this.comboBox5.Location = new System.Drawing.Point(82, 8);
+            this.comboBox5.Location = new System.Drawing.Point(82, 10);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(155, 24);
             this.comboBox5.TabIndex = 6;
