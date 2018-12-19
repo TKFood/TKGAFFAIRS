@@ -114,16 +114,16 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker6 = new System.Windows.Forms.DateTimePicker();
-            this.button13 = new System.Windows.Forms.Button();
-            this.previewControl2 = new FastReport.Preview.PreviewControl();
             this.label30 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker6 = new System.Windows.Forms.DateTimePicker();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.dateTimePicker7 = new System.Windows.Forms.DateTimePicker();
+            this.button13 = new System.Windows.Forms.Button();
+            this.previewControl2 = new FastReport.Preview.PreviewControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -422,9 +422,9 @@
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Location = new System.Drawing.Point(543, 86);
             this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(114, 27);
             this.textBox4.TabIndex = 16;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBox5
             // 
@@ -1200,25 +1200,29 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(972, 164);
             this.tableLayoutPanel5.TabIndex = 4;
             // 
-            // label28
+            // label30
             // 
-            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(363, 92);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(114, 16);
-            this.label28.TabIndex = 3;
-            this.label28.Text = "~";
+            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(3, 12);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(73, 16);
+            this.label30.TabIndex = 5;
+            this.label30.Text = "報表";
             // 
-            // label29
+            // comboBox5
             // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(82, 92);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(155, 16);
-            this.label29.TabIndex = 0;
-            this.label29.Text = "日期";
+            this.comboBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Items.AddRange(new object[] {
+            "用品盤存月表",
+            "用品盤存明細表",
+            "財務每月用品統計表"});
+            this.comboBox5.Location = new System.Drawing.Point(82, 8);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(155, 24);
+            this.comboBox5.TabIndex = 6;
+            this.comboBox5.Text = "用品盤存月表";
             // 
             // dateTimePicker5
             // 
@@ -1239,6 +1243,46 @@
             this.dateTimePicker6.Name = "dateTimePicker6";
             this.dateTimePicker6.Size = new System.Drawing.Size(114, 27);
             this.dateTimePicker6.TabIndex = 2;
+            // 
+            // label28
+            // 
+            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(363, 92);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(114, 16);
+            this.label28.TabIndex = 3;
+            this.label28.Text = "~";
+            // 
+            // label29
+            // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(82, 92);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(155, 16);
+            this.label29.TabIndex = 0;
+            this.label29.Text = "日期";
+            // 
+            // label31
+            // 
+            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(82, 52);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(155, 16);
+            this.label31.TabIndex = 7;
+            this.label31.Text = "月份";
+            // 
+            // dateTimePicker7
+            // 
+            this.dateTimePicker7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker7.CustomFormat = "yyyy/MM";
+            this.dateTimePicker7.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker7.Location = new System.Drawing.Point(243, 46);
+            this.dateTimePicker7.Name = "dateTimePicker7";
+            this.dateTimePicker7.Size = new System.Drawing.Size(114, 27);
+            this.dateTimePicker7.TabIndex = 8;
             // 
             // button13
             // 
@@ -1262,50 +1306,6 @@
             this.previewControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.previewControl2.Size = new System.Drawing.Size(972, 555);
             this.previewControl2.TabIndex = 5;
-            // 
-            // label30
-            // 
-            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(3, 12);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(73, 16);
-            this.label30.TabIndex = 5;
-            this.label30.Text = "報表";
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Items.AddRange(new object[] {
-            "用品盤存月表",
-            "用品盤存明細表",
-            "財務每月用品統計表"});
-            this.comboBox5.Location = new System.Drawing.Point(82, 10);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(155, 24);
-            this.comboBox5.TabIndex = 6;
-            this.comboBox5.Text = "用品盤存月表";
-            // 
-            // label31
-            // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(82, 52);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(155, 16);
-            this.label31.TabIndex = 7;
-            this.label31.Text = "月份";
-            // 
-            // dateTimePicker7
-            // 
-            this.dateTimePicker7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker7.CustomFormat = "yyyy/MM";
-            this.dateTimePicker7.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker7.Location = new System.Drawing.Point(243, 46);
-            this.dateTimePicker7.Name = "dateTimePicker7";
-            this.dateTimePicker7.Size = new System.Drawing.Size(114, 27);
-            this.dateTimePicker7.TabIndex = 8;
             // 
             // FrmINVGAFFAIRS
             // 
