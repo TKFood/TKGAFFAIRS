@@ -328,6 +328,7 @@ namespace TKGAFFAIRS
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             textBox4.Text = FINDCMSMV();
+            FINDDEP1();
         }
 
         public string FINDCMSMV()
@@ -381,6 +382,113 @@ namespace TKGAFFAIRS
             return null;
         }
         
+        public void FINDDEP1()
+        {
+            DataSet dsTEMP2 = new DataSet();
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@" SELECT [CnName] ,[Department].[DepartmentId],[Department].[Code],[Name],[Department].[Code] AS 'DEPID'     FROM [HRMDB].[dbo].[Employee],[HRMDB].[dbo].[Department] WHERE [Employee].DepartmentId=[Department].DepartmentId AND [Employee].Code='{0}'", textBox3.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP2.Clear();
+                adapterTEMP.Fill(dsTEMP2, "dsTEMP2");
+                sqlConn.Close();
+
+
+                if (dsTEMP2.Tables["dsTEMP2"].Rows.Count == 0)
+                {
+                    comboBox1.Text = null;
+                    textBox2.Text = null;
+                }
+                else
+                {
+                    if (dsTEMP2.Tables["dsTEMP2"].Rows.Count >= 1)
+                    {
+                        comboBox1.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["Name"].ToString();
+                        textBox2.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["DEPID"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+            
+        }
+
+        public void FINDDEP2()
+        {
+            DataSet dsTEMP2 = new DataSet();
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@" SELECT [CnName] ,[Department].[DepartmentId],[Department].[Code],[Name],[Department].[Code] AS 'DEPID'     FROM [HRMDB].[dbo].[Employee],[HRMDB].[dbo].[Department] WHERE [Employee].DepartmentId=[Department].DepartmentId AND [Employee].Code='{0}'", textBox10.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP2.Clear();
+                adapterTEMP.Fill(dsTEMP2, "dsTEMP2");
+                sqlConn.Close();
+
+
+                if (dsTEMP2.Tables["dsTEMP2"].Rows.Count == 0)
+                {
+                    comboBox3.Text = null;
+                    textBox9.Text = null;
+                }
+                else
+                {
+                    if (dsTEMP2.Tables["dsTEMP2"].Rows.Count >= 1)
+                    {
+                        comboBox3.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["Name"].ToString();
+                        textBox9.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["DEPID"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+
+        }
         public string FINDCMSMV1()
         {
             try
@@ -1078,6 +1186,7 @@ namespace TKGAFFAIRS
         private void textBox10_TextChanged(object sender, EventArgs e)
         {
             textBox11.Text = FINDCMSMV2();
+            FINDDEP2();
         }
 
         public void SETFASTREPORT()
