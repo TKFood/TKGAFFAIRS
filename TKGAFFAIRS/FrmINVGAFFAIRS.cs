@@ -1338,6 +1338,7 @@ namespace TKGAFFAIRS
 
         private void textBox14_TextChanged(object sender, EventArgs e)
         {
+            FINDINVMB2();
             textBox15.Text = CALNUMCOST();
             textBox17.Text = CALNUMCOST2();
         }
