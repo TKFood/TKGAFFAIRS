@@ -1132,6 +1132,8 @@ namespace TKGAFFAIRS
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
             FINDINVMB2();
+            textBox15.Text = CALNUMCOST();
+            textBox17.Text = CALNUMCOST2();
         }
         public void FINDINVMB2()
         {
