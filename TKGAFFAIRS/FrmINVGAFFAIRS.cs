@@ -327,7 +327,7 @@ namespace TKGAFFAIRS
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            //textBox4.Text = FINDCMSMV();
+            textBox4.Text = FINDCMSMV();
         }
 
         public string FINDCMSMV()
@@ -341,7 +341,7 @@ namespace TKGAFFAIRS
                 sbSqlQuery.Clear();
 
 
-                sbSql.AppendFormat(@"  SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}'", textBox3.Text.ToString());
+                sbSql.AppendFormat(@"  SELECT TOP 1 [CnName] ,[DepartmentId],[Code]   FROM [HRMDB].[dbo].[Employee] WHERE Code='{0}'", textBox3.Text.ToString());
 
 
                 adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -362,7 +362,7 @@ namespace TKGAFFAIRS
                     if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
                     {
 
-                        return dsTEMP.Tables["dsTEMP"].Rows[0]["MV002"].ToString();
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["CnName"].ToString();
 
                     }
 
@@ -442,7 +442,7 @@ namespace TKGAFFAIRS
                 sbSqlQuery.Clear();
 
 
-                sbSql.AppendFormat(@"  SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}'", textBox10.Text.ToString());
+                sbSql.AppendFormat(@"  SELECT TOP 1 [CnName] ,[DepartmentId],[Code]   FROM [HRMDB].[dbo].[Employee] WHERE Code='{0}'", textBox10.Text.ToString());
 
 
                 adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -463,7 +463,7 @@ namespace TKGAFFAIRS
                     if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
                     {
 
-                        return dsTEMP.Tables["dsTEMP"].Rows[0]["MV002"].ToString();
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["CnName"].ToString();
 
                     }
 
@@ -1077,7 +1077,7 @@ namespace TKGAFFAIRS
         }
         private void textBox10_TextChanged(object sender, EventArgs e)
         {
-            //textBox11.Text = FINDCMSMV2();
+            textBox11.Text = FINDCMSMV2();
         }
 
         public void SETFASTREPORT()
@@ -1353,7 +1353,7 @@ namespace TKGAFFAIRS
                 sbSqlQuery.Clear();
 
 
-                sbSql.AppendFormat(@"  SELECT TOP 1 MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV002='{0}' ", textBox4.Text.ToString());
+                sbSql.AppendFormat(@"  SELECT TOP 1 [CnName] ,[DepartmentId],[Code]   FROM [HRMDB].[dbo].[Employee] WHERE CnName='{0}' ", textBox4.Text.ToString());
 
 
                 adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -1374,7 +1374,7 @@ namespace TKGAFFAIRS
                     if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
                     {
 
-                        return dsTEMP.Tables["dsTEMP"].Rows[0]["MV001"].ToString();
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["Code"].ToString();
 
                     }
 
@@ -1409,7 +1409,7 @@ namespace TKGAFFAIRS
                 sbSqlQuery.Clear();
 
 
-                sbSql.AppendFormat(@"  SELECT TOP 1 MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV002='{0}' ", textBox11.Text.ToString());
+                sbSql.AppendFormat(@"  SELECT TOP 1 [CnName] ,[DepartmentId],[Code]   FROM [HRMDB].[dbo].[Employee] WHERE [CnName]='{0}'", textBox11.Text.ToString());
 
 
                 adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -1430,7 +1430,7 @@ namespace TKGAFFAIRS
                     if (dsTEMP.Tables["dsTEMP"].Rows.Count >= 1)
                     {
 
-                        return dsTEMP.Tables["dsTEMP"].Rows[0]["MV001"].ToString();
+                        return dsTEMP.Tables["dsTEMP"].Rows[0]["Code"].ToString();
 
                     }
 
@@ -1448,6 +1448,8 @@ namespace TKGAFFAIRS
 
             return null;
         }
+
+
 
         #endregion
 

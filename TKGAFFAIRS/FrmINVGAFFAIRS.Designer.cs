@@ -592,6 +592,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(123, 43);
             this.comboBox1.Name = "comboBox1";
@@ -820,6 +821,7 @@
             // 
             // comboBox3
             // 
+            this.comboBox3.Enabled = false;
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(123, 43);
             this.comboBox3.Name = "comboBox3";
@@ -1218,7 +1220,7 @@
             "用品盤存月表",
             "用品盤存明細表",
             "財務每月用品統計表"});
-            this.comboBox5.Location = new System.Drawing.Point(82, 10);
+            this.comboBox5.Location = new System.Drawing.Point(82, 8);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(155, 24);
             this.comboBox5.TabIndex = 6;
