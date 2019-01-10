@@ -31,6 +31,9 @@ namespace TKGAFFAIRS
         SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder();
         SqlDataAdapter adapter4 = new SqlDataAdapter();
         SqlCommandBuilder sqlCmdBuilder4 = new SqlCommandBuilder();
+        SqlDataAdapter adapterTEMP = new SqlDataAdapter();
+        SqlCommandBuilder sqlCmdBuilderTEMP = new SqlCommandBuilder();
+
         SqlTransaction tran;
         SqlCommand cmd = new SqlCommand();
         DataSet ds = new DataSet();
@@ -698,8 +701,63 @@ namespace TKGAFFAIRS
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             SEARCHNAME1();
+            
+            FINDDEP2();
         }
 
+        public void FINDDEP2()
+        {
+            DataSet dsTEMP2 = new DataSet();
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@" SELECT [CnName] ,[Department].[DepartmentId],[Department].[Code],[Name],[Department].[Code] AS 'DEPID'     FROM [HRMDB].[dbo].[Employee],[HRMDB].[dbo].[Department] WHERE [Employee].DepartmentId=[Department].DepartmentId AND [Employee].Code='{0}'", textBox1.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP2.Clear();
+                adapterTEMP.Fill(dsTEMP2, "dsTEMP2");
+                sqlConn.Close();
+
+
+                if (dsTEMP2.Tables["dsTEMP2"].Rows.Count == 0)
+                {
+                    label7.Text = null;
+                    comboBox1.Text = null;
+                }
+                else
+                {
+                    if (dsTEMP2.Tables["dsTEMP2"].Rows.Count >= 1)
+                    {
+                        label7.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["Name"].ToString();
+                        comboBox1.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["DEPID"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+
+        }
         private void textBox15_TextChanged(object sender, EventArgs e)
         {
             SEARCHNAME2();
@@ -864,6 +922,121 @@ namespace TKGAFFAIRS
                 sqlConn.Close();
             }
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            SEARCHNAME4();
+
+            FINDDEP3();
+        }
+
+        public void SEARCHNAME4()
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                StringBuilder sbSql = new StringBuilder();
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+                ds4.Clear();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(@" SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV002='{0}' ", textBox2.Text);
+                sbSql.AppendFormat(@"  ");
+
+                adapter4 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder4 = new SqlCommandBuilder(adapter4);
+                sqlConn.Open();
+                ds4.Clear();
+                adapter4.Fill(ds4, "TEMPds4");
+                sqlConn.Close();
+
+
+                if (ds4.Tables["TEMPds4"].Rows.Count == 0)
+                {
+
+                }
+                else
+                {
+                    if (ds4.Tables["TEMPds4"].Rows.Count >= 1)
+                    {
+                        textBox1.Text = ds4.Tables["TEMPds4"].Rows[0]["MV001"].ToString();
+
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+
+        }
+
+        public void FINDDEP3()
+        {
+            DataSet dsTEMP2 = new DataSet();
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@" SELECT [CnName] ,[Department].[DepartmentId],[Department].[Code],[Name],[Department].[Code] AS 'DEPID'     FROM [HRMDB].[dbo].[Employee],[HRMDB].[dbo].[Department] WHERE [Employee].DepartmentId=[Department].DepartmentId AND [Employee].[CnName]='{0}'", textBox2.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP2.Clear();
+                adapterTEMP.Fill(dsTEMP2, "dsTEMP2");
+                sqlConn.Close();
+
+
+                if (dsTEMP2.Tables["dsTEMP2"].Rows.Count == 0)
+                {
+                    label7.Text = null;
+                    comboBox1.Text = null;
+                }
+                else
+                {
+                    if (dsTEMP2.Tables["dsTEMP2"].Rows.Count >= 1)
+                    {
+                        label7.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["Name"].ToString();
+                        comboBox1.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["DEPID"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+
+        }
+
         #endregion
 
         #region BUTTON
@@ -931,6 +1104,7 @@ namespace TKGAFFAIRS
         {
             SETFASTREPORT();
         }
+
 
 
 
