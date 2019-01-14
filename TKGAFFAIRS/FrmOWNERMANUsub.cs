@@ -177,9 +177,9 @@ namespace TKGAFFAIRS
         }
         private void textBox10_TextChanged(object sender, EventArgs e)
         {
-            //SEARCHNAME2();
+            SEARCHNAME2();
 
-            //FINDDEP2();
+            FINDDEP2();
         }
         public void SEARCHNAME2()
         {
@@ -215,7 +215,7 @@ namespace TKGAFFAIRS
                 {
                     if (ds4.Tables["TEMPds4"].Rows.Count >= 1)
                     {
-                        textBox9.Text = ds4.Tables["TEMPds4"].Rows[0]["MV002"].ToString();
+                        textBox9.Text = ds4.Tables["TEMPds4"].Rows[0]["MV001"].ToString();
 
 
                     }
