@@ -55,6 +55,16 @@ namespace TKGAFFAIRS
         string OLDCLASS;
         string OLDNO;
 
+        string NOID;
+        string OWNNAME;
+        string BRAND;
+        string SPEC;
+        string ID;
+        string NAME;
+        string DEP;
+        string DEPNAME;
+
+
         public FrmOWNERMANU()
         {
             InitializeComponent();
@@ -586,6 +596,14 @@ namespace TKGAFFAIRS
                     textBox13.Text = row.Cells["發放人"].Value.ToString();
                     textBox14.Text = row.Cells["備註"].Value.ToString();
 
+                    NOID = row.Cells["流水號"].Value.ToString();
+                    OWNNAME = row.Cells["保管品名"].Value.ToString();
+                    BRAND = row.Cells["廠牌"].Value.ToString();
+                    SPEC = row.Cells["規格"].Value.ToString();
+                    ID =row.Cells["工號"].Value.ToString();
+                    NAME = row.Cells["保管人"].Value.ToString();
+                    DEP = row.Cells["部門"].Value.ToString();
+                    DEPNAME = row.Cells["單位"].Value.ToString();
 
                 }
                 else
@@ -604,6 +622,14 @@ namespace TKGAFFAIRS
                     textBox13.Text = null;
                     textBox14.Text = null;
 
+                    NOID = null;
+                    OWNNAME = null;
+                    BRAND = null;
+                    SPEC = null;
+                    ID = null;
+                    NAME = null;
+                    DEP = null;
+                    DEPNAME = null;
                 }
             }
         }
@@ -766,8 +792,62 @@ namespace TKGAFFAIRS
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             SEARCHNAME3();
+            FINDDEP4();
         }
 
+        public void FINDDEP4()
+        {
+            DataSet dsTEMP2 = new DataSet();
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@" SELECT [CnName] ,[Department].[DepartmentId],[Department].[Code],[Name],[Department].[Code] AS 'DEPID'     FROM [HRMDB].[dbo].[Employee],[HRMDB].[dbo].[Department] WHERE [Employee].DepartmentId=[Department].DepartmentId AND [Employee].Code='{0}'", textBox3.Text.ToString());
+
+
+                adapterTEMP = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilderTEMP = new SqlCommandBuilder(adapterTEMP);
+                sqlConn.Open();
+                dsTEMP2.Clear();
+                adapterTEMP.Fill(dsTEMP2, "dsTEMP2");
+                sqlConn.Close();
+
+
+                if (dsTEMP2.Tables["dsTEMP2"].Rows.Count == 0)
+                {
+                    comboBox2.Text = null;
+                    textBox5.Text = null;
+                }
+                else
+                {
+                    if (dsTEMP2.Tables["dsTEMP2"].Rows.Count >= 1)
+                    {
+                        comboBox2.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["DEPID"].ToString();
+                        textBox5.Text = dsTEMP2.Tables["dsTEMP2"].Rows[0]["Name"].ToString();
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
+
+        }
         public void SEARCHNAME1()
         {
             try
@@ -1106,12 +1186,18 @@ namespace TKGAFFAIRS
         }
 
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+            FrmOWNERMANUsub FrmOWNERMANUsub = new FrmOWNERMANUsub(NOID, OWNNAME, BRAND, SPEC, ID, NAME, DEP, DEPNAME);
+            FrmOWNERMANUsub.ShowDialog();
+        }
 
 
 
 
         #endregion
 
-       
+
     }
 }
