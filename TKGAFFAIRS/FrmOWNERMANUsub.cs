@@ -40,6 +40,8 @@ namespace TKGAFFAIRS
         DataSet ds4 = new DataSet();
         DataSet  dsTEMP2 = new DataSet();
 
+        int result;
+
         public FrmOWNERMANUsub()
         {
             InitializeComponent();
@@ -287,7 +289,53 @@ namespace TKGAFFAIRS
         }
         public void UPDATEOWNERMANU()
         {
+            try
+            {
 
+                //add ZWAREWHOUSEPURTH
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                
+                sbSql.AppendFormat(@" UPDATE [TKGAFFAIRS].[dbo].[OWNERMANU] SET [ID]='{0}',[NAME]='{1}',[DEP]='{2}',[DEPNAME]='{3}'",textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text);
+                sbSql.AppendFormat(@" WHERE [NO]='{0}'",textBox1.Text);
+                sbSql.AppendFormat(@" ");
+                sbSql.AppendFormat(@" ");
+
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+                    MessageBox.Show("完成");
+                    this.Close();
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
         }
 
       

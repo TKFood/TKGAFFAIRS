@@ -1191,6 +1191,8 @@ namespace TKGAFFAIRS
 
             FrmOWNERMANUsub FrmOWNERMANUsub = new FrmOWNERMANUsub(NOID, OWNNAME, BRAND, SPEC, ID, NAME, DEP, DEPNAME);
             FrmOWNERMANUsub.ShowDialog();
+
+            Search();
         }
 
 
