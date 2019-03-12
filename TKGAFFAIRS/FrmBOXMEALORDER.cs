@@ -301,11 +301,14 @@ namespace TKGAFFAIRS
                 if (Meal.Equals("10+20"))
                 {
                     sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{2}', 112) AND [ID]='{0}' AND  ([MEAL]='10' OR [MEAL]='20') AND [DISH]='{1}' ", EmployeeID, Dish,dateTimePicker1.Value.ToString("yyyyMMdd"));
+                    sbSql.AppendFormat(" DELETE [192.168.1.95].[TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{2}', 112) AND [ID]='{0}' AND  ([MEAL]='10' OR [MEAL]='20') AND [DISH]='{1}' ", EmployeeID, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
+                    sbSql.Append(" ");
                 }
                 else
                 {
-                    sbSql.Append(" ");
+                    sbSql.AppendFormat(" DELETE [192.168.1.95].[TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{3}', 112) AND [ID]='{0}' AND  [MEAL]='{1}' AND [DISH]='{2}' ", EmployeeID, Meal, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
                     sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{3}', 112) AND [ID]='{0}' AND  [MEAL]='{1}' AND [DISH]='{2}' ", EmployeeID, Meal, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
+                    sbSql.Append(" ");
                 }
 
                 cmd.Connection = sqlConn;
