@@ -409,7 +409,23 @@ namespace TKGAFFAIRS
 
         }
 
-       
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int rowindex = dataGridView1.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView1.Rows[rowindex];
+                    textBox1.Text= row.Cells["工號"].Value.ToString();
+                  
+                }
+                else
+                {
+                    textBox1.Text = null;
+                }
+            }
+        }
 
         #endregion
 
@@ -530,8 +546,9 @@ namespace TKGAFFAIRS
         }
 
 
+
         #endregion
 
-
+        
     }
 }
