@@ -288,6 +288,7 @@ namespace TKGAFFAIRS
         {
             try
             {
+                //connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
                 connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
                 sqlConn = new SqlConnection(connectionString);
 
@@ -300,17 +301,14 @@ namespace TKGAFFAIRS
 
                 if (Meal.Equals("10+20"))
                 {
-                    //sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{2}', 112) AND [ID]='{0}' AND  ([MEAL]='10' OR [MEAL]='20') AND [DISH]='{1}' ", EmployeeID, Dish,dateTimePicker1.Value.ToString("yyyyMMdd"));
-                    sbSql.AppendFormat(" DELETE [192.168.1.95].[TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{2}', 112) AND [ID]='{0}' AND  ([MEAL]='10' OR [MEAL]='20') AND [DISH]='{1}' ", EmployeeID, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
-                    //sbSql.AppendFormat(" EXEC [TKBOXEDMEAL].[dbo].[DEL95LOCALEMPORDER] @DATES='{0}', @ID='{1}' , @MEAL='{2}', @DISH='{3}'", dateTimePicker1.Value.ToString("yyyyMMdd"), EmployeeID,"10", Dish);
-                    //sbSql.AppendFormat(" EXEC [TKBOXEDMEAL].[dbo].[DEL95LOCALEMPORDER] @DATES='{0}', @ID='{1}' , @MEAL='{2}', @DISH='{3}'", dateTimePicker1.Value.ToString("yyyyMMdd"), EmployeeID, "20", Dish);
+                    sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{2}', 112) AND [ID]='{0}' AND  ([MEAL]='10' OR [MEAL]='20') AND [DISH]='{1}' ", EmployeeID, Dish,dateTimePicker1.Value.ToString("yyyyMMdd"));
+                    sbSql.AppendFormat(" ");
                     sbSql.AppendFormat(" ");
                 }
                 else
                 {
-                    sbSql.AppendFormat(" DELETE [192.168.1.95].[TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{3}', 112) AND [ID]='{0}' AND  [MEAL]='{1}' AND [DISH]='{2}' ", EmployeeID, Meal, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
-                   // sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{3}', 112) AND [ID]='{0}' AND  [MEAL]='{1}' AND [DISH]='{2}' ", EmployeeID, Meal, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
-                    //sbSql.AppendFormat(" DELETE OPENQUERY ([192.168.1.95],'SELECT ID FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]  WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),{0}, 112) AND [ID]={1} AND  [MEAL]={2} AND [DISH]={3}'); ", dateTimePicker1.Value.ToString("yyyyMMdd"), EmployeeID, Meal, Dish);
+                    sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{3}', 112) AND [ID]='{0}' AND  [MEAL]='{1}' AND [DISH]='{2}' ", EmployeeID, Meal, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
+                    sbSql.AppendFormat(" ");
                     sbSql.AppendFormat(" ");
                 }
 
@@ -323,19 +321,19 @@ namespace TKGAFFAIRS
                 {
                     tran.Rollback();    //交易取消
 
-                    SHOWMESSAGE(Name + " 取消訂餐失敗!!");
+                    //SHOWMESSAGE(Name + " 取消訂餐失敗!!");
 
                 }
                 else
                 {
                     tran.Commit();      //執行交易  
 
-                    SHOWMESSAGE(Name + " 取消訂餐成功!!" + " 您取消了: " + OrderBoxed.ToString());
+                    //SHOWMESSAGE(Name + " 取消訂餐成功!!" + " 您取消了: " + OrderBoxed.ToString());
 
                 }
 
                 sqlConn.Close();
-                Search();
+               
             }
             catch
             {
@@ -346,6 +344,67 @@ namespace TKGAFFAIRS
 
             }
             
+        }
+
+        public void ROMOTEOrderCanel(string Meal, string Dish, string OrderBoxed)
+        {
+            try
+            {
+                
+                connectionString = ConfigurationManager.ConnectionStrings["dbTKBOXEDMEAL"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+                //ADD COPTC
+
+                if (Meal.Equals("10+20"))
+                {
+                  
+                    sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{2}', 112) AND [ID]='{0}' AND  ([MEAL]='10' OR [MEAL]='20') AND [DISH]='{1}' ", EmployeeID, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
+                    sbSql.AppendFormat(" ");
+                }
+                else
+                {
+                    sbSql.AppendFormat(" DELETE [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] WHERE CONVERT(varchar(100),[DATE], 112)=CONVERT(varchar(100),'{3}', 112) AND [ID]='{0}' AND  [MEAL]='{1}' AND [DISH]='{2}' ", EmployeeID, Meal, Dish, dateTimePicker1.Value.ToString("yyyyMMdd"));
+                    sbSql.AppendFormat(" ");
+                }
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+
+                    //SHOWMESSAGE(Name + " 取消訂餐失敗!!");
+
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+                    //SHOWMESSAGE(Name + " 取消訂餐成功!!" + " 您取消了: " + OrderBoxed.ToString());
+
+                }
+
+                sqlConn.Close();
+                
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+
         }
 
 
@@ -505,6 +564,7 @@ namespace TKGAFFAIRS
                 EmployeeID = textBox1.Text;
 
                 OrderCanel(Meal, Dish, OrderBoxed);
+                ROMOTEOrderCanel(Meal, Dish, OrderBoxed);
             }
 
             Search();
@@ -519,6 +579,7 @@ namespace TKGAFFAIRS
                 EmployeeID = textBox1.Text;
 
                 OrderCanel(Meal, Dish, OrderBoxed);
+                ROMOTEOrderCanel(Meal, Dish, OrderBoxed);
             }
 
             Search();
@@ -533,6 +594,7 @@ namespace TKGAFFAIRS
                 EmployeeID = textBox1.Text;
 
                 OrderCanel(Meal, Dish, OrderBoxed);
+                ROMOTEOrderCanel(Meal, Dish, OrderBoxed);
             }
             Search();
         }
@@ -546,6 +608,7 @@ namespace TKGAFFAIRS
                 EmployeeID = textBox1.Text;
 
                 OrderCanel(Meal, Dish, OrderBoxed);
+                ROMOTEOrderCanel(Meal, Dish, OrderBoxed);
             }
             Search();
         }
