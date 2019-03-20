@@ -147,8 +147,10 @@ namespace TKGAFFAIRS
 
             StringBuilder NAME = new StringBuilder();
             StringBuilder BUYNAME = new StringBuilder();
+            StringBuilder VENDOR = new StringBuilder();
+            StringBuilder DEP = new StringBuilder();
 
-            if(!string.IsNullOrEmpty(textBox1.Text))
+            if (!string.IsNullOrEmpty(textBox1.Text))
             {
                 NAME.AppendFormat(@" AND [NAME] LIKE '%{0}%'",textBox1.Text);
             }
@@ -158,6 +160,15 @@ namespace TKGAFFAIRS
                 BUYNAME.AppendFormat(@" AND [BUYNAME] LIKE '%{0}%'",textBox12.Text);
             }
 
+            if (!string.IsNullOrEmpty(textBox16.Text))
+            {
+                BUYNAME.AppendFormat(@" AND [VENDOR] LIKE '%{0}%'", textBox16.Text);
+            }
+
+            if (!string.IsNullOrEmpty(textBox17.Text))
+            {
+                BUYNAME.AppendFormat(@" AND [DEP] LIKE '%{0}%'", textBox17.Text);
+            }
             try
             {
                 connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
@@ -176,6 +187,8 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(@"  AND [STATUS]='{0}'",comboBox2.Text.ToString());
                 sbSql.AppendFormat(@"  {0}", NAME.ToString());
                 sbSql.AppendFormat(@"  {0}",BUYNAME.ToString());
+                sbSql.AppendFormat(@"  {0}", VENDOR.ToString());
+                sbSql.AppendFormat(@"  {0}", DEP.ToString());
                 sbSql.AppendFormat(@"  ");
 
                 adapter = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -837,6 +850,8 @@ namespace TKGAFFAIRS
 
             textBox1.Text = null;
             textBox12.Text = null;
+            textBox16.Text = null;
+            textBox17.Text = null;
         }
         private void button2_Click(object sender, EventArgs e)
         {
