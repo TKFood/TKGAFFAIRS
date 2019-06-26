@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="09/25/2018 09:06:06" ReportInfo.Modified="11/27/2018 13:43:15" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/25/2018 09:06:06" ReportInfo.Modified="06/26/2019 08:45:27" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9JBmpLP7DwVnf07MKQlD+5/">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9J9QwMKTJA5Pg9zxpdVF8R0">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [ID]+[NAME] AS '姓名',SUBSTRING(CONVERT(NVARCHAR,[DATE],112),5,4) AS '日期',SUM([NUM]) AS '數量'&#13;&#10;FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]&#13;&#10;WHERE CONVERT(NVARCHAR,[DATE],112)&gt;='20180826' AND CONVERT(NVARCHAR,[DATE],112)&lt;='20180925'&#13;&#10;GROUP BY [ID]+[NAME],CONVERT(NVARCHAR,[DATE],112)&#13;&#10;">
         <Column Name="姓名" DataType="System.String"/>
         <Column Name="日期" DataType="System.String"/>
@@ -13,7 +13,7 @@
     <ReportTitleBand Name="ReportTitle1" Width="1436.4" Height="18.9">
       <TextObject Name="Text1" Width="1048.95" Height="18.9" Text="伙食月統計報表" HorzAlign="Center" VertAlign="Center"/>
     </ReportTitleBand>
-    <DataBand Name="Data1" Top="22.75" Width="1436.4" Height="66.56">
+    <DataBand Name="Data1" Top="22.75" Width="1436.4" Height="57.11">
       <MatrixObject Name="Matrix1" Width="132.08" Height="52.88" FixedRows="1" FixedColumns="1" DataSource="Table">
         <MatrixColumns>
           <Header Expression="[Table.日期]"/>
@@ -44,5 +44,8 @@
         </TableRow>
       </MatrixObject>
     </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="83.7" Width="1436.4" Height="37.8">
+      <TextObject Name="Text13" Width="708.75" Height="18.9" Text="核准:                                 審核:                                   申請人:            " VertAlign="Center"/>
+    </PageFooterBand>
   </ReportPage>
 </Report>

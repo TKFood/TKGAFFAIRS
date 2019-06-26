@@ -863,7 +863,7 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
 
                 sbSql.AppendFormat(@" SELECT MV001,MV002 FROM [TK].dbo.CMSMV WHERE MV001='{0}' ",textBox1.Text);
-                sbSql.AppendFormat(@"  ");
+                sbSql.AppendFormat(@"   ");
 
                 adapter4 = new SqlDataAdapter(@"" + sbSql, sqlConn);
 
