@@ -55,6 +55,7 @@ namespace TKGAFFAIRS
         {
 
             string SQL;
+            string SQL2;
             Report report1 = new Report();
             report1.Load(@"REPORT\當日伙食統計表.frx");
 
@@ -62,8 +63,11 @@ namespace TKGAFFAIRS
             //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
 
             TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
+            TableDataSource Table1 = report1.GetDataSource("Table1") as TableDataSource;
             SQL = SETFASETSQL();
+            SQL2 = SETFASETSQL2();
             Table.SelectCommand = SQL;
+            Table1.SelectCommand = SQL2;
 
             report1.SetParameterValue("P1", dateTimePicker1.Value.ToString("yyyy/MM/dd"));
             report1.Preview = previewControl1;
@@ -82,6 +86,26 @@ namespace TKGAFFAIRS
             FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSMV ON MV001=[ID]");
             FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSME ON ME001=MV004");
             FASTSQL.AppendFormat(@"  WHERE CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+            FASTSQL.AppendFormat(@"  AND ME001 NOT LIKE '103%' ");
+            FASTSQL.AppendFormat(@"  GROUP BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
+            FASTSQL.AppendFormat(@"  ORDER BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
+            FASTSQL.AppendFormat(@"   ");
+
+            return FASTSQL.ToString();
+        }
+
+        public string SETFASETSQL2()
+        {
+            StringBuilder FASTSQL = new StringBuilder();
+
+            FASTSQL.AppendFormat(@"  SELECT CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112) AS '日期',[ID] AS '工號',[NAME] AS '姓名',SUM([NUM]) AS '訂餐量',[MEAL].[MEALNAME] AS '午/晚餐',[MEALDISH].[DISHNAME] AS '葷/素','' AS '用餐',ME002 AS '部門'");
+            FASTSQL.AppendFormat(@"  FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]");
+            FASTSQL.AppendFormat(@"  LEFT JOIN [TKBOXEDMEAL].[dbo].[MEALDISH] ON  [MEALDISH].[DISH]=[LOCALEMPORDER].[DISH]");
+            FASTSQL.AppendFormat(@"  LEFT JOIN [TKBOXEDMEAL].[dbo].[MEAL] ON [MEAL].[MEAL]=[LOCALEMPORDER].[MEAL]");
+            FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSMV ON MV001=[ID]");
+            FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSME ON ME001=MV004");
+            FASTSQL.AppendFormat(@"  WHERE CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+            FASTSQL.AppendFormat(@"  AND ME001  LIKE '103%' ");
             FASTSQL.AppendFormat(@"  GROUP BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
             FASTSQL.AppendFormat(@"  ORDER BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
             FASTSQL.AppendFormat(@"   ");
