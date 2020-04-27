@@ -75,14 +75,16 @@ namespace TKGAFFAIRS
         {
             StringBuilder FASTSQL = new StringBuilder();
 
-            FASTSQL.AppendFormat(@"  SELECT CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112) AS '日期',[ID] AS '工號',[NAME] AS '姓名',SUM([NUM]) AS '訂餐量',[MEAL].[MEALNAME] AS '午/晚餐',[MEALDISH].[DISHNAME] AS '葷/素','' AS '用餐'");
+            FASTSQL.AppendFormat(@"  SELECT CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112) AS '日期',[ID] AS '工號',[NAME] AS '姓名',SUM([NUM]) AS '訂餐量',[MEAL].[MEALNAME] AS '午/晚餐',[MEALDISH].[DISHNAME] AS '葷/素','' AS '用餐',ME002 AS '部門'");
             FASTSQL.AppendFormat(@"  FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]");
             FASTSQL.AppendFormat(@"  LEFT JOIN [TKBOXEDMEAL].[dbo].[MEALDISH] ON  [MEALDISH].[DISH]=[LOCALEMPORDER].[DISH]");
             FASTSQL.AppendFormat(@"  LEFT JOIN [TKBOXEDMEAL].[dbo].[MEAL] ON [MEAL].[MEAL]=[LOCALEMPORDER].[MEAL]");
+            FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSMV ON MV001=[ID]");
+            FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSME ON ME001=MV004");
             FASTSQL.AppendFormat(@"  WHERE CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
-            FASTSQL.AppendFormat(@"  GROUP BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
-            FASTSQL.AppendFormat(@"  ORDER BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
-            FASTSQL.AppendFormat(@"  ");
+            FASTSQL.AppendFormat(@"  GROUP BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
+            FASTSQL.AppendFormat(@"  ORDER BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
+            FASTSQL.AppendFormat(@"   ");
 
             return FASTSQL.ToString();
         }
