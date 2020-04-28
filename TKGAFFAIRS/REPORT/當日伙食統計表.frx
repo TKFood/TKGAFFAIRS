@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="09/26/2018 09:01:05" ReportInfo.Modified="04/27/2020 14:23:04" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/26/2018 09:01:05" ReportInfo.Modified="04/28/2020 13:08:22" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9JgG9kjsUiZcNhbY5sIOkM+">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9KSXRuD94Tr2bGYi9P4puNq">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112) AS '日期',[ID] AS '工號',[NAME] AS '姓名',SUM([NUM]) AS '訂餐量',[MEAL].[MEALNAME] AS '午/晚餐',[MEALDISH].[DISHNAME] AS '葷/素','' AS '用餐',ME002 AS '部門'&#13;&#10;FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]&#13;&#10;LEFT JOIN [TKBOXEDMEAL].[dbo].[MEALDISH] ON  [MEALDISH].[DISH]=[LOCALEMPORDER].[DISH]&#13;&#10;LEFT JOIN [TKBOXEDMEAL].[dbo].[MEAL] ON [MEAL].[MEAL]=[LOCALEMPORDER].[MEAL]&#13;&#10;LEFT JOIN [TK].dbo.CMSMV ON MV001=[ID]&#13;&#10;LEFT JOIN [TK].dbo.CMSME ON ME001=MV004&#13;&#10;WHERE CONVERT(NVARCHAR,[DATE],112)&gt;='20200427' AND CONVERT(NVARCHAR,[DATE],112)&lt;='20200427'&#13;&#10;AND ME001  NOT LIKE '103%'&#13;&#10;GROUP BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]&#13;&#10;ORDER BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]&#13;&#10;">
         <Column Name="工號" DataType="System.String"/>
         <Column Name="姓名" DataType="System.String"/>
@@ -25,6 +25,7 @@
     </MsSqlDataConnection>
     <Parameter Name="P1" DataType="System.String"/>
     <Total Name="TotalNUM" Expression="[Table.訂餐量]" Evaluator="Data1"/>
+    <Total Name="TotalNUM2" Expression="[Table1.訂餐量]" Evaluator="Data2"/>
   </Dictionary>
   <ReportPage Name="Page1">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
@@ -88,7 +89,7 @@
     <ReportSummaryBand Name="ReportSummary2" Top="87.14" Width="718.2" Height="47.25">
       <TextObject Name="Text45" Top="28.35" Width="708.75" Height="18.9" Text="核准:                                 審核:                                   申請人:            " VertAlign="Center"/>
       <TextObject Name="Text43" Width="425.25" Height="18.9" Border.Lines="All" Text="合計" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text44" Left="425.25" Width="75.6" Height="18.9" Border.Lines="All" Text="[TotalNUM]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text44" Left="425.25" Width="75.6" Height="18.9" Border.Lines="All" Text="[TotalNUM2]" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text46" Left="576.45" Width="66.15" Height="18.9" Border.Lines="All" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text47" Left="500.85" Width="75.6" Height="18.9" Border.Lines="All" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text48" Left="642.6" Width="66.15" Height="18.9" Border.Lines="All" HorzAlign="Center" VertAlign="Center"/>
