@@ -86,7 +86,7 @@ namespace TKGAFFAIRS
             FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSMV ON MV001=[ID]");
             FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSME ON ME001=MV004");
             FASTSQL.AppendFormat(@"  WHERE CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
-            FASTSQL.AppendFormat(@"  AND (ME001 NOT LIKE '103%' AND  [ID]  NOT IN ('160033','170018','200012') )");
+            FASTSQL.AppendFormat(@"  AND (ME001 NOT LIKE '103%' AND  [ID]  NOT IN ('160033','170018','180014','200012') )");
             FASTSQL.AppendFormat(@"  GROUP BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
             FASTSQL.AppendFormat(@"  ORDER BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
             FASTSQL.AppendFormat(@"   ");
@@ -105,7 +105,7 @@ namespace TKGAFFAIRS
             FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSMV ON MV001=[ID]");
             FASTSQL.AppendFormat(@"  LEFT JOIN [TK].dbo.CMSME ON ME001=MV004");
             FASTSQL.AppendFormat(@"  WHERE CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
-            FASTSQL.AppendFormat(@"  AND (ME001  LIKE '103%' OR  [ID]  IN ('160033','170018','200012') )");
+            FASTSQL.AppendFormat(@"  AND (ME001  LIKE '103%' OR  [ID]  IN ('160033','170018','180014','200012') )");
             FASTSQL.AppendFormat(@"  GROUP BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
             FASTSQL.AppendFormat(@"  ORDER BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]");
             FASTSQL.AppendFormat(@"   ");
