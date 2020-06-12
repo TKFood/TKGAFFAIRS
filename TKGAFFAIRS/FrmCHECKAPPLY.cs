@@ -58,6 +58,16 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
                 sbSqlQuery.Clear();
 
+                StringBuilder query = new StringBuilder();
+
+                if(comboBox1.Text.Equals("未完成"))
+                {
+                    query.AppendFormat(@"  AND (ISNULL([HREngFrm001OutTime] ,'')='' OR ISNULL([HREngFrm001DefBakTime]  ,'')='')");
+                }
+                else if(comboBox1.Text.Equals("全部"))
+                {
+                    query.AppendFormat(@"  ");
+                }
               
                 sbSql.AppendFormat(@"  SELECT [HREngFrm001Name] AS '姓名',[HREngFrm001Dpt] AS '部門',[HREngFrm001Date] AS '日期',[HREngFrm001TITLE] AS '職稱',[HREngFrm001Agent] AS '代理人' ");
                 sbSql.AppendFormat(@"  ,[HREngFrm001Transp] AS '交通工具',[HREngFrm001Location] AS '外出地點',[HREngFrm001Cause] AS '外出原因',[HREngFrm001DefOutTime] AS '預計外出時間',[HREngFrm001OutTime] AS '實際外出時間' ");
@@ -65,7 +75,7 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(@"  ,[TaskId],[HREngFrm001SN]");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[HREngFrm001]");
                 sbSql.AppendFormat(@"  WHERE [HREngFrm001Date]>='{0}' AND [HREngFrm001Date]<='{1}'",dateTimePicker1.Value.ToString("yyyy/MM/dd"), dateTimePicker2.Value.ToString("yyyy/MM/dd"));
-                sbSql.AppendFormat(@"  AND (ISNULL([HREngFrm001OutTime] ,'')='' OR ISNULL([HREngFrm001DefBakTime]  ,'')='')");
+                sbSql.AppendFormat(@"  {0}",query.ToString());
                 sbSql.AppendFormat(@"  ");
                 sbSql.AppendFormat(@"  ");
 
