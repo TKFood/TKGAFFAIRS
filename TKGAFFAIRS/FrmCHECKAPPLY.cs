@@ -40,12 +40,25 @@ namespace TKGAFFAIRS
         int result;
         Thread TD;
 
+        string TaskId;
+
         public FrmCHECKAPPLY()
         {
             InitializeComponent();
+
+            timer1.Enabled = true;
+            timer1.Interval = 1000*60;
+            timer1.Start();
         }
 
         #region FUNCTION
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label6.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
+
+            dateTimePicker3.Value = DateTime.Now;
+            dateTimePicker4.Value = DateTime.Now;
+        }
         public void Search()
         {
             ds.Clear();
@@ -62,7 +75,7 @@ namespace TKGAFFAIRS
 
                 if(comboBox1.Text.Equals("未完成"))
                 {
-                    query.AppendFormat(@"  AND (ISNULL([HREngFrm001OutTime] ,'')='' OR ISNULL([HREngFrm001DefBakTime]  ,'')='')");
+                    query.AppendFormat(@"  AND (ISNULL([HREngFrm001OutTime] ,'')='' OR ISNULL([HREngFrm001BakTime]  ,'')='')");
                 }
                 else if(comboBox1.Text.Equals("全部"))
                 {
@@ -224,6 +237,140 @@ namespace TKGAFFAIRS
                 sqlConn.Close();
             }
         }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int rowindex = dataGridView1.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView1.Rows[rowindex];
+
+                    TaskId = row.Cells["TaskId"].Value.ToString();                  
+
+                }
+                else
+                {
+                    TaskId = null;                   
+
+                }
+            }
+        }
+
+        public void INSERTHREngFrm001HREngFrm001OutTime(string TaskId)
+        {
+            if(!string.IsNullOrEmpty(TaskId))
+            {
+                UPDATEHREngFrm001HREngFrm001OutTime(TaskId, dateTimePicker3.Value.ToString("HH:mm"));
+            }
+        }
+
+        public void UPDATEHREngFrm001HREngFrm001OutTime(string TaskId, string HREngFrm001OutTime)
+        {
+            try
+            {
+
+                //add ZWAREWHOUSEPURTH
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+                
+                sbSql.AppendFormat(" UPDATE [TKGAFFAIRS].[dbo].[HREngFrm001]");
+                sbSql.AppendFormat(" SET [HREngFrm001OutTime]='{0}'", HREngFrm001OutTime);
+                sbSql.AppendFormat(" WHERE TaskId='{0}'", TaskId);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+
+        public void INSERTHREngFrm001HREngFrm001BakTime(string TaskId)
+        {
+            if (!string.IsNullOrEmpty(TaskId))
+            {
+                UPDATEHREngFrm001HREngFrm001BakTime(TaskId, dateTimePicker4.Value.ToString("HH:mm"));
+            }
+        }
+
+        public void UPDATEHREngFrm001HREngFrm001BakTime(string TaskId, string HREngFrm001OutTime)
+        {
+            try
+            {
+
+                //add ZWAREWHOUSEPURTH
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" UPDATE [TKGAFFAIRS].[dbo].[HREngFrm001]");
+                sbSql.AppendFormat(" SET [HREngFrm001BakTime]='{0}'", HREngFrm001OutTime);
+                sbSql.AppendFormat(" WHERE TaskId='{0}'", TaskId);
+                sbSql.AppendFormat(" ");
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
         #endregion
 
         #region BUTTON
@@ -235,6 +382,23 @@ namespace TKGAFFAIRS
         {
             INSERTUOFDATETIME();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            INSERTHREngFrm001HREngFrm001OutTime(TaskId);
+
+            Search();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            INSERTHREngFrm001HREngFrm001BakTime(TaskId);
+
+            Search();
+        }
+
+
+
 
         #endregion
 
