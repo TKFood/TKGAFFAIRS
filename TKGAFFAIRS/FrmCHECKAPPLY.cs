@@ -140,7 +140,7 @@ namespace TKGAFFAIRS
 
               
                 sbSql.AppendFormat(@"  SELECT [TASK_ID],[TASK_SEQ],[BEGIN_TIME],[END_TIME],[TASK_STATUS],[TASK_RESULT],[DOC_NBR],[FLOW_TYPE],[FLOW_ID],[FORM_VERSION_ID],[SOURCE_DOC_ID],[CURRENT_DOC_ID],[FORM_STATUS],[USER_GUID],[USER_GROUP_ID],[USER_JOB_TITLE_ID],[ATTACH_ID],[URGENT_LEVEL],[CURRENT_SIGNER],[LOCK_STATUS],[CURRENT_DOC],[FILING_STATUS],[CURRENT_SITE_ID],[IS_APPLICANT_GETBACK],[APPLICANT_COMMENT],[DISPLAY_TITLE],[MESSAGE_CONTENT],[DEFAULT_IQY_USERS],[AGENT_USER],[CANCEL_FORM_REASON],[CANCEL_USER],[JSON_DISPLAY]");
-                sbSql.AppendFormat(@"  FROM [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(@"  FROM [UOF].[dbo].[TB_WKF_TASK]");
                 sbSql.AppendFormat(@"  WHERE TASK_ID='75ccea35-3a28-418c-9411-22aa42b124b7'");
                 sbSql.AppendFormat(@"  ");
                 sbSql.AppendFormat(@"  ");
@@ -200,7 +200,7 @@ namespace TKGAFFAIRS
 
                 sbSql.Clear();
 
-                sbSql.AppendFormat(" UPDATE [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(" UPDATE [UOF].[dbo].[TB_WKF_TASK]");
                 sbSql.AppendFormat(" SET  CURRENT_DOC=@CURRENT_DOC");
                 sbSql.AppendFormat(" WHERE TASK_ID='75ccea35-3a28-418c-9411-22aa42b124b7'");
                 sbSql.AppendFormat(" ");
@@ -383,7 +383,7 @@ namespace TKGAFFAIRS
 
 
                 sbSql.AppendFormat(@"  SELECT [TASK_ID],[TASK_SEQ],[BEGIN_TIME],[END_TIME],[TASK_STATUS],[TASK_RESULT],[DOC_NBR],[FLOW_TYPE],[FLOW_ID],[FORM_VERSION_ID],[SOURCE_DOC_ID],[CURRENT_DOC_ID],[FORM_STATUS],[USER_GUID],[USER_GROUP_ID],[USER_JOB_TITLE_ID],[ATTACH_ID],[URGENT_LEVEL],[CURRENT_SIGNER],[LOCK_STATUS],[CURRENT_DOC],[FILING_STATUS],[CURRENT_SITE_ID],[IS_APPLICANT_GETBACK],[APPLICANT_COMMENT],[DISPLAY_TITLE],[MESSAGE_CONTENT],[DEFAULT_IQY_USERS],[AGENT_USER],[CANCEL_FORM_REASON],[CANCEL_USER],[JSON_DISPLAY]");
-                sbSql.AppendFormat(@"  FROM [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(@"  FROM [UOF].[dbo].[TB_WKF_TASK]");
                 sbSql.AppendFormat(@"  WHERE TASK_ID='{0}'", TaskId);
                 sbSql.AppendFormat(@"  ");
                 sbSql.AppendFormat(@"  ");
@@ -445,7 +445,7 @@ namespace TKGAFFAIRS
 
                 sbSql.Clear();
 
-                sbSql.AppendFormat(" UPDATE [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(" UPDATE [UOF].[dbo].[TB_WKF_TASK]");
                 sbSql.AppendFormat(" SET  CURRENT_DOC=@CURRENT_DOC");
                 sbSql.AppendFormat(" WHERE TASK_ID='{0}'",TaskId);
                 sbSql.AppendFormat(" ");
@@ -495,7 +495,7 @@ namespace TKGAFFAIRS
 
 
                 sbSql.AppendFormat(@"  SELECT [TASK_ID],[TASK_SEQ],[BEGIN_TIME],[END_TIME],[TASK_STATUS],[TASK_RESULT],[DOC_NBR],[FLOW_TYPE],[FLOW_ID],[FORM_VERSION_ID],[SOURCE_DOC_ID],[CURRENT_DOC_ID],[FORM_STATUS],[USER_GUID],[USER_GROUP_ID],[USER_JOB_TITLE_ID],[ATTACH_ID],[URGENT_LEVEL],[CURRENT_SIGNER],[LOCK_STATUS],[CURRENT_DOC],[FILING_STATUS],[CURRENT_SITE_ID],[IS_APPLICANT_GETBACK],[APPLICANT_COMMENT],[DISPLAY_TITLE],[MESSAGE_CONTENT],[DEFAULT_IQY_USERS],[AGENT_USER],[CANCEL_FORM_REASON],[CANCEL_USER],[JSON_DISPLAY]");
-                sbSql.AppendFormat(@"  FROM [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(@"  FROM [UOF].[dbo].[TB_WKF_TASK]");
                 sbSql.AppendFormat(@"  WHERE TASK_ID='{0}'", TaskId);
                 sbSql.AppendFormat(@"  ");
                 sbSql.AppendFormat(@"  ");
@@ -557,7 +557,7 @@ namespace TKGAFFAIRS
 
                 sbSql.Clear();
 
-                sbSql.AppendFormat(" UPDATE [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(" UPDATE [UOF].[dbo].[TB_WKF_TASK]");
                 sbSql.AppendFormat(" SET  CURRENT_DOC=@CURRENT_DOC");
                 sbSql.AppendFormat(" WHERE TASK_ID='{0}'", TaskId);
                 sbSql.AppendFormat(" ");
