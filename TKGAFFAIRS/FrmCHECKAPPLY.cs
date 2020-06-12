@@ -371,6 +371,230 @@ namespace TKGAFFAIRS
             }
         }
 
+        public void INSERTUOFHREngFrm001HREngFrm001OutTime(string TaskId)
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["UOFdbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@"  SELECT [TASK_ID],[TASK_SEQ],[BEGIN_TIME],[END_TIME],[TASK_STATUS],[TASK_RESULT],[DOC_NBR],[FLOW_TYPE],[FLOW_ID],[FORM_VERSION_ID],[SOURCE_DOC_ID],[CURRENT_DOC_ID],[FORM_STATUS],[USER_GUID],[USER_GROUP_ID],[USER_JOB_TITLE_ID],[ATTACH_ID],[URGENT_LEVEL],[CURRENT_SIGNER],[LOCK_STATUS],[CURRENT_DOC],[FILING_STATUS],[CURRENT_SITE_ID],[IS_APPLICANT_GETBACK],[APPLICANT_COMMENT],[DISPLAY_TITLE],[MESSAGE_CONTENT],[DEFAULT_IQY_USERS],[AGENT_USER],[CANCEL_FORM_REASON],[CANCEL_USER],[JSON_DISPLAY]");
+                sbSql.AppendFormat(@"  FROM [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(@"  WHERE TASK_ID='{0}'", TaskId);
+                sbSql.AppendFormat(@"  ");
+                sbSql.AppendFormat(@"  ");
+
+                adapter = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder = new SqlCommandBuilder(adapter);
+                sqlConn.Open();
+                ds.Clear();
+                adapter.Fill(ds, "ds");
+                sqlConn.Close();
+
+
+                if (ds.Tables["ds"].Rows.Count == 0)
+                {
+
+                }
+                else
+                {
+                    if (ds.Tables["ds"].Rows.Count >= 1)
+                    {
+                        XmlDocument Xmldoc = new XmlDocument();
+                        Xmldoc.LoadXml(ds.Tables["ds"].Rows[0]["CURRENT_DOC"].ToString());
+
+                        XmlNode node = Xmldoc.SelectSingleNode("Form/FormFieldValue/FieldItem[@fieldId='HREngFrm001OutTime']");
+                        XmlElement element = (XmlElement)node;
+                        element.SetAttribute("fieldValue", dateTimePicker3.Value.ToString("HH:mm"));
+
+                        UPDATETUOFHREngFrm001HREngFrm001OutTime(TaskId, Xmldoc);
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+        }
+
+        public void UPDATETUOFHREngFrm001HREngFrm001OutTime(string TaskId, XmlDocument Xmldoc)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            try
+            {
+
+                //add ZWAREWHOUSEPURTH
+                connectionString = ConfigurationManager.ConnectionStrings["UOFdbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" UPDATE [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(" SET  CURRENT_DOC=@CURRENT_DOC");
+                sbSql.AppendFormat(" WHERE TASK_ID='{0}'",TaskId);
+                sbSql.AppendFormat(" ");
+
+                cmd.Parameters.AddWithValue("@CURRENT_DOC", Xmldoc.OuterXml);
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+
+
+
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        public void INSERTUOFHREngFrm001HREngFrm001BakTime(string TaskId)
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["UOFdbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                sbSql.AppendFormat(@"  SELECT [TASK_ID],[TASK_SEQ],[BEGIN_TIME],[END_TIME],[TASK_STATUS],[TASK_RESULT],[DOC_NBR],[FLOW_TYPE],[FLOW_ID],[FORM_VERSION_ID],[SOURCE_DOC_ID],[CURRENT_DOC_ID],[FORM_STATUS],[USER_GUID],[USER_GROUP_ID],[USER_JOB_TITLE_ID],[ATTACH_ID],[URGENT_LEVEL],[CURRENT_SIGNER],[LOCK_STATUS],[CURRENT_DOC],[FILING_STATUS],[CURRENT_SITE_ID],[IS_APPLICANT_GETBACK],[APPLICANT_COMMENT],[DISPLAY_TITLE],[MESSAGE_CONTENT],[DEFAULT_IQY_USERS],[AGENT_USER],[CANCEL_FORM_REASON],[CANCEL_USER],[JSON_DISPLAY]");
+                sbSql.AppendFormat(@"  FROM [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(@"  WHERE TASK_ID='{0}'", TaskId);
+                sbSql.AppendFormat(@"  ");
+                sbSql.AppendFormat(@"  ");
+
+                adapter = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder = new SqlCommandBuilder(adapter);
+                sqlConn.Open();
+                ds.Clear();
+                adapter.Fill(ds, "ds");
+                sqlConn.Close();
+
+
+                if (ds.Tables["ds"].Rows.Count == 0)
+                {
+
+                }
+                else
+                {
+                    if (ds.Tables["ds"].Rows.Count >= 1)
+                    {
+                        XmlDocument Xmldoc = new XmlDocument();
+                        Xmldoc.LoadXml(ds.Tables["ds"].Rows[0]["CURRENT_DOC"].ToString());
+
+                        XmlNode node = Xmldoc.SelectSingleNode("Form/FormFieldValue/FieldItem[@fieldId='HREngFrm001BakTime']");
+                        XmlElement element = (XmlElement)node;
+                        element.SetAttribute("fieldValue", dateTimePicker4.Value.ToString("HH:mm"));
+
+                        UPDATETUOFHREngFrm001HREngFrm001OutTime(TaskId, Xmldoc);
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+        }
+
+        public void UPDATETUOFHREngFrm001HREngFrm001BakTime(string TaskId, XmlDocument Xmldoc)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            try
+            {
+
+                //add ZWAREWHOUSEPURTH
+                connectionString = ConfigurationManager.ConnectionStrings["UOFdbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" UPDATE [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(" SET  CURRENT_DOC=@CURRENT_DOC");
+                sbSql.AppendFormat(" WHERE TASK_ID='{0}'", TaskId);
+                sbSql.AppendFormat(" ");
+
+                cmd.Parameters.AddWithValue("@CURRENT_DOC", Xmldoc.OuterXml);
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+
+
+
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
         #endregion
 
         #region BUTTON
@@ -386,15 +610,22 @@ namespace TKGAFFAIRS
         private void button3_Click(object sender, EventArgs e)
         {
             INSERTHREngFrm001HREngFrm001OutTime(TaskId);
+            INSERTUOFHREngFrm001HREngFrm001OutTime(TaskId);
+
 
             Search();
+
+            MessageBox.Show("完成"); 
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             INSERTHREngFrm001HREngFrm001BakTime(TaskId);
+            INSERTUOFHREngFrm001HREngFrm001BakTime(TaskId);
 
             Search();
+
+            MessageBox.Show("完成");
         }
 
 
