@@ -67,6 +67,8 @@ namespace TKGAFFAIRS
 
             label6.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
             STATUS = "Y";
+
+            textBox1.Text = null;
         }
 
 
