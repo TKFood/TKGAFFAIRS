@@ -42,6 +42,10 @@ namespace TKGAFFAIRS
 
         string TaskId;
 
+        //string DB = "UOF";
+        string DB = "UOFTEST";
+      
+
 
         public FrmCHECKAPPLYCARD()
         {
@@ -55,6 +59,21 @@ namespace TKGAFFAIRS
         }
 
 
+      
+        #region FUNCTION
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label6.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
+
+        }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
+            {
+                SEARCHHREngFrm001(textBox1.Text.Trim());
+            }
+
+        }
         public void INSERTHREngFrm001HREngFrm001OutTime(string TaskId, string MODIFYUSR, string MODIFYCASUE)
         {
             if (!string.IsNullOrEmpty(TaskId))
@@ -79,7 +98,7 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
 
                 sbSql.AppendFormat(" UPDATE [TKGAFFAIRS].[dbo].[HREngFrm001]");
-                sbSql.AppendFormat(" SET [HREngFrm001OutTime]='{0}',[MODIFYUSR]='{1}',[MODIFYCASUE]='{2}',[MODIFYTIME]='{3}'", HREngFrm001OutTime, MODIFYUSR, MODIFYCASUE,DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
+                sbSql.AppendFormat(" SET [HREngFrm001OutTime]='{0}',[MODIFYUSR]='{1}',[MODIFYCASUE]='{2}',[MODIFYTIME]='{3}'", HREngFrm001OutTime, MODIFYUSR, MODIFYCASUE, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
                 sbSql.AppendFormat(" WHERE TaskId='{0}'", TaskId);
                 sbSql.AppendFormat(" ");
 
@@ -112,15 +131,15 @@ namespace TKGAFFAIRS
         }
 
 
-        public void INSERTHREngFrm001HREngFrm001BakTime(string TaskId)
+        public void INSERTHREngFrm001HREngFrm001BakTime(string TaskId , string MODIFYUSR, string MODIFYCASUE)
         {
             if (!string.IsNullOrEmpty(TaskId))
             {
-                UPDATEHREngFrm001HREngFrm001BakTime(TaskId, DateTime.Now.ToString("HH:mm"));
+                UPDATEHREngFrm001HREngFrm001BakTime(TaskId, DateTime.Now.ToString("HH:mm"), MODIFYUSR, MODIFYCASUE);
             }
         }
 
-        public void UPDATEHREngFrm001HREngFrm001BakTime(string TaskId, string HREngFrm001OutTime)
+        public void UPDATEHREngFrm001HREngFrm001BakTime(string TaskId, string HREngFrm001OutTime, string MODIFYUSR, string MODIFYCASUE)
         {
             try
             {
@@ -136,7 +155,7 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
 
                 sbSql.AppendFormat(" UPDATE [TKGAFFAIRS].[dbo].[HREngFrm001]");
-                sbSql.AppendFormat(" SET [HREngFrm001BakTime]='{0}'", HREngFrm001OutTime);
+                sbSql.AppendFormat(" SET [HREngFrm001BakTime]='{0}',[MODIFYUSR]='{1}',[MODIFYCASUE]='{2}',[MODIFYTIME]='{3}'", HREngFrm001OutTime, MODIFYUSR, MODIFYCASUE, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
                 sbSql.AppendFormat(" WHERE TaskId='{0}'", TaskId);
                 sbSql.AppendFormat(" ");
 
@@ -170,6 +189,8 @@ namespace TKGAFFAIRS
 
         public void INSERTUOFHREngFrm001HREngFrm001OutTime(string TaskId)
         {
+            DataSet ds=new DataSet();
+
             try
             {
                 connectionString = ConfigurationManager.ConnectionStrings["UOFdbconn"].ConnectionString;
@@ -180,7 +201,7 @@ namespace TKGAFFAIRS
 
 
                 sbSql.AppendFormat(@"  SELECT [TASK_ID],[TASK_SEQ],[BEGIN_TIME],[END_TIME],[TASK_STATUS],[TASK_RESULT],[DOC_NBR],[FLOW_TYPE],[FLOW_ID],[FORM_VERSION_ID],[SOURCE_DOC_ID],[CURRENT_DOC_ID],[FORM_STATUS],[USER_GUID],[USER_GROUP_ID],[USER_JOB_TITLE_ID],[ATTACH_ID],[URGENT_LEVEL],[CURRENT_SIGNER],[LOCK_STATUS],[CURRENT_DOC],[FILING_STATUS],[CURRENT_SITE_ID],[IS_APPLICANT_GETBACK],[APPLICANT_COMMENT],[DISPLAY_TITLE],[MESSAGE_CONTENT],[DEFAULT_IQY_USERS],[AGENT_USER],[CANCEL_FORM_REASON],[CANCEL_USER],[JSON_DISPLAY]");
-                sbSql.AppendFormat(@"  FROM [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(@"  FROM [{0}].[dbo].[TB_WKF_TASK]", DB);
                 sbSql.AppendFormat(@"  WHERE TASK_ID='{0}'", TaskId);
                 sbSql.AppendFormat(@"  ");
                 sbSql.AppendFormat(@"  ");
@@ -242,7 +263,7 @@ namespace TKGAFFAIRS
 
                 sbSql.Clear();
 
-                sbSql.AppendFormat(" UPDATE [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(" UPDATE [{0}].[dbo].[TB_WKF_TASK]",DB);
                 sbSql.AppendFormat(" SET  CURRENT_DOC=@CURRENT_DOC");
                 sbSql.AppendFormat(" WHERE TASK_ID='{0}'", TaskId);
                 sbSql.AppendFormat(" ");
@@ -282,6 +303,8 @@ namespace TKGAFFAIRS
 
         public void INSERTUOFHREngFrm001HREngFrm001BakTime(string TaskId)
         {
+            DataSet ds = new DataSet();
+
             try
             {
                 connectionString = ConfigurationManager.ConnectionStrings["UOFdbconn"].ConnectionString;
@@ -292,7 +315,7 @@ namespace TKGAFFAIRS
 
 
                 sbSql.AppendFormat(@"  SELECT [TASK_ID],[TASK_SEQ],[BEGIN_TIME],[END_TIME],[TASK_STATUS],[TASK_RESULT],[DOC_NBR],[FLOW_TYPE],[FLOW_ID],[FORM_VERSION_ID],[SOURCE_DOC_ID],[CURRENT_DOC_ID],[FORM_STATUS],[USER_GUID],[USER_GROUP_ID],[USER_JOB_TITLE_ID],[ATTACH_ID],[URGENT_LEVEL],[CURRENT_SIGNER],[LOCK_STATUS],[CURRENT_DOC],[FILING_STATUS],[CURRENT_SITE_ID],[IS_APPLICANT_GETBACK],[APPLICANT_COMMENT],[DISPLAY_TITLE],[MESSAGE_CONTENT],[DEFAULT_IQY_USERS],[AGENT_USER],[CANCEL_FORM_REASON],[CANCEL_USER],[JSON_DISPLAY]");
-                sbSql.AppendFormat(@"  FROM [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(@"  FROM [{0}].[dbo].[TB_WKF_TASK]",DB);
                 sbSql.AppendFormat(@"  WHERE TASK_ID='{0}'", TaskId);
                 sbSql.AppendFormat(@"  ");
                 sbSql.AppendFormat(@"  ");
@@ -354,7 +377,7 @@ namespace TKGAFFAIRS
 
                 sbSql.Clear();
 
-                sbSql.AppendFormat(" UPDATE [UOFTEST].[dbo].[TB_WKF_TASK]");
+                sbSql.AppendFormat(" UPDATE [{0}].[dbo].[TB_WKF_TASK]",DB);
                 sbSql.AppendFormat(" SET  CURRENT_DOC=@CURRENT_DOC");
                 sbSql.AppendFormat(" WHERE TASK_ID='{0}'", TaskId);
                 sbSql.AppendFormat(" ");
@@ -391,20 +414,7 @@ namespace TKGAFFAIRS
                 sqlConn.Close();
             }
         }
-        #region FUNCTION
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            label6.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
-
-        }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if(!string.IsNullOrEmpty(textBox1.Text.Trim()))
-            {
-                SEARCHHREngFrm001(textBox1.Text.Trim());
-            }
-           
-        }
+      
 
         public void  SEARCHHREngFrm001(string CARDNO)
         {
@@ -514,33 +524,49 @@ namespace TKGAFFAIRS
                 INSERTHREngFrm001HREngFrm001OutTime(TaskId, HREngFrm001User, "實際外出時間");
                 INSERTUOFHREngFrm001HREngFrm001OutTime(TaskId);
 
-                
-                //SEARCHHREngFrm001(textBox1.Text.Trim());
-                //textBox1.Text = null;
+
+                if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
+                {
+                    SEARCHHREngFrm001(textBox1.Text.Trim());
+                    textBox1.Text = null;
+                }
+
                 //MessageBox.Show("實際外出時間"+ TaskId+" "+ HREngFrm001User);
             }
-            else if (!HREngFrm001FF.Equals("是")&& HREngFrm001CH.Equals("是") && string.IsNullOrEmpty(HREngFrm001BakTime))
+            else if (!HREngFrm001FF.Equals("是")  && HREngFrm001CH.Equals("是") && string.IsNullOrEmpty(HREngFrm001BakTime))
             {
-                //INSERTHREngFrm001HREngFrm001BakTime(TaskId);
-                //INSERTUOFHREngFrm001HREngFrm001BakTime(TaskId);
+                INSERTHREngFrm001HREngFrm001BakTime(TaskId, HREngFrm001User, "1實際返廠時間");
+                INSERTUOFHREngFrm001HREngFrm001BakTime(TaskId);
 
-              
-                //SEARCHHREngFrm001(textBox1.Text.Trim());
-                //textBox1.Text = null;
+
+                if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
+                {
+                    SEARCHHREngFrm001(textBox1.Text.Trim());
+                    textBox1.Text = null;
+                }
+
+                
                 //MessageBox.Show("1實際返廠時間" + TaskId + " " + HREngFrm001User);
             }
             else if(HREngFrm001FF.Equals("是") && !string.IsNullOrEmpty(HREngFrm001OutTime) && HREngFrm001CH.Equals("是") && string.IsNullOrEmpty(HREngFrm001BakTime))
             {
-                //INSERTHREngFrm001HREngFrm001BakTime(TaskId);
-                //INSERTUOFHREngFrm001HREngFrm001BakTime(TaskId);
+                INSERTHREngFrm001HREngFrm001BakTime(TaskId, HREngFrm001User, "2實際返廠時間");
+                INSERTUOFHREngFrm001HREngFrm001BakTime(TaskId);
 
-                
-                //SEARCHHREngFrm001(textBox1.Text.Trim());
-                //textBox1.Text = null;
+
+                if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
+                {
+                    SEARCHHREngFrm001(textBox1.Text.Trim());
+                    textBox1.Text = null;
+                }
+
+            
                 //MessageBox.Show("2實際返廠時間" + TaskId + " " + HREngFrm001User);
             }
 
         }
+
+       
         #endregion
 
         #region BUTTON
