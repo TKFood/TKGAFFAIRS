@@ -399,7 +399,11 @@ namespace TKGAFFAIRS
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            SEARCHHREngFrm001(textBox1.Text.Trim());
+            if(!string.IsNullOrEmpty(textBox1.Text.Trim()))
+            {
+                SEARCHHREngFrm001(textBox1.Text.Trim());
+            }
+           
         }
 
         public void  SEARCHHREngFrm001(string CARDNO)
@@ -474,7 +478,7 @@ namespace TKGAFFAIRS
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow != null)
+            if (dataGridView1.CurrentRow != null&&!string.IsNullOrEmpty(textBox1.Text))
             {
                 int rowindex = dataGridView1.CurrentRow.Index;
                 if (rowindex >= 0)
