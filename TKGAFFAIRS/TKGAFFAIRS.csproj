@@ -136,6 +136,12 @@
     <Compile Include="FrmCHECKAPPLY.Designer.cs">
       <DependentUpon>FrmCHECKAPPLY.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCHECKAPPLYCARD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCHECKAPPLYCARD.Designer.cs">
+      <DependentUpon>FrmCHECKAPPLYCARD.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmINVGAFFAIRS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCHECKAPPLY.resx">
       <DependentUpon>FrmCHECKAPPLY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCHECKAPPLYCARD.resx">
+      <DependentUpon>FrmCHECKAPPLYCARD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmINVGAFFAIRS.resx">
       <DependentUpon>FrmINVGAFFAIRS.cs</DependentUpon>
