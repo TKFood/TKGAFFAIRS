@@ -146,6 +146,37 @@ namespace TKGAFFAIRS
 
             }
         }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null && !string.IsNullOrEmpty(textBox1.Text))
+            {
+                int rowindex = dataGridView1.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView1.Rows[rowindex];
+
+                    string TaskId = row.Cells["TaskId"].Value.ToString();
+                    string HREngFrm001User = row.Cells["申請人"].Value.ToString();
+                    string HREngFrm001OutTime = row.Cells["實際外出時間"].Value.ToString();
+                    string HREngFrm001BakTime = row.Cells["實際返廠時間"].Value.ToString();
+                    string HREngFrm001FF = row.Cells["是否由公司出發"].Value.ToString();
+                    string HREngFrm001CH = row.Cells["是否回廠"].Value.ToString();
+
+                    //if(STATUS.Equals("Y") && ds.Tables["TEMPds1"].Rows.Count== 1)
+                    //{
+                    //    CEHCK(TaskId, HREngFrm001User, HREngFrm001OutTime, HREngFrm001BakTime, HREngFrm001FF, HREngFrm001CH);
+                    //}
+
+                }
+                else
+                {
+
+
+                }
+            }
+        }
+
         #endregion
 
         #region BUTTON
