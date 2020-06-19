@@ -30,10 +30,13 @@ namespace TKGAFFAIRS
         StringBuilder sbSqlQuery = new StringBuilder();
         SqlDataAdapter adapter = new SqlDataAdapter();
         SqlCommandBuilder sqlCmdBuilder = new SqlCommandBuilder();
+        SqlDataAdapter adapter2 = new SqlDataAdapter();
+        SqlCommandBuilder sqlCmdBuilder2 = new SqlCommandBuilder();
 
         SqlTransaction tran;
         SqlCommand cmd = new SqlCommand();
         DataSet ds = new DataSet();
+        DataSet ds2 = new DataSet();
 
         string tablename = null;
         string EDITID;
@@ -41,6 +44,7 @@ namespace TKGAFFAIRS
         Thread TD;
 
         string TaskId;
+        string CARDNO;
 
         string DB = "UOF";
         //string DB = "UOFTEST";
@@ -56,7 +60,7 @@ namespace TKGAFFAIRS
             label6.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
 
             timer1.Enabled = true;
-            timer1.Interval = 1000 * 2;
+            timer1.Interval = 1000 * 1;
             timer1.Start();
         }
 
@@ -68,7 +72,14 @@ namespace TKGAFFAIRS
             label6.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
             STATUS = "Y";
 
-            textBox1.Text = null;
+            if(!string.IsNullOrEmpty(textBox1.Text))
+            {
+                CARDNO = textBox1.Text;
+                textBox1.Text = null;
+
+                SEARCHHREngFrm001B(CARDNO);
+            }
+          
         }
 
 
@@ -98,6 +109,7 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(@"  ,[TaskId] AS 'TaskId',[HREngFrm001SN] AS '表單編號',[HREngFrm001Date] AS '申請日期',[HREngFrm001UsrDpt] AS '部門',[HREngFrm001Location] AS '外出地點',[HREngFrm001Agent] AS '代理人',[HREngFrm001Cause] AS '外出原因',[HREngFrm001FF] AS '是否由公司出發',[HREngFrm001CH] AS '是否回廠',[CRADNO] AS '卡號'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[HREngFrm001]");
                 sbSql.AppendFormat(@"  WHERE [HREngFrm001OutDate]='{0}' AND [CRADNO]='{1}'", DateTime.Now.ToString("yyyy/MM/dd"), CARDNO);
+                sbSql.AppendFormat(@"  AND ((ISNULL([HREngFrm001OutTime],'')='' AND [HREngFrm001FF]='是' ) OR (ISNULL([HREngFrm001BakTime],'')='' AND [HREngFrm001CH]='是' ))");
                 sbSql.AppendFormat(@"  ORDER BY [HREngFrm001DefOutTime]");
                 sbSql.AppendFormat(@"  ");
                 sbSql.AppendFormat(@"  ");
@@ -149,6 +161,75 @@ namespace TKGAFFAIRS
             }
         }
 
+        public void SEARCHHREngFrm001B(string CARDNO)
+        {
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+                StringBuilder query = new StringBuilder();
+
+                sbSql.AppendFormat(@"  SELECT ");
+                sbSql.AppendFormat(@"  [HREngFrm001User] AS '申請人',[HREngFrm001Rank] AS '職級',[HREngFrm001OutDate] AS '外出日期',[HREngFrm001Transp] AS '交通工具',[HREngFrm001LicPlate] AS '車牌',[HREngFrm001DefOutTime] AS '預計外出時間',[HREngFrm001OutTime] AS '實際外出時間',[HREngFrm001DefBakTime] AS '預計返廠時間',[HREngFrm001BakTime] AS '實際返廠時間'");
+                sbSql.AppendFormat(@"  ,[TaskId] AS 'TaskId',[HREngFrm001SN] AS '表單編號',[HREngFrm001Date] AS '申請日期',[HREngFrm001UsrDpt] AS '部門',[HREngFrm001Location] AS '外出地點',[HREngFrm001Agent] AS '代理人',[HREngFrm001Cause] AS '外出原因',[HREngFrm001FF] AS '是否由公司出發',[HREngFrm001CH] AS '是否回廠',[CRADNO] AS '卡號'");
+                sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[HREngFrm001]");
+                sbSql.AppendFormat(@"  WHERE [HREngFrm001OutDate]='{0}' AND [CRADNO]='{1}'", DateTime.Now.ToString("yyyy/MM/dd"), CARDNO);                
+                sbSql.AppendFormat(@"  ORDER BY [HREngFrm001DefOutTime]");
+                sbSql.AppendFormat(@"  ");
+                sbSql.AppendFormat(@"  ");
+                sbSql.AppendFormat(@"  ");
+
+                adapter2 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder2 = new SqlCommandBuilder(adapter2);
+                sqlConn.Open();
+                ds2.Clear();
+                adapter2.Fill(ds2, "ds2");
+                sqlConn.Close();
+
+
+                if (ds2.Tables["ds2"].Rows.Count == 0)
+                {
+                    dataGridView1.DataSource = null;
+
+                }
+                else
+                {
+                    if (ds2.Tables["ds2"].Rows.Count >= 1)
+                    {
+                        dataGridView1.DataSource = ds2.Tables["ds2"];
+                        dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10);
+
+                        dataGridView1.AutoResizeColumns();
+
+                        for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                        {
+                            DataGridViewRow row = dataGridView1.Rows[i];
+                            row.Height = 60;
+                        }
+
+
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+            }
+        }
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow != null && !string.IsNullOrEmpty(textBox1.Text))
@@ -165,10 +246,16 @@ namespace TKGAFFAIRS
                     string HREngFrm001FF = row.Cells["是否由公司出發"].Value.ToString();
                     string HREngFrm001CH = row.Cells["是否回廠"].Value.ToString();
 
-                    if (STATUS.Equals("Y") && ds.Tables["TEMPds1"].Rows.Count == 1)
+                    if (STATUS.Equals("Y") )
                     {
                         CEHCK(TaskId, HREngFrm001User, HREngFrm001OutTime, HREngFrm001BakTime, HREngFrm001FF, HREngFrm001CH);
                     }
+
+
+                    //if (STATUS.Equals("Y") && ds.Tables["TEMPds1"].Rows.Count == 1)
+                    //{
+                    //    CEHCK(TaskId, HREngFrm001User, HREngFrm001OutTime, HREngFrm001BakTime, HREngFrm001FF, HREngFrm001CH);
+                    //}
 
                 }
                 else
@@ -190,7 +277,7 @@ namespace TKGAFFAIRS
 
                 if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
                 {
-                    SEARCHHREngFrm001(textBox1.Text.Trim());
+                    SEARCHHREngFrm001B(textBox1.Text.Trim());
                     //textBox1.Text = null;
                 }
 
@@ -576,10 +663,11 @@ namespace TKGAFFAIRS
         }
 
 
+
         #endregion
 
         #region BUTTON
-
+   
 
         #endregion
 
