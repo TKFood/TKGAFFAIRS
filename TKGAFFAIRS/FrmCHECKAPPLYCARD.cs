@@ -42,8 +42,8 @@ namespace TKGAFFAIRS
 
         string TaskId;
 
-        //string DB = "UOF";
-        string DB = "UOFTEST";
+        string DB = "UOF";
+        //string DB = "UOFTEST";
 
         //用STATUS來控制在1分鐘內不得連續刷卡
         string STATUS = "Y";
@@ -56,7 +56,7 @@ namespace TKGAFFAIRS
             label6.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
 
             timer1.Enabled = true;
-            timer1.Interval = 1000 * 60;
+            timer1.Interval = 1000 * 2;
             timer1.Start();
         }
 
