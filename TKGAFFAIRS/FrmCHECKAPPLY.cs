@@ -628,9 +628,13 @@ namespace TKGAFFAIRS
 
 
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         #endregion
 
-       
     }
 }
