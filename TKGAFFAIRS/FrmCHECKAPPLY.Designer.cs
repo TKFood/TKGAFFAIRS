@@ -53,7 +53,6 @@
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.button6 = new System.Windows.Forms.Button();
@@ -62,6 +61,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.previewControl1 = new FastReport.Preview.PreviewControl();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -208,7 +208,7 @@
             this.comboBox1.Items.AddRange(new object[] {
             "未完成",
             "全部"});
-            this.comboBox1.Location = new System.Drawing.Point(143, 88);
+            this.comboBox1.Location = new System.Drawing.Point(143, 90);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 7;
@@ -400,10 +400,6 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // splitContainer3
             // 
             this.splitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -438,10 +434,10 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Controls.Add(this.button6, 4, 1);
-            this.tableLayoutPanel3.Controls.Add(this.dateTimePicker5, 3, 1);
-            this.tableLayoutPanel3.Controls.Add(this.dateTimePicker6, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.label10, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.label11, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.dateTimePicker6, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.dateTimePicker5, 1, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -469,7 +465,7 @@
             this.dateTimePicker5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker5.CustomFormat = "yyyy/MM/dd";
             this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker5.Location = new System.Drawing.Point(423, 46);
+            this.dateTimePicker5.Location = new System.Drawing.Point(143, 46);
             this.dateTimePicker5.Name = "dateTimePicker5";
             this.dateTimePicker5.Size = new System.Drawing.Size(134, 27);
             this.dateTimePicker5.TabIndex = 2;
@@ -479,7 +475,7 @@
             this.dateTimePicker6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker6.CustomFormat = "yyyy/MM/dd";
             this.dateTimePicker6.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker6.Location = new System.Drawing.Point(143, 46);
+            this.dateTimePicker6.Location = new System.Drawing.Point(423, 46);
             this.dateTimePicker6.Name = "dateTimePicker6";
             this.dateTimePicker6.Size = new System.Drawing.Size(134, 27);
             this.dateTimePicker6.TabIndex = 1;
@@ -515,6 +511,10 @@
             this.previewControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.previewControl1.Size = new System.Drawing.Size(966, 487);
             this.previewControl1.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FrmCHECKAPPLY
             // 

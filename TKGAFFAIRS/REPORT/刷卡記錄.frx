@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/24/2020 09:11:55" ReportInfo.Modified="06/24/2020 09:16:51" ReportInfo.CreatorVersion="2016.4.4.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9K5U8D+1DisbZbaPD6JPohU">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT &#13;&#10;[HREngFrm001User] AS '人員'&#13;&#10;,[HREngFrm001Date] AS '日期'&#13;&#10;,[HREngFrm001OutTime] AS '時間'&#13;&#10;,[HREngFrm001Cause] AS '外出原因'&#13;&#10;,[MODIFYCASUE] AS '記錄'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[HREngFrm001]&#13;&#10;WHERE [HREngFrm001Cause]='可自由外出人員'&#13;&#10;AND [HREngFrm001Date]&gt;='2020/06/01' AND [HREngFrm001Date]&lt;='2020/06/24'&#13;&#10;ORDER BY [HREngFrm001Date],[HREngFrm001OutTime]">
+        <Column Name="人員" DataType="System.String"/>
+        <Column Name="日期" DataType="System.String"/>
+        <Column Name="時間" DataType="System.String"/>
+        <Column Name="外出原因" DataType="System.String"/>
+        <Column Name="記錄" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="18.9">
+      <TextObject Name="Text1" Width="718.2" Height="18.9" Text="人員外出記錄" HorzAlign="Center" VertAlign="Center"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="22.75" Width="718.2" Height="18.9">
+      <TextObject Name="Text3" Width="94.5" Height="18.9" Border.Lines="All" Text="人員" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text5" Left="94.5" Width="94.5" Height="18.9" Border.Lines="All" Text="日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text7" Left="189" Width="94.5" Height="18.9" Border.Lines="All" Text="時間" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text11" Left="283.5" Width="94.5" Height="18.9" Border.Lines="All" Text="記錄" HorzAlign="Center" VertAlign="Center"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="45.49" Width="718.2" Height="18.9" DataSource="Table">
+      <TextObject Name="Text2" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.人員]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text4" Left="94.5" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.日期]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text6" Left="189" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.時間]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text10" Left="283.5" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.記錄]" HorzAlign="Center" VertAlign="Center"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="68.24" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

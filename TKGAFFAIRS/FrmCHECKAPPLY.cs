@@ -593,6 +593,45 @@ namespace TKGAFFAIRS
             }
         }
 
+        public void SETFASTREPORT()
+        {
+
+            string SQL;
+            string SQL2;
+            Report report1 = new Report();
+            report1.Load(@"REPORT\刷卡記錄.frx");
+
+            report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+            TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;            
+            SQL = SETFASETSQL();
+            //SQL2 = SETFASETSQL2();
+            Table.SelectCommand = SQL;
+
+            //Table1.SelectCommand = SQL2;
+
+            report1.SetParameterValue("P1", dateTimePicker1.Value.ToString("yyyy/MM/dd"));
+            report1.Preview = previewControl1;
+            report1.Show();
+
+        }
+        public string SETFASETSQL()
+        {
+            StringBuilder FASTSQL = new StringBuilder();
+
+            FASTSQL.AppendFormat(@"   SELECT [HREngFrm001User] AS '人員',[HREngFrm001Date] AS '日期',[HREngFrm001OutTime] AS '時間',[HREngFrm001Cause] AS '外出原因',[MODIFYCASUE] AS '記錄'");
+            FASTSQL.AppendFormat(@"   FROM [TKGAFFAIRS].[dbo].[HREngFrm001]");
+            FASTSQL.AppendFormat(@"   WHERE [HREngFrm001Cause]='可自由外出人員'");
+            FASTSQL.AppendFormat(@"   AND [HREngFrm001Date]>='{0}' AND [HREngFrm001Date]<='{1}'",dateTimePicker5.Value.ToString("yyyy/MM/dd"), dateTimePicker6.Value.ToString("yyyy/MM/dd"));
+            FASTSQL.AppendFormat(@"   ORDER BY [HREngFrm001Date],[HREngFrm001OutTime] ");
+            FASTSQL.AppendFormat(@"   ");
+            FASTSQL.AppendFormat(@"   ");
+
+
+            return FASTSQL.ToString();
+        }
+
         #endregion
 
         #region BUTTON
@@ -630,7 +669,7 @@ namespace TKGAFFAIRS
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            SETFASTREPORT();
         }
 
 
