@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 11:34:28" ReportInfo.Modified="01/15/2021 17:05:31" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 11:34:28" ReportInfo.Modified="01/15/2021 17:09:56" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9JQf6BENdAfNJmWSGla8SBW">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9JLAiW9CmfiJ31YOR4NlByr">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'&#13;&#10;,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'&#13;&#10;,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM]  AS '驗收數量'&#13;&#10;,[SIGN] AS '簽名',[REMARK] AS '備考'&#13;&#10;,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'&#13;&#10;,[STATUS] AS '狀態'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[BUYITEM]&#13;&#10;WHERE [BUYDATES]&gt;='20180801' AND [BUYDATES]&lt;='20180831'">
         <Column Name="請購日期" DataType="System.DateTime"/>
         <Column Name="請購編號" DataType="System.String"/>
@@ -29,7 +29,7 @@
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" LeftMargin="5" RightMargin="5">
     <ReportTitleBand Name="ReportTitle1" Width="1084.86" Height="37.8">
       <TextObject Name="Text1" Top="18.9" Width="1077.3" Height="18.9" Text="總務課每日採購請購項目總表" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text45" Width="1077.3" Height="18.9" Text="老楊股份有限公司" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text45" Width="1077.3" Height="18.9" Text="老楊食品股份有限公司" HorzAlign="Center" VertAlign="Center"/>
     </ReportTitleBand>
     <ColumnHeaderBand Name="ColumnHeader1" Top="42.29" Width="1084.86" Height="28.35">
       <TextObject Name="Text3" Width="66.15" Height="28.35" Border.Lines="All" Text="請購日期" HorzAlign="Center" VertAlign="Center"/>
