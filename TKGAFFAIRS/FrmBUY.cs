@@ -725,7 +725,7 @@ namespace TKGAFFAIRS
             FASTSQL.AppendFormat(@" WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}' ",dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
             FASTSQL.AppendFormat(@"  AND [BUYNO] IN ({0})", BUYNOSERIAL.ToString());
             FASTSQL.AppendFormat(@"  AND [STATUS]='{0}'", comboBox4.Text.ToString());
-            FASTSQL.AppendFormat(@"  ");
+            FASTSQL.AppendFormat(@"   ");
 
             return FASTSQL.ToString();
         }

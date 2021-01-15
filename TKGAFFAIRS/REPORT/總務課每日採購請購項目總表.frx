@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 11:34:28" ReportInfo.Modified="12/19/2018 09:42:38" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/30/2018 11:34:28" ReportInfo.Modified="01/15/2021 17:05:31" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9LTQo7yBlofMP8a2GWE4Vt4">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9JQf6BENdAfNJmWSGla8SBW">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'&#13;&#10;,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'&#13;&#10;,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM]  AS '驗收數量'&#13;&#10;,[SIGN] AS '簽名',[REMARK] AS '備考'&#13;&#10;,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'&#13;&#10;,[STATUS] AS '狀態'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[BUYITEM]&#13;&#10;WHERE [BUYDATES]&gt;='20180801' AND [BUYDATES]&lt;='20180831'">
         <Column Name="請購日期" DataType="System.DateTime"/>
         <Column Name="請購編號" DataType="System.String"/>
@@ -27,10 +27,11 @@
     <Total Name="TotalTMONEY" Expression="[Table.總價]" Evaluator="Data1" PrintOn="ColumnFooter1"/>
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" LeftMargin="5" RightMargin="5">
-    <ReportTitleBand Name="ReportTitle1" Width="1084.86" Height="18.9">
-      <TextObject Name="Text1" Width="1077.3" Height="18.9" Text="總務課每日採購請購項目總表" HorzAlign="Center" VertAlign="Center"/>
+    <ReportTitleBand Name="ReportTitle1" Width="1084.86" Height="37.8">
+      <TextObject Name="Text1" Top="18.9" Width="1077.3" Height="18.9" Text="總務課每日採購請購項目總表" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text45" Width="1077.3" Height="18.9" Text="老楊股份有限公司" HorzAlign="Center" VertAlign="Center"/>
     </ReportTitleBand>
-    <ColumnHeaderBand Name="ColumnHeader1" Top="22.75" Width="1084.86" Height="28.35">
+    <ColumnHeaderBand Name="ColumnHeader1" Top="42.29" Width="1084.86" Height="28.35">
       <TextObject Name="Text3" Width="66.15" Height="28.35" Border.Lines="All" Text="請購日期" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text5" Left="66.15" Width="85.05" Height="28.35" Border.Lines="All" Text="請購編號" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text7" Left="151.2" Width="56.7" Height="28.35" Border.Lines="All" Text="請購&#13;&#10;人員" HorzAlign="Center" VertAlign="Center"/>
@@ -50,7 +51,7 @@
       <TextObject Name="Text36" Left="841.05" Width="47.25" Height="28.35" Border.Lines="All" Text="付款&#13;&#10;天數" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text44" Left="1030.05" Width="56.7" Height="28.35" Border.Lines="All" Text="狀態" HorzAlign="Center" VertAlign="Center"/>
     </ColumnHeaderBand>
-    <DataBand Name="Data1" Top="54.94" Width="1084.86" Height="18.9" CanGrow="true" Guides="0" DataSource="Table">
+    <DataBand Name="Data1" Top="75.14" Width="1084.86" Height="18.9" CanGrow="true" Guides="0" DataSource="Table">
       <TextObject Name="Text2" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.請購日期]" Format="Date" Format.Format="d" VertAlign="Center" Font="宋体, 7pt"/>
       <TextObject Name="Text4" Left="66.15" Width="85.05" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.請購編號]" VertAlign="Center"/>
       <TextObject Name="Text6" Left="151.2" Width="56.7" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.請購人員]" VertAlign="Center"/>
@@ -70,7 +71,7 @@
       <TextObject Name="Text35" Left="841.05" Width="47.25" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.付款天數]" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text43" Left="1030.05" Width="56.7" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.狀態]" HorzAlign="Center" VertAlign="Center" Font="宋体, 6pt"/>
     </DataBand>
-    <ColumnFooterBand Name="ColumnFooter1" Top="77.69" Width="1084.86" Height="37.8">
+    <ColumnFooterBand Name="ColumnFooter1" Top="98.53" Width="1084.86" Height="37.8">
       <TextObject Name="Text32" Top="18.9" Width="1077.3" Height="18.9" Text="核准:                                                        審核:                                                      申請人:          "/>
       <TextObject Name="Text37" Left="424.29" Width="56.7" Height="18.9" Border.Lines="All" Text="合計: " VertAlign="Center"/>
       <TextObject Name="Text38" Width="425.25" Height="18.9" Border.Lines="All"/>
@@ -79,6 +80,6 @@
       <TextObject Name="Text39" Left="481.95" Width="66.15" Height="18.9" Border.Lines="All" Text="[TotalNUM]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
       <TextObject Name="Text41" Left="660.54" Width="66.15" Height="18.9" Border.Lines="All" Text="[TotalTMONEY]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
     </ColumnFooterBand>
-    <PageFooterBand Name="PageFooter1" Top="119.33" Width="1084.86" Height="18.9"/>
+    <PageFooterBand Name="PageFooter1" Top="140.83" Width="1084.86" Height="18.9"/>
   </ReportPage>
 </Report>
