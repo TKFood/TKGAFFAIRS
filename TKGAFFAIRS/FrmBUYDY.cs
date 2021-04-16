@@ -51,6 +51,7 @@ namespace TKGAFFAIRS
         string BUYNO;
         string OLDBUYNO;
         string CHECKYN = "N";
+        string CHECKYN2 = "N";
 
         public FrmBUYDY()
         {
@@ -261,11 +262,11 @@ namespace TKGAFFAIRS
                 if (CHECKYN.Equals("N"))
                 {
                     //建立一個DataGridView的Column物件及其內容
-                    DataGridViewColumn dgvc = new DataGridViewCheckBoxColumn();
-                    dgvc.Width = 40;
-                    dgvc.Name = "選取";
+                    DataGridViewColumn dgvc2 = new DataGridViewCheckBoxColumn();
+                    dgvc2.Width = 40;
+                    dgvc2.Name = "選取";
 
-                    this.dataGridView2.Columns.Insert(0, dgvc);
+                    this.dataGridView2.Columns.Insert(0, dgvc2);
                     CHECKYN = "Y";
                 }
 
@@ -327,15 +328,15 @@ namespace TKGAFFAIRS
                 adapter3.Fill(ds3, "TEMPds3");
                 sqlConn.Close();
 
-                if (CHECKYN.Equals("N"))
+                if (CHECKYN2.Equals("N"))
                 {
                     //建立一個DataGridView的Column物件及其內容
-                    DataGridViewColumn dgvc = new DataGridViewCheckBoxColumn();
-                    dgvc.Width = 40;
-                    dgvc.Name = "選取";
+                    DataGridViewColumn dgvc3 = new DataGridViewCheckBoxColumn();
+                    dgvc3.Width = 40;
+                    dgvc3.Name = "選取";
 
-                    this.dataGridView3.Columns.Insert(0, dgvc);
-                    CHECKYN = "Y";
+                    this.dataGridView3.Columns.Insert(0, dgvc3);
+                    CHECKYN2 = "Y";
                 }
 
                 if (ds3.Tables["TEMPds3"].Rows.Count == 0)
@@ -697,7 +698,7 @@ namespace TKGAFFAIRS
 
             string SQL;
             Report report1 = new Report();
-            report1.Load(@"REPORT\總務課每日採購請購項目總表.frx");
+            report1.Load(@"REPORT\總務課每日採購請購項目總表-大潁.frx");
 
             report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
@@ -762,7 +763,7 @@ namespace TKGAFFAIRS
 
             string SQL;
             Report report2 = new Report();
-            report2.Load(@"REPORT\請款單.frx");
+            report2.Load(@"REPORT\請款單-大潁.frx");
 
             report2.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";

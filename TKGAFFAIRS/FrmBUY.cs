@@ -51,6 +51,7 @@ namespace TKGAFFAIRS
         string BUYNO;
         string OLDBUYNO;
         string CHECKYN = "N";
+        string CHECKYN2 = "N";
 
         public FrmBUY()
         {
@@ -326,7 +327,7 @@ namespace TKGAFFAIRS
                 adapter3.Fill(ds3, "TEMPds3");
                 sqlConn.Close();
 
-                if (CHECKYN.Equals("N"))
+                if (CHECKYN2.Equals("N"))
                 {
                     //建立一個DataGridView的Column物件及其內容
                     DataGridViewColumn dgvc = new DataGridViewCheckBoxColumn();
@@ -334,7 +335,7 @@ namespace TKGAFFAIRS
                     dgvc.Name = "選取";
 
                     this.dataGridView3.Columns.Insert(0, dgvc);
-                    CHECKYN = "Y";
+                    CHECKYN2 = "Y";
                 }
 
                 if (ds3.Tables["TEMPds3"].Rows.Count == 0)

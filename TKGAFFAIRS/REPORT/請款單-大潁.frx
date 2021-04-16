@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/01/2018 09:24:48" ReportInfo.Modified="04/16/2021 10:58:59" ReportInfo.CreatorVersion="2016.4.4.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9KW2iMG5K+JiLjsHjWdNaYC">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [BUYDATES] AS '請購日期',[BUYNO] AS '請購編號',[NAME] AS '請購人員',[DEP] AS '請購部門'&#13;&#10;,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'&#13;&#10;,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM]  AS '驗收數量'&#13;&#10;,[SIGN] AS '簽名',[REMARK] AS '備考'&#13;&#10;,[PAY] AS '付款方式',[PAYDAY] AS '付款天數'&#13;&#10;FROM [TKGAFFAIRS].[dbo].[BUYITEM]&#13;&#10;WHERE [BUYDATES]&gt;='20180801' AND [BUYDATES]&lt;='20180831'">
+        <Column Name="請購日期" DataType="System.DateTime"/>
+        <Column Name="請購編號" DataType="System.String"/>
+        <Column Name="請購人員" DataType="System.String"/>
+        <Column Name="請購部門" DataType="System.String"/>
+        <Column Name="品名" DataType="System.String"/>
+        <Column Name="規格" DataType="System.String"/>
+        <Column Name="供應商" DataType="System.String"/>
+        <Column Name="數量" DataType="System.Decimal"/>
+        <Column Name="單位" DataType="System.String"/>
+        <Column Name="單價" DataType="System.Decimal"/>
+        <Column Name="總價" DataType="System.Decimal"/>
+        <Column Name="到貨日期" DataType="System.DateTime"/>
+        <Column Name="驗收數量" DataType="System.Decimal"/>
+        <Column Name="簽名" DataType="System.String"/>
+        <Column Name="備考" DataType="System.String"/>
+        <Column Name="付款方式" DataType="System.String"/>
+        <Column Name="付款天數" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Total Name="Total" Expression="[Table.總價]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="47.25">
+      <TextObject Name="Text1" Top="18.9" Width="708.75" Height="28.35" Text="請款憑單" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text29" Width="708.75" Height="18.9" Text="大潁國際股份有限公司" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+    </ReportTitleBand>
+    <ColumnHeaderBand Name="ColumnHeader1" Top="51.74" Width="718.2" Height="40.25">
+      <TextObject Name="Text2" Width="198.45" Height="18.9" Text="製單日：[Year([Date])]/[Month([Date])]/[Day([Date])]" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text3" Left="226.8" Width="198.45" Height="18.9" Text="付訖日：" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text4" Left="510.3" Width="198.45" Height="18.9" Text="NO." VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text6" Top="21.35" Width="47.25" Height="18.9" Border.Lines="All" Text="NO" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text10" Left="47.25" Top="21.35" Width="151.2" Height="18.9" Border.Lines="All" Text="費用/廠商/客戶名稱" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text11" Left="396.9" Top="21.35" Width="113.4" Height="18.9" Border.Lines="All" Text="金額" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text12" Left="510.3" Top="21.35" Width="198.45" Height="18.9" Border.Lines="All" Text="費用所屬部門名稱及代碼" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text13" Left="198.45" Top="21.35" Width="198.45" Height="18.9" Border.Lines="All" Text="明細" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" Top="96.49" Width="718.2" Height="18.9" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text5" Width="47.25" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Row#]" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text7" Left="47.25" Width="151.2" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.供應商]" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text8" Left="198.45" Width="198.45" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.品名]&#13;&#10;[Table.規格]&#13;&#10;數量:[Table.數量]" VertAlign="Center" Font="新細明體, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text9" Left="396.9" Width="113.4" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.總價]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="新細明體, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text14" Left="510.3" Width="198.45" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="部門：	       代碼：" VertAlign="Center" Font="新細明體, 10pt"/>
+    </DataBand>
+    <ColumnFooterBand Name="ColumnFooter1" Top="119.88" Width="718.2" Height="151.2">
+      <TextObject Name="Text15" Width="47.25" Height="37.8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text16" Left="47.25" Width="349.65" Height="37.8" Border.Lines="All" Text="合計&#13;&#10;TOTAL" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text17" Left="396.9" Width="113.4" Height="37.8" Border.Lines="All" Text="[Total]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text18" Left="510.3" Width="198.45" Height="37.8" Border.Lines="All" Text="簽收人：&#13;&#10;" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text19" Top="50.7" Width="141.75" Height="18.9" Text="出納：" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text20" Left="141.75" Top="50.7" Width="141.75" Height="18.9" Text="會計：" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text21" Left="283.5" Top="50.7" Width="141.75" Height="18.9" Text="核准：" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text22" Left="425.25" Top="50.7" Width="141.75" Height="18.9" Text="審核：" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text23" Left="567" Top="50.7" Width="141.75" Height="18.9" Text="申請人：" VertAlign="Center" Font="新細明體, 10pt"/>
+      <TextObject Name="Text24" Left="56.7" Top="76.6" Width="652.05" Height="18.9" Text="●由申請人開立請款憑單	●付款方式由出納人員勾選	●出納人員交付現金時領款人應於請款憑單上簽名" VertAlign="Center" Font="新細明體, 8pt"/>
+      <TextObject Name="Text25" Top="75.6" Width="56.7" Height="18.9" Text="備註：" VertAlign="Center" Font="新細明體, 8pt"/>
+      <TextObject Name="Text26" Left="56.7" Top="94.5" Width="652.05" Height="37.8" Text="●請款時應檢附原始憑證，原始憑證為請購單、採購單、發票、收據、繳款通知單 ●如無法取得發票或收據時另檢附經手人支出證明單或無法取得憑證支出證明單 ●金額禁止修改&#13;&#10;" VertAlign="Center" Font="新細明體, 8pt" TextFill.Color="Red"/>
+      <TextObject Name="Text27" Top="132.3" Width="179.55" Height="18.9" Text="(本文件不得擅自塗改及影印)" VertAlign="Center" Font="新細明體, 8pt"/>
+      <TextObject Name="Text28" Left="481.95" Top="132.3" Width="226.8" Height="18.9" Text="A03-01-001-01-A" VertAlign="Center" Font="新細明體, 8pt"/>
+    </ColumnFooterBand>
+  </ReportPage>
+</Report>
