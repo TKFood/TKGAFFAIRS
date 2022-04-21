@@ -1191,36 +1191,38 @@ namespace TKGAFFAIRS
                 {
                     string NAME = ds1.Tables["ds1"].Rows[0]["NAME"].ToString();
 
-                    XmlDocument xmlDoc = new XmlDocument();                    
+                    XmlDocument xmlDoc = new XmlDocument();                  
 
                     xmlDoc.LoadXml(ds1.Tables["ds1"].Rows[0]["CURRENT_DOC"].ToString());
 
                     //XmlNode node = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='ID']");
-                    string GA001 = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA001']").Attributes["fieldValue"].Value;
-                    string GA005 = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA005']").Attributes["fieldValue"].Value;
+                    string BUYNO = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA001']").Attributes["fieldValue"].Value;
+                    string BUYDATES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA005']").Attributes["fieldValue"].Value;
                     string GA007 = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA007']").Attributes["fieldValue"].Value;
                     XmlNode XNODES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA008']/DataGrid");
 
                     foreach (XmlNode nodeDataGrid in XNODES)
                     {
-                        string GG001 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG001']").Attributes["fieldValue"].Value;
-                        string GG002 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG002']").Attributes["fieldValue"].Value;
+                        string SPEC = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG001']").Attributes["fieldValue"].Value;
+                        string BUYNAME = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG002']").Attributes["fieldValue"].Value;
                         string GG003 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG003']").Attributes["fieldValue"].Value;
-                        string GG004 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG004']").Attributes["fieldValue"].Value;
-                        string GG005 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG005']").Attributes["fieldValue"].Value;
+                        string VENDOR = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG004']").Attributes["fieldValue"].Value;
+                        string NUM = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG005']").Attributes["fieldValue"].Value;
                         string GG006 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG006']").Attributes["fieldValue"].Value;
-                        string GG007 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG007']").Attributes["fieldValue"].Value;
+                        string DEP = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG007']").Attributes["fieldValue"].Value;
                         string GG008 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG008']").Attributes["fieldValue"].Value;
+                        string UNIT = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG009']").Attributes["fieldValue"].Value;
 
                         ROWS = ROWS + 1;
+                        BUYNO = BUYNO + '-' + ROWS;
+
+                        ADDBUYITEM(BUYDATES, BUYNO, NAME, DEP, BUYNAME, SPEC, VENDOR, NUM, UNIT, STATUS);
                     }
 
-                    string OK = "";
+                    //string OK = "";
+                    STATUS = "1.詢價中";
 
-                    //ADDTOTKMKTBSTORESCHECK(
-                    //                       ID
-
-                    //                       );
+                   
 
 
                 }
@@ -1240,15 +1242,15 @@ namespace TKGAFFAIRS
             }
         }
 
-        public void ADDBUYITEM()
+        public void ADDBUYITEM(string BUYDATES,string BUYNO, string NAME, string DEP, string BUYNAME, string SPEC, string VENDOR,string NUM, string UNIT, string STATUS)
         {
             try
             {
                 //connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
                 //sqlConn = new SqlConnection(connectionString);
 
-                //20210902密
-                Class1 TKID = new Class1();//用new 建立類別實體
+        //20210902密
+        Class1 TKID = new Class1();//用new 建立類別實體
                 SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dberp"].ConnectionString);
 
                 //資料庫使用者密碼解密
@@ -1265,8 +1267,12 @@ namespace TKGAFFAIRS
                 sbSql.Clear();
 
                 sbSql.AppendFormat(@"
-                                    
-                                    ",);
+                                    INSERT INTO 
+                                    [TKGAFFAIRS].[dbo].[BUYITEM]
+                                    ([BUYDATES],[BUYNO],[NAME],[DEP],[BUYNAME],[SPEC],[VENDOR],[NUM],[UNIT],[STATUS])
+                                    VALUES
+                                    ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')
+                                    ", BUYDATES, BUYNO, NAME, DEP, BUYNAME, SPEC, VENDOR, NUM, UNIT, STATUS);
 
                 cmd.Connection = sqlConn;
                 cmd.CommandTimeout = 60;
