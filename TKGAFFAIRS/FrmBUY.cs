@@ -232,7 +232,7 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(@"  ,[BUYNAME] AS '品名',[SPEC] AS '規格',[VENDOR] AS '供應商',[NUM] AS '數量',[UNIT] AS '單位'");
                 sbSql.AppendFormat(@"  ,[PRICES] AS '單價',[TMONEY] AS '總價',[INDATES] AS '到貨日期',[CHECKNUM] AS '驗收數量'");
                 sbSql.AppendFormat(@"  ,[SIGN] AS '簽名',[REMARK] AS '備考'");
-                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數' ");
+                sbSql.AppendFormat(@"  ,[PAY] AS '付款方式',[PAYDAY] AS '付款天數' ,[DOC_NBR] AS 'UOF請購單號'");
                 sbSql.AppendFormat(@"  FROM [TKGAFFAIRS].[dbo].[BUYITEM]");
                 sbSql.AppendFormat(@"  WHERE [BUYDATES]>='{0}' AND [BUYDATES]<='{1}'",dateTimePicker1.Value.ToString("yyyy/MM/dd"), dateTimePicker2.Value.ToString("yyyy/MM/dd"));
                 sbSql.AppendFormat(@"  AND [STATUS]='{0}'",comboBox2.Text.ToString());
@@ -1197,7 +1197,9 @@ namespace TKGAFFAIRS
 
                     //XmlNode node = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='ID']");
                     string BUYNO = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA001']").Attributes["fieldValue"].Value;
+                    
                     string BUYDATES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA005']").Attributes["fieldValue"].Value;
+                    string INDATES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA005']").Attributes["fieldValue"].Value;
                     string GA007 = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA007']").Attributes["fieldValue"].Value;
                     XmlNode XNODES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA008']/DataGrid");
 
@@ -1214,13 +1216,14 @@ namespace TKGAFFAIRS
                         string UNIT = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG009']").Attributes["fieldValue"].Value;
 
                         ROWS = ROWS + 1;
-                        BUYNO = BUYNO + '-' + ROWS;
+                        BUYNO = DOC_NBR + '-' + ROWS;
 
-                        ADDBUYITEM(BUYDATES, BUYNO, NAME, DEP, BUYNAME, SPEC, VENDOR, NUM, UNIT, STATUS);
+                        STATUS = "1.詢價中";
+                        ADDBUYITEM(BUYDATES, BUYNO, NAME, DEP, BUYNAME, SPEC, VENDOR, NUM, UNIT,INDATES, STATUS,DOC_NBR);
                     }
 
                     //string OK = "";
-                    STATUS = "1.詢價中";
+                    
 
                    
 
@@ -1242,7 +1245,7 @@ namespace TKGAFFAIRS
             }
         }
 
-        public void ADDBUYITEM(string BUYDATES,string BUYNO, string NAME, string DEP, string BUYNAME, string SPEC, string VENDOR,string NUM, string UNIT, string STATUS)
+        public void ADDBUYITEM(string BUYDATES,string BUYNO, string NAME, string DEP, string BUYNAME, string SPEC, string VENDOR,string NUM, string UNIT, string INDATES, string STATUS,string DOC_NBR)
         {
             try
             {
@@ -1269,10 +1272,10 @@ namespace TKGAFFAIRS
                 sbSql.AppendFormat(@"
                                     INSERT INTO 
                                     [TKGAFFAIRS].[dbo].[BUYITEM]
-                                    ([BUYDATES],[BUYNO],[NAME],[DEP],[BUYNAME],[SPEC],[VENDOR],[NUM],[UNIT],[STATUS])
+                                    ([BUYDATES],[BUYNO],[NAME],[DEP],[BUYNAME],[SPEC],[VENDOR],[NUM],[UNIT],[INDATES],[STATUS],[DOC_NBR])
                                     VALUES
-                                    ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')
-                                    ", BUYDATES, BUYNO, NAME, DEP, BUYNAME, SPEC, VENDOR, NUM, UNIT, STATUS);
+                                    ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')
+                                    ", BUYDATES, BUYNO, NAME, DEP, BUYNAME, SPEC, VENDOR, NUM, UNIT, INDATES, STATUS, DOC_NBR);
 
                 cmd.Connection = sqlConn;
                 cmd.CommandTimeout = 60;
