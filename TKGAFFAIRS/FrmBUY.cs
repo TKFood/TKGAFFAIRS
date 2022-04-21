@@ -18,6 +18,7 @@ using System.Threading;
 using FastReport;
 using FastReport.Data;
 using TKITDLL;
+using System.Xml;
 
 namespace TKGAFFAIRS
 {
@@ -53,6 +54,8 @@ namespace TKGAFFAIRS
         string OLDBUYNO;
         string CHECKYN = "N";
         string CHECKYN2 = "N";
+        
+        int ROWS = 0;
 
         public FrmBUY()
         {
@@ -969,6 +972,274 @@ namespace TKGAFFAIRS
             CALSUM();
         }
 
+
+        public void NEWBUYITEM()
+        {
+            IEnumerable<DataRow> query2 = null;
+
+            DataTable DT1 = SEARCHUOFGA();
+            DataTable DT2 = SEARCHBUYITEM();
+
+
+            //找DataTable差集
+            //要有相同的欄位名稱
+            if(DT1.Rows.Count>0 && DT2.Rows.Count > 0)
+            {
+                query2 = DT1.AsEnumerable().Except(DT2.AsEnumerable(), DataRowComparer.Default);
+            }
+            
+
+            if (query2.Count() > 0)
+            {
+                //差集集合
+                DataTable dt3 = query2.CopyToDataTable();
+
+                foreach (DataRow dr in dt3.Rows)
+                {
+                    SEARCHUOFTB_WKF_TASK(dr["DOC_NBR"].ToString());
+                }
+            }
+        }
+
+        public DataTable SEARCHUOFGA()
+        {
+            SqlDataAdapter adapter1 = new SqlDataAdapter();
+            SqlCommandBuilder sqlCmdBuilder1 = new SqlCommandBuilder();
+            DataSet ds1 = new DataSet();
+
+            string THISYEARS = DateTime.Now.ToString("yyyy");
+            //取西元年後2位
+            THISYEARS = THISYEARS.Substring(2, 2);
+
+            try
+            {
+                //connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                //sqlConn = new SqlConnection(connectionString);
+
+                //20210902密
+                Class1 TKID = new Class1();//用new 建立類別實體
+                SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbUOF"].ConnectionString);
+
+                //資料庫使用者密碼解密
+                sqlsb.Password = TKID.Decryption(sqlsb.Password);
+                sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+                String connectionString;
+                sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+
+                //是門市督導單STORE
+                //核準過TASK_RESULT='0'
+                sbSql.AppendFormat(@"  
+                                     SELECT DOC_NBR
+                                     FROM [UOF].DBO.TB_WKF_TASK 
+                                     WHERE DOC_NBR LIKE 'GA1003{0}%'
+                                     AND TASK_RESULT='0'
+                                    ", THISYEARS);
+
+
+                adapter1 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder1 = new SqlCommandBuilder(adapter1);
+                sqlConn.Open();
+                ds1.Clear();
+                adapter1.Fill(ds1, "ds1");
+                sqlConn.Close();
+
+                if (ds1.Tables["ds1"].Rows.Count >= 1)
+                {
+                    return ds1.Tables["ds1"];
+
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        public DataTable SEARCHBUYITEM()
+        {
+            SqlDataAdapter adapter1 = new SqlDataAdapter();
+            SqlCommandBuilder sqlCmdBuilder1 = new SqlCommandBuilder();
+            DataSet ds1 = new DataSet();
+
+            string THISYEARS = DateTime.Now.ToString("yyyy");
+            //取西元年後2位
+            THISYEARS = THISYEARS.Substring(2, 2);
+
+            try
+            {
+                //connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                //sqlConn = new SqlConnection(connectionString);
+
+                //20210902密
+                Class1 TKID = new Class1();//用new 建立類別實體
+                SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dberp"].ConnectionString);
+
+                //資料庫使用者密碼解密
+                sqlsb.Password = TKID.Decryption(sqlsb.Password);
+                sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+                String connectionString;
+                sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+                //UNION ALL 
+                //SELECT 'A'
+                //避免回傳NULL
+
+                sbSql.AppendFormat(@"  
+                                    SELECT [DOC_NBR]
+                                    FROM  [TKGAFFAIRS].[dbo].[BUYITEM]
+                                    WHERE [DOC_NBR] LIKE 'GA1003{0}%'
+                                    UNION ALL 
+									SELECT 'A'
+                                    ", THISYEARS);
+
+
+                adapter1 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder1 = new SqlCommandBuilder(adapter1);
+                sqlConn.Open();
+                ds1.Clear();
+                adapter1.Fill(ds1, "ds1");
+                sqlConn.Close();
+
+                if (ds1.Tables["ds1"].Rows.Count >= 1)
+                {
+                    return ds1.Tables["ds1"];
+
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        //找出UOF表單的資料，將CURRENT_DOC的內容，轉成xmlDoc
+        //從xmlDoc找出各節點的Attributes
+        public void SEARCHUOFTB_WKF_TASK(string DOC_NBR)
+        {
+            SqlDataAdapter adapter1 = new SqlDataAdapter();
+            SqlCommandBuilder sqlCmdBuilder1 = new SqlCommandBuilder();
+            DataSet ds1 = new DataSet();
+
+            try
+            {
+                //connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                //sqlConn = new SqlConnection(connectionString);
+
+                //20210902密
+                Class1 TKID = new Class1();//用new 建立類別實體
+                SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbUOF"].ConnectionString);
+
+                //資料庫使用者密碼解密
+                sqlsb.Password = TKID.Decryption(sqlsb.Password);
+                sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+                String connectionString;
+                sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+
+                //庫存數量看LA009 IN ('20004','20006','20008','20019','20020'
+
+                sbSql.AppendFormat(@"  
+                                    SELECT * 
+                                    FROM [UOF].DBO.TB_WKF_TASK 
+                                    LEFT JOIN [UOF].[dbo].[TB_EB_USER] ON [TB_EB_USER].USER_GUID=TB_WKF_TASK.USER_GUID
+                                    WHERE DOC_NBR LIKE '{0}%'
+                              
+                                    ", DOC_NBR);
+
+
+                adapter1 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder1 = new SqlCommandBuilder(adapter1);
+                sqlConn.Open();
+                ds1.Clear();
+                adapter1.Fill(ds1, "ds1");
+                sqlConn.Close();
+
+                if (ds1.Tables["ds1"].Rows.Count >= 1)
+                {
+                    string NAME = ds1.Tables["ds1"].Rows[0]["NAME"].ToString();
+
+                    XmlDocument xmlDoc = new XmlDocument();                    
+
+                    xmlDoc.LoadXml(ds1.Tables["ds1"].Rows[0]["CURRENT_DOC"].ToString());
+
+                    //XmlNode node = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='ID']");
+                    string GA001 = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA001']").Attributes["fieldValue"].Value;
+                    string GA005 = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA005']").Attributes["fieldValue"].Value;
+                    string GA007 = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA007']").Attributes["fieldValue"].Value;
+                    XmlNode XNODES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA008']/DataGrid");
+
+                    foreach (XmlNode nodeDataGrid in XNODES)
+                    {
+                        string GG001 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG001']").Attributes["fieldValue"].Value;
+                        string GG002 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG002']").Attributes["fieldValue"].Value;
+                        string GG003 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG003']").Attributes["fieldValue"].Value;
+                        string GG004 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG004']").Attributes["fieldValue"].Value;
+                        string GG005 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG005']").Attributes["fieldValue"].Value;
+                        string GG006 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG006']").Attributes["fieldValue"].Value;
+                        string GG007 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG007']").Attributes["fieldValue"].Value;
+                        string GG008 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG008']").Attributes["fieldValue"].Value;
+
+                        ROWS = ROWS + 1;
+                    }
+
+                    string OK = "";
+
+                    //ADDTOTKMKTBSTORESCHECK(
+                    //                       ID
+
+                    //                       );
+
+
+                }
+                else
+                {
+
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
         #endregion
 
         #region BUTTON
@@ -1050,9 +1321,13 @@ namespace TKGAFFAIRS
             SETFASTREPORT2();
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            NEWBUYITEM();
+        }
 
         #endregion
 
-      
+
     }
 }
