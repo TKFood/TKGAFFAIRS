@@ -1149,6 +1149,8 @@ namespace TKGAFFAIRS
             SqlCommandBuilder sqlCmdBuilder1 = new SqlCommandBuilder();
             DataSet ds1 = new DataSet();
 
+            ROWS = 0;
+
             try
             {
                 //connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
