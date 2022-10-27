@@ -670,10 +670,64 @@ namespace TKGAFFAIRS
             Search();
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "30";
+                Dish = "1";
+                EmployeeID = textBox1.Text;
+                Name = textBox2.Text;
+                ORDERAdd(Meal, Dish, OrderBoxed);
+            }
+            Search();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "30";
+                Dish = "2";
+                EmployeeID = textBox1.Text;
+                Name = textBox2.Text;
+                ORDERAdd(Meal, Dish, OrderBoxed);
+            }
+            Search();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "30";
+                Dish = "1";
+                EmployeeID = textBox1.Text;
+
+                OrderCanel(Meal, Dish, OrderBoxed);
+                ROMOTEOrderCanel(Meal, Dish, OrderBoxed);
+            }
+            Search();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                Meal = "30";
+                Dish = "2";
+                EmployeeID = textBox1.Text;
+
+                OrderCanel(Meal, Dish, OrderBoxed);
+                ROMOTEOrderCanel(Meal, Dish, OrderBoxed);
+            }
+            Search();
+        }
 
 
         #endregion
 
-        
+
     }
 }
