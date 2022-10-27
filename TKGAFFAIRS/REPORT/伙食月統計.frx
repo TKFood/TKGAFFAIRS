@@ -1,22 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="09/25/2018 09:06:06" ReportInfo.Modified="06/26/2019 08:45:27" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/25/2018 09:06:06" ReportInfo.Modified="10/27/2022 17:22:55" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9J9QwMKTJA5Pg9zxpdVF8R0">
-      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [ID]+[NAME] AS '姓名',SUBSTRING(CONVERT(NVARCHAR,[DATE],112),5,4) AS '日期',SUM([NUM]) AS '數量'&#13;&#10;FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]&#13;&#10;WHERE CONVERT(NVARCHAR,[DATE],112)&gt;='20180826' AND CONVERT(NVARCHAR,[DATE],112)&lt;='20180925'&#13;&#10;GROUP BY [ID]+[NAME],CONVERT(NVARCHAR,[DATE],112)&#13;&#10;">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9IMZ73i2rl3rvlBR+eBBSdh">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand=" SELECT [ID]+[NAME] AS '姓名',SUBSTRING(CONVERT(NVARCHAR,[DATE],112),5,4) AS '日期',SUM([NUM]) AS '數量' &#13;&#10; , MEALNAME&#13;&#10;FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER],[TKBOXEDMEAL].[dbo].[MEAL]&#13;&#10;WHERE 1=1&#13;&#10;AND [LOCALEMPORDER].MEAL=[MEAL].MEAL&#13;&#10;AND CONVERT(NVARCHAR,[DATE],112)&gt;='20221001' AND CONVERT(NVARCHAR,[DATE],112)&lt;='20221031'&#13;&#10;GROUP BY [ID]+[NAME], MEALNAME,CONVERT(NVARCHAR,[DATE],112)">
         <Column Name="姓名" DataType="System.String"/>
         <Column Name="日期" DataType="System.String"/>
         <Column Name="數量" DataType="System.Int32"/>
+        <Column Name="MEALNAME" DataType="System.String"/>
       </TableDataSource>
     </MsSqlDataConnection>
   </Dictionary>
-  <ReportPage Name="Page1" PaperWidth="400" PaperHeight="300">
-    <ReportTitleBand Name="ReportTitle1" Width="1436.4" Height="18.9">
+  <ReportPage Name="Page1" PaperWidth="1000" PaperHeight="1000">
+    <ReportTitleBand Name="ReportTitle1" Width="3704.4" Height="18.9">
       <TextObject Name="Text1" Width="1048.95" Height="18.9" Text="伙食月統計報表" HorzAlign="Center" VertAlign="Center"/>
     </ReportTitleBand>
-    <DataBand Name="Data1" Top="22.75" Width="1436.4" Height="57.11">
-      <MatrixObject Name="Matrix1" Width="132.08" Height="52.88" FixedRows="1" FixedColumns="1" DataSource="Table">
+    <DataBand Name="Data1" Top="23.39" Width="3704.4" Height="69.38">
+      <MatrixObject Name="Matrix1" Width="156.88" Height="69.38" FixedRows="2" FixedColumns="1" DataSource="Table">
         <MatrixColumns>
           <Header Expression="[Table.日期]"/>
+          <Header Expression="[Table.MEALNAME]" Totals="false"/>
         </MatrixColumns>
         <MatrixRows>
           <Header Expression="[Table.姓名]"/>
@@ -25,26 +27,31 @@
           <Cell Expression="[Table.數量]"/>
         </MatrixCells>
         <TableColumn Name="Column1" Width="46.07" AutoSize="true"/>
-        <TableColumn Name="Column2" Width="46.07" AutoSize="true"/>
+        <TableColumn Name="Column2" Width="70.87" AutoSize="true"/>
         <TableColumn Name="Column3" Width="39.94" AutoSize="true"/>
         <TableRow Name="Row1" Height="18.19" AutoSize="true">
-          <TableCell Name="Cell1" Border.Lines="All" Text="姓名" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell1" Border.Lines="All" Text="姓名" HorzAlign="Center" VertAlign="Center" RowSpan="2"/>
           <TableCell Name="Cell2" Border.Lines="All" Text="[日期]" HorzAlign="Center" VertAlign="Center"/>
-          <TableCell Name="Cell5" Border.Lines="All" Text="Total" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell5" Border.Lines="All" Text="Total" HorzAlign="Center" VertAlign="Center" RowSpan="2"/>
         </TableRow>
-        <TableRow Name="Row2" Height="18.19" AutoSize="true">
-          <TableCell Name="Cell3" Border.Lines="All" Text="[姓名]" HorzAlign="Center" VertAlign="Center"/>
-          <TableCell Name="Cell4" Border.Lines="All" Text="[數量]" HorzAlign="Right" VertAlign="Center"/>
-          <TableCell Name="Cell6" Border.Lines="All" HorzAlign="Right" VertAlign="Center"/>
+        <TableRow Name="Row2" Height="16.5" AutoSize="true">
+          <TableCell Name="Cell3" Border.Lines="All"/>
+          <TableCell Name="Cell4" Border.Lines="All" Text="[MEALNAME]" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell6" Border.Lines="All"/>
         </TableRow>
-        <TableRow Name="Row3" Height="16.5" AutoSize="true">
-          <TableCell Name="Cell7" Border.Lines="All" Text="Total" HorzAlign="Center" VertAlign="Center"/>
-          <TableCell Name="Cell8" Border.Lines="All" HorzAlign="Right" VertAlign="Center"/>
+        <TableRow Name="Row3" Height="18.19" AutoSize="true">
+          <TableCell Name="Cell7" Border.Lines="All" Text="[姓名]" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="[數量]" HorzAlign="Right" VertAlign="Center"/>
           <TableCell Name="Cell9" Border.Lines="All" HorzAlign="Right" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="16.5" AutoSize="true">
+          <TableCell Name="Cell13" Border.Lines="All" Text="Total" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell14" Border.Lines="All" HorzAlign="Right" VertAlign="Center"/>
+          <TableCell Name="Cell15" Border.Lines="All" HorzAlign="Right" VertAlign="Center"/>
         </TableRow>
       </MatrixObject>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="83.7" Width="1436.4" Height="37.8">
+    <PageFooterBand Name="PageFooter1" Top="97.27" Width="3704.4" Height="37.8">
       <TextObject Name="Text13" Width="708.75" Height="18.9" Text="核准:                                 審核:                                   申請人:            " VertAlign="Center"/>
     </PageFooterBand>
   </ReportPage>

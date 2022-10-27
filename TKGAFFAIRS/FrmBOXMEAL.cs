@@ -88,11 +88,19 @@ namespace TKGAFFAIRS
         {
             StringBuilder FASTSQL = new StringBuilder();
                                
-            FASTSQL.AppendFormat(@" SELECT [ID]+[NAME] AS '姓名',SUBSTRING(CONVERT(NVARCHAR,[DATE],112),5,4) AS '日期',SUM([NUM]) AS '數量' ");
-            FASTSQL.AppendFormat(@" FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER] ");
-            FASTSQL.AppendFormat(@" WHERE CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'", dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
-            FASTSQL.AppendFormat(@" GROUP BY [ID]+[NAME],CONVERT(NVARCHAR,[DATE],112)");
-            FASTSQL.AppendFormat(@"  ");
+              
+            FASTSQL.AppendFormat(@" 
+
+                             SELECT [ID]+[NAME] AS '姓名',SUBSTRING(CONVERT(NVARCHAR,[DATE],112),5,4) AS '日期',SUM([NUM]) AS '數量' 
+                             , MEALNAME
+                            FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER],[TKBOXEDMEAL].[dbo].[MEAL]
+                            WHERE 1=1
+                            AND [LOCALEMPORDER].MEAL=[MEAL].MEAL
+                            AND CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'
+                            GROUP BY [ID]+[NAME], MEALNAME,CONVERT(NVARCHAR,[DATE],112)
+
+                            ", dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
+
 
             return FASTSQL.ToString();
         }
