@@ -720,8 +720,8 @@ namespace TKGAFFAIRS
                 EmployeeID = textBox1.Text;
 
                 OrderCanel(Meal, Dish, OrderBoxed);
-                ROMOTEOrderCanel(Meal, Dish, OrderBoxed);
-            }
+                ROMOTEOrderCanel(Meal, Dish, OrderBoxed); 
+            } 
             Search();
         }
 

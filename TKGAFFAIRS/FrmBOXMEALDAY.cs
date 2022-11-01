@@ -56,10 +56,10 @@ namespace TKGAFFAIRS
         public void SETFASTREPORT()
         {
 
-            string SQL;
+            string SQL; 
             string SQL2;
             Report report1 = new Report();
-            report1.Load(@"REPORT\當日伙食統計表.frx");
+            report1.Load(@"REPORT\當日伙食統計表.frx"); 
 
             //20210902密
             Class1 TKID = new Class1();//用new 建立類別實體
