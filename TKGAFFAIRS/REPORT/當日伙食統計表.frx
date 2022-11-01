@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="09/26/2018 09:01:05" ReportInfo.Modified="11/01/2022 09:09:40" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/26/2018 09:01:05" ReportInfo.Modified="11/01/2022 09:47:32" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9I4t7iHXqc/aBlbyAgHUA2r">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9KjGM3yojSied+vvw3DUe6k">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112) AS '日期',[ID] AS '工號',[NAME] AS '姓名',SUM([NUM]) AS '訂餐量',[MEAL].[MEALNAME] AS '午/晚餐',[MEALDISH].[DISHNAME] AS '葷/素','' AS '用餐',ME002 AS '部門'&#13;&#10;FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]&#13;&#10;LEFT JOIN [TKBOXEDMEAL].[dbo].[MEALDISH] ON  [MEALDISH].[DISH]=[LOCALEMPORDER].[DISH]&#13;&#10;LEFT JOIN [TKBOXEDMEAL].[dbo].[MEAL] ON [MEAL].[MEAL]=[LOCALEMPORDER].[MEAL]&#13;&#10;LEFT JOIN [TK].dbo.CMSMV ON MV001=[ID]&#13;&#10;LEFT JOIN [TK].dbo.CMSME ON ME001=MV004&#13;&#10;WHERE CONVERT(NVARCHAR,[DATE],112)&gt;='20221101' AND CONVERT(NVARCHAR,[DATE],112)&lt;='20221101'&#13;&#10;AND (ME001 NOT LIKE '103%' AND  [ID] NOT IN ('160033','200012'))&#13;&#10;GROUP BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]&#13;&#10;ORDER BY CONVERT(NVARCHAR,[LOCALEMPORDER].[DATE],112),ME002,[ID],[NAME],[MEAL].[MEALNAME] ,[MEALDISH].[DISHNAME]&#13;&#10;">
         <Column Name="工號" DataType="System.String"/>
         <Column Name="姓名" DataType="System.String"/>
@@ -42,7 +42,7 @@
       <TextObject Name="Text22" Width="75.6" Height="18.9" Border.Lines="All" Text="日期" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text24" Left="75.6" Width="151.2" Height="18.9" Border.Lines="All" Text="部門" HorzAlign="Center" VertAlign="Center"/>
     </ColumnHeaderBand>
-    <GroupHeaderBand Name="GroupHeader1" Top="65.69" Width="718.2" Condition="[Table.午/晚餐]">
+    <GroupHeaderBand Name="GroupHeader1" Top="65.69" Width="718.2" Condition="[Table.午/晚餐]" SortOrder="None">
       <DataBand Name="Data1" Top="70.18" Width="718.2" Height="18.9" Guides="0" DataSource="Table">
         <TextObject Name="Text2" Left="226.8" Width="66.15" Height="18.9" Border.Lines="All" Text="[Table.工號]" HorzAlign="Center" VertAlign="Center"/>
         <TextObject Name="Text4" Left="292.95" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.姓名]" HorzAlign="Center" VertAlign="Center"/>
