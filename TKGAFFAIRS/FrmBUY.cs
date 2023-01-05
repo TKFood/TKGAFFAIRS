@@ -1069,6 +1069,8 @@ namespace TKGAFFAIRS
                                      FROM [UOF].DBO.TB_WKF_TASK 
                                      WHERE DOC_NBR LIKE 'GA1003{0}%'
                                      AND TASK_RESULT='0'
+                                        UNION ALL 
+                                        SELECT 'GA1003230100002'
                                     ", THISYEARS);
 
 
@@ -1229,24 +1231,120 @@ namespace TKGAFFAIRS
                     xmlDoc.LoadXml(ds1.Tables["ds1"].Rows[0]["CURRENT_DOC"].ToString());
 
                     //XmlNode node = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='ID']");
-                    string BUYNO = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA001']").Attributes["fieldValue"].Value;
-                    
-                    string BUYDATES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA005']").Attributes["fieldValue"].Value;
-                    string INDATES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA005']").Attributes["fieldValue"].Value;
-                    string GA007 = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA007']").Attributes["fieldValue"].Value;
-                    XmlNode XNODES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA008']/DataGrid");
+                    string BUYNO = "";
+                    string BUYDATES = "";
+                    string INDATES = "";
+                    string GA007 = "";
+                    XmlNode XNODES = null;
+
+                    try
+                    {
+                        BUYNO = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA001']").Attributes["fieldValue"].Value;
+
+                       
+                    }
+                    catch { }
+                    try
+                    {
+                        BUYDATES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA005']").Attributes["fieldValue"].Value;
+                       
+                    }
+                    catch { }
+                    try
+                    {
+                        INDATES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA005']").Attributes["fieldValue"].Value;
+                       
+                    }
+                    catch { }
+                    try
+                    {
+                        GA007 = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA007']").Attributes["fieldValue"].Value;
+                       
+                    }
+                    catch { }
+                    try
+                    {
+                        XNODES = xmlDoc.SelectSingleNode($"/Form/FormFieldValue/FieldItem[@fieldId='GA008']/DataGrid");
+
+                    }
+                    catch { }
+                   
+                    string SPEC = "";
+                    string BUYNAME = "";
+                    string GG003 = "";
+                    string VENDOR = "";
+                    string NUM = "";
+                    string GG006 = "";
+                    string DEP = "";
+                    string GG008 = "";
+                    string UNIT = "";
+
 
                     foreach (XmlNode nodeDataGrid in XNODES)
                     {
-                        string SPEC = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG001']").Attributes["fieldValue"].Value;
-                        string BUYNAME = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG002']").Attributes["fieldValue"].Value;
-                        string GG003 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG003']").Attributes["fieldValue"].Value;
-                        string VENDOR = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG004']").Attributes["fieldValue"].Value;
-                        string NUM = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG005']").Attributes["fieldValue"].Value;
-                        string GG006 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG006']").Attributes["fieldValue"].Value;
-                        string DEP = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG007']").Attributes["fieldValue"].Value;
-                        string GG008 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG008']").Attributes["fieldValue"].Value;
-                        string UNIT = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG009']").Attributes["fieldValue"].Value;
+                        try
+                        {
+                            SPEC = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG001']").Attributes["fieldValue"].Value;
+                        }
+                        catch
+                        { }
+                        try
+                        {
+                             BUYNAME = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG002']").Attributes["fieldValue"].Value;
+                           
+                        }
+                        catch
+                        { }
+                        try
+                        {
+                             GG003 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG003']").Attributes["fieldValue"].Value;
+                            
+                        }
+                        catch
+                        { }
+                        try
+                        {
+                             VENDOR = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG004']").Attributes["fieldValue"].Value;
+                           
+                        }
+                        catch
+                        { }                      
+                        try
+                        {
+                             NUM = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG005']").Attributes["fieldValue"].Value;
+                         
+                        }
+                        catch
+                        { }
+                        try
+                        {
+                             GG006 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG006']").Attributes["fieldValue"].Value;
+                           
+                        }
+                        catch
+                        { }
+                        try
+                        {
+                             DEP = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG007']").Attributes["fieldValue"].Value;
+                          
+                        }
+                        catch
+                        { }
+                        try
+                        {
+                             GG008 = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG008']").Attributes["fieldValue"].Value;
+                            
+                        }
+                        catch
+                        { }
+                        try
+                        {                          
+                             UNIT = nodeDataGrid.SelectSingleNode("./Cell[@fieldId='GG009']").Attributes["fieldValue"].Value;
+
+                        }
+                        catch
+                        { }
+
 
                         ROWS = ROWS + 1;
                         BUYNO = DOC_NBR + '-' + ROWS;
