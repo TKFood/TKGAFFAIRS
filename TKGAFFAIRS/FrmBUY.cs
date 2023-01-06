@@ -242,6 +242,12 @@ namespace TKGAFFAIRS
             {
                 BUYNAME.AppendFormat(@" AND [DEP] LIKE '%{0}%'", textBox17.Text);
             }
+
+            if (!string.IsNullOrEmpty(textBox18.Text))
+            {
+                BUYNAME.AppendFormat(@" AND [DOC_NBR] LIKE '%{0}%'", textBox18.Text);
+            }
+
             try
             {
                 //20210902密

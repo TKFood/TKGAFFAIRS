@@ -206,8 +206,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 112F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -224,11 +224,11 @@
             this.tableLayoutPanel1.Controls.Add(this.label28, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.textBox16, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label29, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 5, 2);
             this.tableLayoutPanel1.Controls.Add(this.label30, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.textBox17, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.textBox18, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button10, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.button10, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.button1, 4, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -320,7 +320,7 @@
             // 
             this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(143, 131);
+            this.comboBox2.Location = new System.Drawing.Point(143, 129);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(134, 24);
             this.comboBox2.TabIndex = 25;
@@ -366,9 +366,9 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(715, 83);
+            this.button1.Location = new System.Drawing.Point(563, 125);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 33);
+            this.button1.Size = new System.Drawing.Size(146, 33);
             this.button1.TabIndex = 4;
             this.button1.Text = "查詢";
             this.button1.UseVisualStyleBackColor = true;
@@ -404,9 +404,9 @@
             // 
             this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.button10.ForeColor = System.Drawing.Color.MediumBlue;
-            this.button10.Location = new System.Drawing.Point(563, 125);
+            this.button10.Location = new System.Drawing.Point(715, 125);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(146, 33);
+            this.button10.Size = new System.Drawing.Size(150, 33);
             this.button10.TabIndex = 32;
             this.button10.Text = "轉入UOD請購資料";
             this.button10.UseVisualStyleBackColor = true;
@@ -837,7 +837,7 @@
             this.comboBox1.Items.AddRange(new object[] {
             "付現",
             "月結"});
-            this.comboBox1.Location = new System.Drawing.Point(723, 170);
+            this.comboBox1.Location = new System.Drawing.Point(723, 168);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(114, 24);
             this.comboBox1.TabIndex = 36;
@@ -866,7 +866,7 @@
             // 
             this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(843, 248);
+            this.comboBox3.Location = new System.Drawing.Point(843, 250);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(114, 24);
             this.comboBox3.TabIndex = 39;
@@ -1015,7 +1015,7 @@
             // 
             this.comboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(143, 51);
+            this.comboBox4.Location = new System.Drawing.Point(143, 53);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(134, 24);
             this.comboBox4.TabIndex = 27;
@@ -1198,7 +1198,7 @@
             // 
             this.comboBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(123, 59);
+            this.comboBox5.Location = new System.Drawing.Point(123, 61);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(114, 24);
             this.comboBox5.TabIndex = 29;
