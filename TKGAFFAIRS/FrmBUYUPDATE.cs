@@ -58,9 +58,16 @@ namespace TKGAFFAIRS
             comboBox1load();
             comboBox2load();
             comboBox3load();
+
+            SETDATES();
         }
 
         #region FUNCTION
+        public void SETDATES()
+        {
+            DateTime startYear = new DateTime(DateTime.Now.Year, 1, 1); //本年年初
+            dateTimePicker1.Value = startYear;
+        }
         public void comboBox1load()
         {
             //20210902密
