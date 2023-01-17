@@ -95,7 +95,7 @@ namespace TKGAFFAIRS
                                 ,[GA005] AS '品名'
                                 ,[GA006] AS '規格'
                                 ,[GA007] AS '單位'
-                                ,[GA008] AS '數量'
+                                ,[GA008] AS '數量' 
                                 ,[GA009] AS '單價'
                                 ,[GA010] AS '總價'
                                 ,[GA011] AS '供應商'
@@ -105,6 +105,7 @@ namespace TKGAFFAIRS
                                 ,[GA015] AS '到貨日期'
                                 ,[GA016] AS '驗收數量'
                                 ,[GA017] AS '請購序號'
+                                ,[GA018] AS '是否已議價'
                                 ,[GA099] AS '備註'
                                 ,[GA999] AS '負責採購人員'
                                 FROM [TKGAFFAIRS].[dbo].[BUYITEMREPORTS]
