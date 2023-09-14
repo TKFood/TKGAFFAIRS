@@ -1085,6 +1085,7 @@ namespace TKGAFFAIRS
                                      AND TASK_RESULT='0'
                                         UNION ALL 
                                         SELECT 'GA1003230100002'
+                                    ORDER BY DOC_NBR
                                     ", THISYEARS);
 
 
