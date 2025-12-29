@@ -51,7 +51,10 @@ namespace TKGAFFAIRS
         {
             InitializeComponent();
         }
-
+        private void FrmBOXMEAL_Load(object sender, EventArgs e)
+        {
+            textBox1.Text = "80";
+        }
         #region FUNCTION
 
         public void SETFASTREPORT()
@@ -84,8 +87,9 @@ namespace TKGAFFAIRS
 
         }
 
-        public string SETFASETSQL()
+        public string SETFASETSQL() 
         {
+            int MONEYS = int.Parse(textBox1.Text);
             StringBuilder FASTSQL = new StringBuilder();
                                
               
@@ -93,13 +97,14 @@ namespace TKGAFFAIRS
 
                              SELECT [ID]+[NAME] AS '姓名',SUBSTRING(CONVERT(NVARCHAR,[DATE],112),5,4) AS '日期',SUM([NUM]) AS '數量' 
                              , MEALNAME
+                            ,{2}*SUM([NUM]) AS '金額' 
                             FROM [TKBOXEDMEAL].[dbo].[LOCALEMPORDER],[TKBOXEDMEAL].[dbo].[MEAL]
                             WHERE 1=1
                             AND [LOCALEMPORDER].MEAL=[MEAL].MEAL
                             AND CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'
                             GROUP BY [ID]+[NAME], MEALNAME,CONVERT(NVARCHAR,[DATE],112)
 
-                            ", dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
+                            ", dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"),MONEYS);
 
 
             return FASTSQL.ToString();
@@ -114,5 +119,7 @@ namespace TKGAFFAIRS
             SETFASTREPORT();
         }
         #endregion
+
+       
     }
 }
