@@ -53,7 +53,16 @@ namespace TKGAFFAIRS
         }
         private void FrmBOXMEAL_Load(object sender, EventArgs e)
         {
-            textBox1.Text = "80";
+            DataTable DT = FIND_BOXEDMEAL();
+            if(DT!=null && DT.Rows.Count>=1)
+            {
+                textBox1.Text = DT.Rows[0]["PARANAME"].ToString();
+            }
+            else
+            {
+                textBox1.Text = "0";
+            }
+            
         }
         #region FUNCTION
 
@@ -110,7 +119,63 @@ namespace TKGAFFAIRS
             return FASTSQL.ToString();
         }
 
+        public DataTable FIND_BOXEDMEAL()
+        {
+            ds.Clear();
 
+            try
+            {
+                //20210902密
+                Class1 TKID = new Class1();//用new 建立類別實體
+                SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString);
+
+                //資料庫使用者密碼解密
+                sqlsb.Password = TKID.Decryption(sqlsb.Password);
+                sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+                String connectionString;
+                sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+                sbSql.AppendFormat(@"  
+                                    SELECT  
+                                    [ID]
+                                    ,[KIND]
+                                    ,[PARAID]
+                                    ,[PARANAME]
+                                    FROM [TKGAFFAIRS].[dbo].[TBPARA]
+                                    WHERE [KIND]='BOXEDMEAL'
+                                    ");
+
+                adapter = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder = new SqlCommandBuilder(adapter);
+                sqlConn.Open();
+                ds.Clear();
+                adapter.Fill(ds, "TEMPds1");
+                sqlConn.Close();
+
+
+                if (ds.Tables["TEMPds1"].Rows.Count >= 1)
+                {
+                    return ds.Tables["TEMPds1"];
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+
+            }
+        }
         #endregion
 
         #region BUTTON
