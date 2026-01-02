@@ -18,7 +18,7 @@ using System.Threading;
 using FastReport;
 using FastReport.Data;
 using TKITDLL;
-
+ 
 
 namespace TKGAFFAIRS
 {
