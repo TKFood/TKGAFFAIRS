@@ -410,6 +410,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(114, 27);
             this.textBox1.TabIndex = 6;
+            this.textBox1.Text = "0";
             // 
             // previewControl2
             // 

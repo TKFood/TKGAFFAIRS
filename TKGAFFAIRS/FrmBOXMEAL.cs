@@ -53,15 +53,15 @@ namespace TKGAFFAIRS
         }
         private void FrmBOXMEAL_Load(object sender, EventArgs e)
         {
-            DataTable DT = FIND_BOXEDMEAL();
-            if(DT!=null && DT.Rows.Count>=1)
-            {
-                textBox1.Text = DT.Rows[0]["PARANAME"].ToString();
-            }
-            else
-            {
-                textBox1.Text = "0";
-            }
+            //DataTable DT = FIND_BOXEDMEAL();
+            //if(DT!=null && DT.Rows.Count>=1)
+            //{
+            //    textBox1.Text = DT.Rows[0]["PARANAME"].ToString();
+            //}
+            //else
+            //{
+            //    textBox1.Text = "0";
+            //}
             
         }
         #region FUNCTION
@@ -176,6 +176,50 @@ namespace TKGAFFAIRS
 
             }
         }
+
+        //SQL 依日期+金額新增到[TKGAFFAIRS].[dbo].[EMPORDER_MONEYS]
+        public void ADD_EMPORDER_MONEYS(string DATES,string MEALMONEYS)
+        {
+            try
+            {
+                //20210902密
+                Class1 TKID = new Class1();//用new 建立類別實體
+                SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString);
+                //資料庫使用者密碼解密
+                sqlsb.Password = TKID.Decryption(sqlsb.Password);
+                sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+                String connectionString;
+                sqlConn = new SqlConnection(sqlsb.ConnectionString);
+                sbSql.Clear();
+                sbSqlQuery.Clear();
+                sbSql.AppendFormat(@"  
+                                    DELETE FROM [TKGAFFAIRS].[dbo].[EMPORDER_MONEYS]
+                                    WHERE [DATES]='{0}'
+
+                                    INSERT INTO [TKGAFFAIRS].[dbo].[EMPORDER_MONEYS]
+                                    ([DATES],[MEALMONEYS])
+                                    VALUES ('{0}','{1}')
+                                    ", DATES, MEALMONEYS);
+                using (SqlCommand cmd = new SqlCommand(sbSql.ToString(), sqlConn))
+                {
+                    sqlConn.Open();
+                    result = cmd.ExecuteNonQuery();
+                    sqlConn.Close();
+                }
+
+               
+            }
+            catch (Exception EX)
+            {
+
+            }
+            finally
+            {
+            }
+
+        }
+
+
         #endregion
 
         #region BUTTON
@@ -185,7 +229,22 @@ namespace TKGAFFAIRS
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            //依日期+金額新增到[TKGAFFAIRS].[dbo].[EMPORDER_MONEYS]
+            string DATES = dateTimePicker3.Value.ToString("yyyyMMdd");
+            string MEALMONEYS = textBox1.Text;
+            //MEALMONEYS>0
+            if(int.Parse(MEALMONEYS) > 0)
+            {
+                ADD_EMPORDER_MONEYS(DATES, MEALMONEYS);
+                MessageBox.Show("新增完成");
+            }
+            else
+            {
+                MessageBox.Show("金額需大於0");
+                return;
+            }
 
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
