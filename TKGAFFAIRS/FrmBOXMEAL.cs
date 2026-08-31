@@ -219,7 +219,59 @@ namespace TKGAFFAIRS
 
         }
 
+        public void SETFASTREPORT_MEALMONEYS(string SDATES, string EDATES)
+        {
 
+            string SQL;
+            Report report1 = new Report();
+            report1.Load(@"REPORT\伙食月統計報表(含金額).frx");
+
+            //20210902密
+            Class1 TKID = new Class1();//用new 建立類別實體
+            SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString);
+
+            //資料庫使用者密碼解密
+            sqlsb.Password = TKID.Decryption(sqlsb.Password);
+            sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+            String connectionString;
+            sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+            report1.Dictionary.Connections[0].ConnectionString = sqlsb.ConnectionString;
+
+            //report1.Dictionary.Connections[0].ConnectionString = "server=192.168.1.105;database=TKPUR;uid=sa;pwd=dsc";
+
+            TableDataSource Table = report1.GetDataSource("Table") as TableDataSource;
+            SQL = SETFASETSQL_MEALMONEYS(SDATES, EDATES);
+            Table.SelectCommand = SQL;
+            report1.Preview = previewControl2;
+            report1.Show();
+
+        }
+
+        public string SETFASETSQL_MEALMONEYS(string SDATES, string EDATES)
+        {            
+            StringBuilder FASTSQL = new StringBuilder();
+
+
+            FASTSQL.AppendFormat(@" 
+
+                                SELECT 
+                                [ID]+[NAME] AS '姓名',SUBSTRING(CONVERT(NVARCHAR,[DATE],112),5,4) AS '日期',([NUM]) AS '數量' 
+                                , MEALNAME
+                                ,(CASE WHEN [MEALMONEYS]>0 THEN [MEALMONEYS] ELSE 80 END)*([NUM]) AS '金額' 
+                                FROM[TKBOXEDMEAL].[dbo].[MEAL], [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]
+                                LEFT JOIN [TKGAFFAIRS].[dbo].[EMPORDER_MONEYS] ON [TKGAFFAIRS].[dbo].[EMPORDER_MONEYS].DATES=CONVERT(NVARCHAR,[DATE],112)
+                                WHERE 1=1
+                                AND [LOCALEMPORDER].MEAL=[MEAL].MEAL
+
+                                AND CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'
+
+                                 ", SDATES, EDATES);
+
+
+            return FASTSQL.ToString();
+        }
         #endregion
 
         #region BUTTON
@@ -249,7 +301,9 @@ namespace TKGAFFAIRS
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            string SDATES = dateTimePicker1.Value.ToString("yyyyMMdd");
+            string EDATES = dateTimePicker2.Value.ToString("yyyyMMdd");
+            SETFASTREPORT_MEALMONEYS(SDATES, EDATES );
         }
         #endregion
 
