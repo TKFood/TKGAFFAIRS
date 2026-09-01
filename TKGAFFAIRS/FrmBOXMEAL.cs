@@ -263,6 +263,7 @@ namespace TKGAFFAIRS
                                 FROM[TKBOXEDMEAL].[dbo].[MEAL], [TKBOXEDMEAL].[dbo].[LOCALEMPORDER]
                                 LEFT JOIN [TKGAFFAIRS].[dbo].[EMPORDER_MONEYS] ON [TKGAFFAIRS].[dbo].[EMPORDER_MONEYS].DATES=CONVERT(NVARCHAR,[DATE],112)
                                 WHERE 1=1
+                                AND [ID] IN  (SELECT  [ID] FROM [TKGAFFAIRS].[dbo].[EMPORDER_IDS])
                                 AND [LOCALEMPORDER].MEAL=[MEAL].MEAL
 
                                 AND CONVERT(NVARCHAR,[DATE],112)>='{0}' AND CONVERT(NVARCHAR,[DATE],112)<='{1}'
